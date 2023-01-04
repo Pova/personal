@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Roman Kitsela" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me</title>
+  <!-- Bootstrap import -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Extra custom styling -->
+  <link rel="stylesheet" href="css/sketch.css">
+  <!-- Javascript files HERE -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="../">
+        <h1 class="display-4">Roman Kitsela</h1>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active">Bio</a>
+          </li>
+          <li class="nav-item">
+            <a href="#cv" class="nav-link">CV</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Projects
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="dropdown-item" href="../sorting/index.html">Sorting</a></li>
+              <li><a class="dropdown-item" href="../astar/index.html">A* Algorithm</a></li>
+              <li><a class="dropdown-item" href="../perlin/index.html">Perlin Noise</a></li>
+              <li><a class="dropdown-item" href="../curves/index.html">Curves in Space</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-dark bg-secondary border-bottom border-dark border-2 justify-content-between">
+    <div class="container">
+      <div class="d-inline-flex">
+        <a class="navbar-brand">
+          <h2>About Me</h2>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Intro -->
+  <section class="p-3">
+    <div class="container">
+      <div class="row align-items-center justify-content-between">
+        <div class="col-md">
+          <img src="img/headshot.jpg" class="img-fluid" alt="" />
+        </div>
+        <div class="col-md p-5">
+          <h2 class="display-5">Looking for new challenges</h2>
+          <p class="lead text_exp_sm">
+            I come from an academic background with a PhD in mathematics and experience lecturing at UCSD
+          </p>
+          <p class="text_exp_sm">
+            I felt a strong desire to branch out and pursue my other interests - particularly those involving new innovative technologies and artificial intelligence. To this end during covid lockdown I made the decision to transition to a data
+            science profession and I am seeking opportunities to work on exciting real-world problems in the future.
+          </p>
+          <a href="#contact_links" class="btn btn-dark mt-3">
+            <i class="bi bi-chevron-right"></i> Contact Me
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Skills -->
+  <section class="p-5 bg-dark text-light">
+    <div class="container">
+      <div class="row align-items-center justify-content-between">
+        <div class="col-md p-5">
+          <h2 class="display-5">Technical Skills</h2>
+          <p class="lead text_exp_sm">
+            I have been working hard to develop essential technical skills necessary for a job in data science. I'm confident that these would make me an asset to any data science team.
+          </p>
+          <ul class="text_exp_sm">
+            <li><b>Programming languages:</b> Python, Javascript, SQL</li>
+            <li>Experienced with data structures and algorithmic problem solving (click here for certificate from AlgoExpert)</li>
+            <li>Experienced with full data scientist workflow - completed IBM Data Science professional course (click here for certificate of completion) <ul>
+                <li>Data cleaning and wrangling with pandas</li>
+                <li>EDA with pandas and SQL</li>
+                <li>Data visualization with matplotlib, seaborn</li>
+                <li>Building interactive dashboards with plotly</li>
+                <li>ML modelling, classification and prediction with scikit-learn</li>
+              </ul>
+            </li>
+            <li>Graduate level <b><i>CSE 250A. Principles of Artificial Intelligence: Probabilistic Reasoning and Decision-Making</i></b> course taken at UCSD</li>
+            <li>Basic frontend website development (HTML, CSS, JS)</li>
+          </ul>
+        </div>
+        <div class="col-md">
+          <!-- <img src="img/react.svg" class="img-fluid" alt="" /> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work Experience -->
+  <section class="p-5">
+    <div class="container">
+      <div class="row align-items-center justify-content-between">
+        <div class="col-md">
+          <!-- <img src="img/fundamentals.svg" class="img-fluid" alt="" /> -->
+        </div>
+        <div class="col-md p-5">
+          <h2 class="display-5">Work Experience</h2>
+          <p class="lead text_exp_sm">
+            My employment history in education has developed key soft skills in public speaking, communication and the ability to convey complex ideas succinctly.
+          </p>
+          <ul class="text_exp_sm">
+            <li>ACT/SAT Tutor - Huntington Learning Centers</li>
+            <li>Lecturer - UCSD</li>
+            <li>Associate Instructor - UCSD</li>
+            <li>Graduate Teaching Assistant - UCSD</li>
+          </ul>
+          <a href="#" class="btn btn-light mt-3 border border-dark">
+            <i class="bi bi-chevron-right"></i> Read my CV
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="p-5 bg-dark text-light">
+    <div class="container">
+      <div class="row align-items-center justify-content-between">
+        <div class="col-md p-5">
+          <h2 class="display-5">Educational Background</h2>
+          <p class="lead text_exp_sm">
+            Learning mathematics at the research level has provided me with indispensable skills of analysis. Being able to think clearly and logically is a prerequisite to solving the hardest problems.
+          </p>
+          <ul class="text_exp_sm">
+            <li><b>PhD</b> - Mathematics - University of California, San Diego, USA
+              <ul>
+                <li><i>Specialization:</i> Algebraic Number Theory, Non-Archimedian Functional Analysis, p-adic Lie Groups</li>
+                <li>PhD Thesis: <i>A Tannaka-Krein Theorem for Profinite Groups</i></li>
+              </ul>
+            </li>
+            <li><b>MASt</b> - Mathematics - University of Cambridge, UK</li>
+            <li><b>BSc</b> - Mathematics - University College London, UK</li>
+          </ul>
+          <a href="#" class="btn btn-light mt-3">
+            <i class="bi bi-chevron-right"></i> Read my CV
+          </a>
+        </div>
+        <div class="col-md">
+          <!-- <img src="img/react.svg" class="img-fluid" alt="" /> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interests -->
+  <section class="p-5">
+    <div class="container">
+      <div class="row align-items-center justify-content-between">
+        <div class="col-md">
+
+        </div>
+        <div class="col-md p-5">
+          <h2 class="display-5">Interests</h2>
+          <p class="lead text_exp_sm">
+            I've done my best to cultivate a variety of different activities and hobbies over the years and am always looking for new experiences to challenge myself with.
+          </p>
+          <p class="lead text_exp_sm">
+            Not having any kind of music background I decided to start learning classical guitar and violin whilst at graduate school and am on a lifelong quest to master these instruments.
+          </p>
+          <p class="lead text_exp_sm">
+            I played ultimate frisbee for 3 years for the UCSD team, love hiking (when it's scenic) and running (even when it's not). I picked up skiing a couple of years ago and can now almost make it down the mountain without falling (too hard).
+          </p>
+          <p class="lead text_exp_sm">
+            On a nerdier note I love strategy based games and have spent perhaps too much time playing Dominion (deck building card game) and Factorio (construction and management simulation game) over the years. Whilst fun in their own right I've found these games to nurture otherwise very useful executive skills.
+          </p>
+          <!-- <a href="#" class="btn btn-light mt-3">
+            <i class="bi bi-chevron-right"></i> Read More
+          </a> -->
+        </div>
+      </div>
+        <!-- START Image Carousel -->
+      <!-- <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+    <li data-tbs-arget="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="img/img1.jpg" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="img/img1.jpg" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="img/img1.jpg" alt="Third slide">
+    </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+    </a>
+    </div> -->
+    <!-- END Image Carousel -->
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="bg-dark text-center text-white">
+
+    <!-- Grid container -->
+    <div class="container p-4" id="contact_links">
+      <p class="lead text_exp">Contact Links</p>
+      <!-- Section: Social media -->
+      <section class="mb-4">
+
+        <!-- Google -->
+        <a class="btn btn-outline-light btn-floating m-1" href="mailto: romankitsela@gmail.com" role="button"><i class="fab fa-google"></i></a>
+
+        <!-- Linkedin -->
+        <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/in/roman-kitsela-29615b133/" role="button"><i class="fab fa-linkedin-in"></i></a>
+
+        <!-- Github -->
+        <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/Pova" role="button"><i class="fab fa-github"></i></a>
+      </section>
+      <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+  </footer>
+
+
+
+
+</body>
+
+</html>

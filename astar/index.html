@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Roman Kitsela" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A* algorithms</title>
+  <!-- Bootstrap import -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Extra custom styling -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- p5 Library files HERE -->
+  <script src="lib/p5.min.js" type="text/javascript"></script>
+  <!-- Javascript files HERE -->
+  <script src="sketch.js" type="text/javascript"></script>
+  <script src="cell.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <div class="container">
+      <a href="../" class="navbar-brand">
+        <h1 class="display-4">Roman Kitsela</h1>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon">
+        </span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a href="../bio/index.html" class="nav-link">Bio</a>
+          </li>
+          <li class="nav-item">
+            <a href="#cv" class="nav-link">CV</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Projects
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="dropdown-item" href="../sorting/index.html">Sorting</a></li>
+              <li><a class="dropdown-item active" href="../astar/index.html">A* Algorithm</a></li>
+              <li><a class="dropdown-item" href="../perlin/index.html">Perlin Noise</a></li>
+              <li><a class="dropdown-item" href="../curves/index.html">Curves in Space</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <nav class="navbar bg-secondary navbar-dark justify-content-between border-bottom border-dark border-2">
+    <div class="container">
+      <div class="d-flex flex-row">
+        <a class="navbar-brand">
+          <h2>The A* Algorithm</h2>
+        </a>
+      </div>
+      <div class="d-flex justify-content-between">
+        <button type="button" name="button" class="btn btn-dark mx-1" onclick="reset();">Reset</button>
+        <a href="#how" class="navbar-brand mx-3">How does it work?</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="d-flex justify-content-center py-4" id="canvas_container">
+  </div>
+
+  <!-- Showcase -->
+  <section class="bg-secondary text-light p-md-5 text-center text-lg-start" id="how">
+
+    <div class="d-xl-flex align-items-center justify-content-around">
+      <div class="container py-5 text-center">
+        <h1 class="display-1">What am I looking at?</h1>
+      </div>
+
+      <div class="container">
+        <h5 class="text_exp">
+          This is a visualization of the <a href="https://en.wikipedia.org/wiki/A*_search_algorithm" target=”_blank” class="link-dark text-decoration-none">A* algorithm</a>.
+        </h5>
+        <p class="text_exp">
+          Based on the famous Dikstra's search algorithm, the A* algorithm includes the use of a <i>heuristic</i> function to prioritize searching in the direction of the target.
+        </p>
+        <p class="text_exp">
+          The A* algorithm is a weighted search algorithm that is <b>guaranteed</b> to find the shortest path between start and end goals.
+        </p>
+        <p class="text_exp">
+          In this visualization the different kinds of cells are highlighted in different colours:
+        </p>
+        <ul>
+          <li class="text_exp">
+            <div style="color:gold;float:left;">&#9733;</div> - Start and end goals.
+          </li>
+          <li class="text_exp">
+            <div style="color:grey;float:left;">&#9632;</div> - Grey cells have not yet been "visited" by the algorithm.
+          </li>
+          <li class="text_exp">
+            <div style="color:black;float:left;">&#9632;</div> - Black cells represent obstacles (which cannot be passed through).
+          </li>
+        </ul>
+        <p class="text_exp">The algorithm will iterate through cells in the grid looking for the end goal. At each iteration the algorithm will examine a cell (checking if it is at the end goal) and if not it will add the current cell's valid
+          neighbours (the adjacent cells which can be visited) to a shortlist of <i>visitable</i> cells (the <b>open set</b>). Any cells that have been checked already are added to a list of <i>visited</i> cells (the <b>closed set</b>).</p>
+        <ul>
+          <li class="text_exp">
+            <div style="color:blue;float:left;">&#9632;</div> - Dark blue cells are on the shortlist to be checked next - the <b>open set</b>.
+          </li>
+          <li class="text_exp">
+            <div style="color:lightsteelblue;float:left;">&#9632;</div> - Light blue cells have already been checked - the <b>closed set</b>.
+          </li>
+          <li class="text_exp">
+            <div style="color:lightyellow;float:left;">&#9632;</div> - Light yellow cells represent the current path being examined.
+          </li>
+          <li class="text_exp">
+            <div style="color:gold;float:left;">&#9632;</div> - Gold cells represent the solution path (guaranteed to be shortest possible) from start point to end point.
+          </li>
+        </ul>
+        <p class="text_exp">As mentioned above the key ingredient in the A* algorithm is how the next cell to be examined is chosen. A heuristic function is used to evaluate the cells in the open set and the best looking candidates are chosen to be
+          checked first. This helps avoid needlessly checking options that are unlikely to work (unless no other options are available).</p>
+
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-dark text-center text-white">
+
+    <!-- Grid container -->
+    <div class="container p-4">
+      <p class="lead text_exp">Contact Links</p>
+      <!-- Section: Social media -->
+      <section class="mb-4">
+
+        <!-- Google -->
+        <a class="btn btn-outline-light btn-floating m-1" href = "mailto: romankitsela@gmail.com" role="button"><i class="fab fa-google"></i></a>
+
+        <!-- Linkedin -->
+        <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/in/roman-kitsela-29615b133/" role="button"><i class="fab fa-linkedin-in"></i></a>
+
+        <!-- Github -->
+        <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/Pova" role="button"><i class="fab fa-github"></i></a>
+      </section>
+      <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+  </footer>
+
+</body>
+
+</html>
