@@ -1,11 +1,6 @@
-
 var w, h;
 var cols, rows;
 var grid = new Array(cols);
-
-
-//priority queue
-// var openSet = new PriorityQueue();
 
 var openSet = []; //cells to check
 var closedSet = []; //cells already checked
@@ -17,7 +12,6 @@ var obsDensity = 0.3; //controls density of the obstacles
 var path = [];
 
 var noSolution = false; //set to true if algorithm has no solution
-var diag_allowed = false; //set to true with a checkbox
 
 function setup() {
   h = 30;
@@ -25,13 +19,7 @@ function setup() {
 
 
   rows = Math.floor((windowHeight - 200) / h);
-  // if (rows%2!=1){
-  //   rows -=1;
-  // }
   cols = Math.floor((windowWidth - 30) / w);
-  // if (cols%2!=1){
-  //   cols -= 1;
-  // }
 
   canvas = createCanvas(w * cols, h * rows);
   canvas.parent("#canvas_container");

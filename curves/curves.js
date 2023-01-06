@@ -1,5 +1,3 @@
-
-
 //Path 0
 
 function path_0(t){
