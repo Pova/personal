@@ -11,6 +11,7 @@ var obsDensity = 0.3; //controls density of the obstacles
 
 var path = [];
 
+var diag_allowed = false; 
 var noSolution = false; //set to true if algorithm has no solution
 
 function setup() {
