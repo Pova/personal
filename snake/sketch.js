@@ -20,12 +20,16 @@ function setup() {
     // rows = Math.floor((height) / scl);
     // cols = Math.floor((width) / scl);
 
-    width_size = scl * cols
-    height_size = scl * rows
+    width_size = scl * cols;
+    height_size = scl * rows;
 
-    highScore = 0;
+    if (localStorage.getItem('hiscore')===null){
+        localStorage.setItem('hiscore', 0);
+    } 
+    highscore = localStorage.getItem('hiscore');
     highscore_elt = document.getElementById('highscore');
     currentscore_elt = document.getElementById('currentscore');
+    highscore_elt.innerHTML = highscore.toString();
 }
 
 function draw() {
@@ -57,7 +61,7 @@ function draw() {
         currentscore_elt.innerHTML = "0";
         if (millis() >= 1000) {
             push();
-            fill(0);
+            fill('#6c757d');
             stroke(0);
             textSize(128);
             textAlign(CENTER);
@@ -66,7 +70,7 @@ function draw() {
         }
         if (millis() >= 2000) {
             push();
-            fill(0);
+            fill('#6c757d');
             stroke(0);
             textSize(128);
             textAlign(CENTER);
@@ -75,7 +79,7 @@ function draw() {
         }
         if (millis() >= 3000) {
             push();
-            fill(0);
+            fill('#6c757d');
             stroke(0);
             textSize(128);
             textAlign(CENTER);
@@ -84,7 +88,7 @@ function draw() {
         }
         if (millis() >= 4000) {
             push();
-            fill(0);
+            fill('#6c757d');
             stroke(0);
             textSize(128);
             textAlign(CENTER);
@@ -93,7 +97,7 @@ function draw() {
         }
         if (millis() >= 5000) {
             push();
-            fill(0);
+            fill('#6c757d');
             stroke(0);
             textSize(128);
             textAlign(CENTER);
@@ -102,7 +106,7 @@ function draw() {
         }
         if (millis() >= 6000) {
             push();
-            fill(0);
+            fill('#6c757d');
             stroke(0);
             textSize(20);
             textAlign(CENTER);
@@ -111,7 +115,7 @@ function draw() {
         }
     }
 
-    highscore_elt.innerHTML = highScore.toString();
+    highscore_elt.innerHTML = highscore.toString();
 
     if (gameStarted) {
         

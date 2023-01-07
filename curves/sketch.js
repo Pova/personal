@@ -5,6 +5,7 @@ let sensitivityZoom = 0.5;
 
 var t = -10; //initial time
 var t_inc = 0.05; //initial time interval
+var animation_const = 1;
 var fr; //frame rate element
 var curve_name; //curve name variable
 var button; //resets animation
@@ -14,8 +15,20 @@ let points = new Array(); //list of points for each curve
 let particle_hue = 0; //initial particle hue
 
 var path = 0;
-var path_dict = {0:path_0,1:path_1,2:path_2,3:path_3,4:path_4,5:path_5,6:path_6,7:path_7}; //dictionary of curve paths
-
+var path_dict = {
+  0:path_0,
+  1:path_1,
+  2:path_2,
+  3:path_3,
+  4:path_4,
+  5:path_5,
+  6:path_6,
+  7:path_7,
+  8:path_8,
+  9:path_9,
+  10:path_10
+};
+ 
 var frame_rates = [];
 
 function setup() {
@@ -86,11 +99,7 @@ function draw() {
   }
   endShape();
 
-  if (path==2){
-    t += speed*.1;
-  } else {
-    t += speed;
-  }
+  t += speed*animation_const
 
   // time_slider.value() = t;
 

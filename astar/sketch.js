@@ -2,6 +2,7 @@ var w, h;
 var cols, rows;
 var grid = new Array(cols);
 
+var current;
 var openSet = []; //cells to check
 var closedSet = []; //cells already checked
 var start;
@@ -14,10 +15,13 @@ var path = [];
 var diag_allowed = false; 
 var noSolution = false; //set to true if algorithm has no solution
 
+var counter = 0;
+var alg_started = false;
+var alg_finished = false;
+
 function setup() {
   h = 30;
   w = 30;
-
 
   rows = Math.floor((windowHeight - 200) / h);
   cols = Math.floor((windowWidth - 30) / w);
@@ -34,229 +38,180 @@ function setup() {
 
   //Randomly populates obstacles
 
+  // for (var i = 0; i < cols; i++) {
+  //   for (var j = 0; j < rows; j++) {
+  //     if (random(1) < obsDensity) {
+  //       grid[i][j] = new Cell(i, j, true); //Draws solid block
+  //     } else {
+  //       grid[i][j] = new Cell(i, j, false);
+  //     }
+  //   }
+  // }
+
+  // grid[cols - 1][rows - 1].wall = false; 
+  // grid[0][0].wall = false;
+  
   for (var i = 0; i < cols; i++) {
     for (var j = 0; j < rows; j++) {
-      if (random(1) < obsDensity) {
-        grid[i][j] = new Cell(i, j, true); //Draws solid block
-      } else {
-        grid[i][j] = new Cell(i, j, false);
-      }
+      grid[i][j] = new Cell(i, j, false);
     }
   }
 
-  // Other obstacle options - maze
+  populate_neighbors();
 
-
-  if (grid[cols - 1][rows - 1].wall == true) {
-    grid[cols - 1][rows - 1].wall = false; //fixes blocked target problem
-  }
-
-  if (grid[0][0].wall == true) {
-    grid[0][0].wall = false; //fixes blocked start problem
-  }
-
-
-
-  //Can be made more efficient
-  for (var i = 0; i < cols; i++) {
-    for (var j = 0; j < rows; j++) {
-      grid[i][j].addNeighbours(grid);
-    }
-  }
   // Want to be able to pick these...
-
   start = grid[0][0];
   end = grid[cols - 1][rows - 1];
 
-  //path.push(end);
-  openSet.push(start);
-
-  //Want to add control over this
-  //noLoop();
+  noLoop();
 }
 
+function start_alg(){
+  if (!alg_finished){
+    alg_started = true;
+    openSet.push(start);
+    loop();
+  }
+}
 
 function draw() {
-
-  // if (frameCount % 30 == 0) {
-  //   console.log(frameRate());
-  // }
-
-  // clear the path every time
-  path = [];
-
-  // If there are cells to check...
-  if (openSet.length > 0) {
-    var current;
-
-    //While there are cells in OpenSet this loop gets activated
-    var winner = 0; //index of best so far
-
-    for (var i = 0; i < openSet.length; i++) {
-      //iterate over openSet
-      if (openSet[i].f < openSet[winner].f) {
-        winner = i;
+  console.log('draw loop')
+  for (var i = 0; i < cols; i++) {
+    for (var j = 0; j < rows; j++) {
+      if (grid[i][j].wall) {
+        grid[i][j].show(color(50));
+      } else {
+        grid[i][j].show(color(108, 117, 125));
       }
     }
-
-    //current is the cell in openSet with the lowest fscore
-    current = openSet[winner];
-
-    if (current === end) {
-
-      var text = 'Optimal path length = ' + end.f;
-
-      console.log('A* terminates (success)');
-      console.log(text);
-      noLoop();
-    }
-
-
-
-
-    //remove current from openSet and add to closedSet
-    removeFromArray(openSet, current);
-    closedSet.push(current);
-
-
-    var neighbours = current.neighbours;
-    //iterate over all neighbours
-    for (var i = 0; i < neighbours.length; i++) {
-      var neighbour = neighbours[i];
-
-      //Can be made more efficient
-      if (!closedSet.includes(neighbour)) { //(if neighbour is NOT in closedSet)
-        //i.e Ignore the neighbour which is already evaluated
-        var tempG = current.g + 1;
-
-        if (!openSet.includes(neighbour) && neighbour.wall === false) {
-          //Discovered new Cell
-          openSet.push(neighbour);
-        } else if (tempG >= neighbour.g) {
-          continue;
-          //This is not a better path
-        }
-
-        //This path is the best until now. Record it!
-        neighbour.prev = current;
-        neighbour.g = tempG;
-        neighbour.h = heuristic(neighbour, end);
-        neighbour.f = neighbour.g + neighbour.h;
-      }
-    }//neighbour loop
-
-
-
   }
 
-  //openSet is empty --> algorithm terminates
-  else {
+  if (alg_started){
+    astar();
 
-    noLoop();
-    noSolution = true; //can this ever trigger if there is a solution?
-
-
-    //draw once more...
-
-    for (var i = 0; i < cols; i++) {
-      for (var j = 0; j < rows; j++) {
-        if (grid[i][j].wall) {
-          grid[i][j].show(color(50));
-        } else {
-          grid[i][j].show(color(108, 117, 125));
-        }
-      }
-    }
-
-    //closed set cells =  light steel blue
+    //closed set cells = light blue
     for (var i = 0; i < closedSet.length; i++) {
       closedSet[i].show(color(176, 196, 222));
     }
 
-    //start star
-    push();
-    fill(255, 215, 0);
-    translate(w/2,h/2);
-    rotate(frameCount / -100.0);
-    star(0, 0, 6, 14, 5);
-    pop();
-
-    //end star
-    push();
-    fill(255, 0, 0);
-    translate(width-w/2,height-h/2);
-    rotate(frameCount / 100.0);
-    star(0, 0, 6, 14, 5);
-    pop();
-
-    return null;
-  }
-
-  //draw grid
-  for (var i = 0; i < cols; i++) {
-    for (var j = 0; j < rows; j++) {
-      if (grid[i][j].wall) {
-        grid[i][j].show(color(50)); //black
-      } else {
-        grid[i][j].show(color(108, 117, 125)); //grey
+    if (!alg_finished){
+      //open set cells = dark blue
+      for (var i = 0; i < openSet.length; i++) {
+        openSet[i].show(color(0, 0, 255));
       }
     }
-  }
 
-  //closed set cells =  light steel blue
-  for (var i = 0; i < closedSet.length; i++) {
-    closedSet[i].show(color(176, 196, 222));
-  }
+    //draw the path
+    if (current != end) {
+      current.reconstruct();
+    } else {
+      end.reconstruct();
+      path.push(end);
+    }
 
-  //open set cells = blue
-  for (var i = 0; i < openSet.length; i++) {
-    openSet[i].show(color(0, 0, 255));
-  }
-
-
-  //draw the path
-
-  if (current != end) {
-    current.reconstruct();
-  } else {
-
-    end.reconstruct();
-    path.push(end);
-  }
-
-  //draw path
-  if (!noSolution) {
-    if (current == end){
-      for (var i = 0; i < path.length; i++) {
-        path[i].show(color(255, 215, 0)); //gold
-      }
-    } else{
-      for (var i = 0; i < path.length; i++) {
-        path[i].show(color(255,255,224)); //light yellow
+    if (!noSolution) {
+      if (current == end){
+        for (var i = 0; i < path.length; i++) {
+          path[i].show(color(255, 215, 0)); //gold
+        }
+      } else{
+        for (var i = 0; i < path.length; i++) {
+          path[i].show(color(255,255,224)); //light yellow
+        }
       }
     }
   }
 
   //start star
   push();
-  fill(255, 215, 0);
+  stroke(1);
+  fill('#65C6FF');
   translate(w/2,h/2);
   rotate(frameCount / -100.0);
-  star(0, 0, 6, 14, 5);
+  star(0, 0, 5, 10, 5);
   pop();
 
   //end star
   push();
-  fill(255, 215, 0);
+  stroke(1);
+  if (!noSolution){
+    fill(255, 215, 0);
+  } else {
+    fill(255, 0, 0);
+  }
   translate(width-w/2,height-h/2);
   rotate(frameCount / 100.0);
-  star(0, 0, 6, 14, 5);
+  star(0, 0, 5, 10, 5);
   pop();
 
-} //closes draw loop
+  if (alg_started && alg_finished){
+    alg_started = false;
+  }
+}
+
+function astar(){
+  //console.log('A* called')
+  path = [];
+    if (openSet.length > 0) {
+      
+      var winner = 0; //index of best so far
+  
+      for (var i = 0; i < openSet.length; i++) {
+        if (openSet[i].f < openSet[winner].f) {
+          winner = i;
+        }
+      }
+  
+      current = openSet[winner];
+
+      if (current === end) {
+        const text = 'Optimal path length = ' + end.f;
+        console.log('A* terminates (success)');
+        console.log(text);
+        alg_finished = true;
+        noLoop();
+      }
+    
+      //remove current from openSet and add to closedSet
+      removeFromArray(openSet, current);
+      closedSet.push(current);
+  
+      var neighbours = current.neighbours;
+      for (var i = 0; i < neighbours.length; i++) {
+        var neighbour = neighbours[i];
+  
+        //Can be made more efficient
+        if (!closedSet.includes(neighbour)) { //(if neighbour is NOT in closedSet)
+          //i.e Ignore the neighbour which is already evaluated
+          var tempG = current.g + 1;
+  
+          if (!openSet.includes(neighbour) && neighbour.wall === false) {
+            //Discovered new Cell
+            openSet.push(neighbour);
+          } else if (tempG >= neighbour.g) {
+            continue;
+            //This is not a better path
+          }
+  
+          //This path is the best until now. Record it!
+          neighbour.prev = current;
+          neighbour.g = tempG;
+          neighbour.h = heuristic(neighbour, end);
+          neighbour.f = neighbour.g + neighbour.h;
+        }
+      } //neighbour loop
+    } else {
+      //openSet is empty --> algorithm terminates
+      noSolution = true;
+      alg_finished = true;
+      noLoop();
+    }
+}
 
 function reset() {
   noSolution = false;
+  alg_finished = false;
+  alg_started = false;
   console.log('reset');
 
   path = [];
@@ -270,34 +225,16 @@ function reset() {
         grid[i][j].h = 0;
         grid[i][j].neighbours = [];
         this.prev = undefined;
-      if (random(1) < obsDensity) {
-        grid[i][j].wall = true; //Draws solid block
-      } else {
         grid[i][j].wall = false;
-      }
     }
   }
 
-  if (grid[cols - 1][rows - 1].wall == true) {
-    console.log('impossible! changing target...'); //fixes blocked target problem
-    grid[cols - 1][rows - 1].wall = false;
-  }
-
-  if (grid[0][0].wall == true) {
-    grid[0][0].wall = false; //fixes blocked start problem
-  }
-
-  for (var i = 0; i < cols; i++) {
-    for (var j = 0; j < rows; j++) {
-      grid[i][j].addNeighbours(grid);
-    }
-  }
+  populate_neighbors();
 
   start = grid[0][0];
   end = grid[cols - 1][rows - 1];
 
-  //path.push(end);
-  openSet.push(start);
+  //openSet.push(start);
 
   //draw grid
   for (var i = 0; i < cols; i++) {
@@ -310,9 +247,53 @@ function reset() {
     }
   }
 
+  //start star
+  push();
+  stroke(1);
+  fill('#65C6FF');
+  translate(w/2,h/2);
+  rotate(frameCount / -100.0);
+  star(0, 0, 5, 10, 5);
+  pop();
 
-  loop();
+  //end star
+  push();
+  stroke(1);
+  fill(255, 215, 0);
+  translate(width-w/2,height-h/2);
+  rotate(frameCount / 100.0);
+  star(0, 0, 5, 10, 5);
+  pop();
+
+  noLoop();
 } //closes reset()
+
+
+function random_grid(){
+  for (var i = 0; i < cols; i++) {
+    for (var j = 0; j < rows; j++) {
+      if (random(1) < obsDensity) {
+        grid[i][j] = new Cell(i, j, true); //Draws solid block
+      } else {
+        grid[i][j] = new Cell(i, j, false);
+      }
+    }
+  }
+
+  grid[cols - 1][rows - 1].wall = false; 
+  grid[0][0].wall = false;
+
+  populate_neighbors();
+  redraw();
+}
+
+function populate_neighbors(){
+  for (var i = 0; i < cols; i++) {
+    for (var j = 0; j < rows; j++) {
+      grid[i][j].addNeighbours(grid);
+    }
+  }
+}
 
 //Controls if diagonals are allowed when populating neighbours
 function myCheckedEvent() {

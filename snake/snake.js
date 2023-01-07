@@ -93,7 +93,7 @@ function Snake(pos_x, pos_y) { //Constructor
     this.show = function() {
         push();
         colorMode(HSB);
-        var hue = 0;
+        var hue = -2.55;
         var sat = 100;
         var bri = 78;
 
@@ -101,7 +101,7 @@ function Snake(pos_x, pos_y) { //Constructor
             if (hue > 255){
                 hue = hue-255;
             } else{
-                hue = hue+5;
+                hue = hue+2.55;
             }
             if (i === -1) {
                 fill(hue, sat, bri);
@@ -119,6 +119,7 @@ function Snake(pos_x, pos_y) { //Constructor
     this.reset = function() {
         if (this.total+1 > highScore) {
             highScore = this.total+1;
+            localStorage.setItem('hiscore', highScore);
         }
         gameStarted = false;
         s = new Snake();

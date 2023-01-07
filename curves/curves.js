@@ -25,6 +25,8 @@ function path_2(t){
 
   //R = 1, a = .4, w = 40, h = .3
 
+  animation_const = 0.1
+
   curve_name_elt.innerHTML = "Slinky Curve";
   curve_name_elt.style.color = '#65C6FF';
 
@@ -104,3 +106,51 @@ function path_7(t){
 
   return new p5.Vector(x,y,z)
 }
+
+//Path 8 - Trefoil Knot
+
+function path_8(t){
+
+  curve_name_elt.innerHTML = "Trefoil Knot";
+  curve_name_elt.style.color = '#65C6FF';
+
+  x = 1*(cos(t)-2*cos(2*t));
+  y = -1*(-sin(3*t));
+  z = 1*(sin(t)+2*sin(2*t));
+
+  return new p5.Vector(x,y,z)
+}
+
+// x = pow(t, 2); <-- y
+// y = -pow(t, 3); <-- -z
+// z = pow(t, 1); <-- x
+
+//Path 9 - Star
+
+function path_9(t){
+
+  curve_name_elt.innerHTML = "Star";
+  curve_name_elt.style.color = '#65C6FF';
+
+  x = 1*(2*sin(3*t)*sin(t));
+  y = -1*sin(3*t);
+  z = 1*(2*sin(3*t)*cos(t));
+
+  return new p5.Vector(x,y,z)
+}
+
+//Path 10 - Torus
+
+function path_10(t){
+  animation_const = 0.15
+
+  curve_name_elt.innerHTML = "Torus";
+  curve_name_elt.style.color = '#65C6FF';
+
+  x = 1*(3*sin(t/2)+cos(20*t)*sin(t/2));
+  y = -1*sin(20*t);
+  z = 1*(3*cos(t/2)+cos(20*t)*cos(t/2));
+
+  return new p5.Vector(x,y,z)
+}
+

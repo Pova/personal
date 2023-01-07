@@ -66,12 +66,55 @@
         </a>
       </div>
       <div class="d-flex justify-content-between">
+        <button type="button" name="button" class="btn btn-dark mx-1" onclick="start_alg();">Start</button>
         <button type="button" name="button" class="btn btn-dark mx-1" onclick="reset();">Reset</button>
+        <button class="btn btn-dark mx-1" type="button" data-bs-toggle="collapse" data-bs-target="#algorithmOptions" aria-expanded="false" aria-controls="collapseExample">Options</button>
         <a href="#how" class="navbar-brand mx-3">How does it work?</a>
       </div>
     </div>
   </nav>
 
+  <section class="bg-secondary p-3 collapse" id="algorithmOptions">
+    <div class="container-fluid d-flex align-items-center justify-content-around">
+      <div class="d-inline-flex">
+        <!-- <div class="d-inline-flex ">
+
+
+        </div> -->
+        <span class="navbar-brand align-middle mx-4">Obstacles:</span>
+      <div class="d-inline-flex">
+        <button type="button" name="button" class="btn btn-outline-dark mx-1 active" onclick="button();">Draw your own</button>
+      </div>
+      <div class="d-inline-flex">
+        <button type="button" name="button" class="btn btn-outline-dark mx-1" onclick="random_grid();">Random</button>
+      </div>
+      <div class="d-inline-flex">
+        <button type="button" name="button" class="btn btn btn-outline-dark mx-1" onclick="button();">Maze</button>
+      </div>
+    </div>
+    <div class="d-inline-flex">
+      <span class="navbar-brand align-middle mx-4">Algorithm:</span>
+      <div class="d-inline-flex">
+        <button type="button" name="button" class="btn btn-outline-dark mx-1 active" onclick="button();">A*</button>
+      </div>
+      <div class="d-inline-flex">
+        <button type="button" name="button" class="btn btn-outline-dark mx-1" onclick="button();">BFS</button>
+      </div>
+      <div class="d-inline-flex">
+        <button type="button" name="button" class="btn btn-outline-dark mx-1" onclick="button();">DFS</button>
+      </div>
+    </div>
+    <div class="d-inline-flex">
+      <span class="navbar-brand align-middle mx-4">Diagonals allowed?</span>
+      <div class="d-inline-flex">
+        <button type="button" name="button" class="btn btn-outline-dark mx-1" onclick="button();">Yes</button>
+      </div>
+      <div class="d-inline-flex">
+        <button type="button" name="button" class="btn btn-outline-dark mx-1 active" onclick="button();">No</button>
+      </div>
+    </div>     
+    </div>
+  </section>
 
   <div class="d-flex justify-content-center py-4" id="canvas_container">
   </div>
