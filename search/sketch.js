@@ -396,6 +396,11 @@ async function drawMaze(){
   draw_allowed = false;
   drawing_maze = true;
 
+  for (i=0;i<cols;i+=1){
+    for (j=0;j<rows;j+=1){
+      grid[i][j].wall = false;
+    }
+  }
   // fill rows
   for (i=1;i<cols;i+=2){
     for (j=0;j<rows;j+=1){
