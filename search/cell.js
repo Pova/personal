@@ -8,8 +8,8 @@ function Cell(i, j, wall) {
   this.h = 0; //Heuristic
 
   this.wall = wall;
-
   this.neighbours = [];
+  this.visited = false;
 
   this.prev = undefined;
 
@@ -18,12 +18,16 @@ function Cell(i, j, wall) {
     noStroke();
     if (diag_allowed && this.wall==true){
       push();
-      //translate(15, 15);
-      //rotate(TWO_PI / 16);
-      octogon(this.i * w, this.j * h, 30);
+      fill(color(108, 117, 125));
+      rect(this.i * w, this.j * h, w-1, h-1)
       pop();
+      octogon(this.i * w, this.j * h, 30);
+      
     } else {
       rect(this.i * w, this.j * h, w-1, h-1);
+    }
+    if (this.visited === true){
+      fill(101,198,255);
     }
   }
 

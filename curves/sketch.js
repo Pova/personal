@@ -1,21 +1,17 @@
-
-//SKETCH
-
 let sensitivityZoom = 0.5;
 
-var t = -10; //initial time
-var t_inc = 0.05; //initial time interval
+let t = -10; //initial time
+let t_inc = 0.05; //initial time interval
 var animation_const = 1;
-var fr; //frame rate element
-var curve_name; //curve name variable
-var button; //resets animation
+let fr; //frame rate element
+let curve_name; //curve name variable
 
 let a_1 = .1; //constant in spherical spiral
 let points = new Array(); //list of points for each curve
 let particle_hue = 0; //initial particle hue
 
-var path = 0;
-var path_dict = {
+let path = 0;
+let path_dict = {
   0:path_0,
   1:path_1,
   2:path_2,
@@ -29,11 +25,11 @@ var path_dict = {
   10:path_10
 };
  
-var frame_rates = [];
+let frame_rates = [];
 
 function setup() {
   smooth();
-  var canvas = createCanvas(windowWidth, windowHeight-180, WEBGL);
+  let canvas = createCanvas(windowWidth, windowHeight-180, WEBGL);
   canvas.parent('canvas_container');
   background(0);
 
@@ -48,11 +44,6 @@ function setup() {
 }
 
 function draw() {
-
-  // if (frameCount%3500 == 0){
-  //   console.log('trigger')
-  //   frame_rates.push(minute(),frameRate(),points.length);
-  // }
 
   // Enable orbit control
   orbitControl();

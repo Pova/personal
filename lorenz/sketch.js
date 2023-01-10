@@ -1,7 +1,7 @@
-var canvas
-var rSlider, gSlider, bSlider;
-var r, theta, phi
-var button
+let canvas
+let rSlider, gSlider, bSlider;
+let r, theta, phi
+let button
 
 let counter = 0
 
@@ -18,20 +18,14 @@ let c = 8.0 / 3.0; //beta
 let pause = false;
 
 function setup() {
-	var canvas = createCanvas(windowWidth, windowHeight-180, WEBGL);
+	let canvas = createCanvas(windowWidth, windowHeight-180, WEBGL);
   	canvas.parent('canvas_container');
 
 	background(0);
 	cursor('grab');
 
 	camera(175, -175, 200, 0, 0, 0, 0, 1, 0);
-
-	// button = createButton("reset sketch");
-	// button.id('reset_button')
-
 	colorMode(HSB);
-
-	//slider_5 = createSlider(-TWO_PI, TWO_PI, 0, 0.1);
 }
 
 function resetSketch(){
@@ -49,19 +43,14 @@ function pauseSketch(){
 }
 
 function draw() {
-	
 	// Enable orbit control
 	orbitControl();
 
-	console.log(frameRate());
+	//console.log(frameRate());
 	if (frameRate() < 5){
 		resetSketch();
 	}
 
-	//button.mousePressed(resetSketch);
-	// rect(1,1,399,399);
-	// noFill();
-	// stroke(0);
 	background(0);
 
 	//draw axes
@@ -86,14 +75,11 @@ function draw() {
 
 	points.push(new p5.Vector(x, y, z));
 
-	//theta = slider_5.value();
-
 	scale(3);
 	stroke(255);
 
-
 	let hu = 0;
-	let br = 255
+	let br = 255;
 
 	push();
 	beginShape();

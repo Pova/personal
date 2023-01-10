@@ -1,11 +1,11 @@
-var s;
-var scl = 30; //Scale variable
-var food;
-var highScore;
-var gameStarted = false;
-var slider;
-var speed;
-var status;
+let s;
+let scl = 30; //Scale variable
+let food;
+let highScore;
+let gameStarted = false;
+let slider;
+let speed;
+let status;
 
 
 
@@ -36,8 +36,8 @@ function draw() {
     //translate(2,2);
     background(255); 
     stroke(0);
-    for (var i = 0; i < cols; i++) {
-        for (var j = 0; j <= rows; j++) {
+    for (let i = 0; i < cols; i++) {
+        for (let j = 0; j <= rows; j++) {
             point(i * scl, j * scl);
             point((i + 1) * scl, j * scl);
             point(i * scl, (j + 1) * scl);
@@ -125,7 +125,7 @@ function draw() {
         if (s.eat(food)) {
             let found_pos = false;
             while (found_pos === false) {
-                var maybe_food = createVector((floor(random(0,cols)) * scl), (floor(random(0, rows)) * scl));
+                let maybe_food = createVector((floor(random(0,cols)) * scl), (floor(random(0, rows)) * scl));
                 if (!s.check(maybe_food.x, maybe_food.y)) {
                     found_pos = true;
                 }

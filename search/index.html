@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="author" content="Roman Kitsela" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A* algorithms</title>
+  <title>Search algorithms</title>
   <!-- Bootstrap import -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <!-- Font Awesome -->
@@ -70,9 +70,9 @@
         <a class="navbar-brand">Algorithm: <span class="navbar-brand" id="alg_name">A*</span></a>
         <a class="navbar-brand" id="path_length"></a>
       </div>
-      <div class="d-inline-flex">
+      <div class="d-inline-flex flex-row p-3">
         <button type="button" name="button" class="btn btn-dark mx-1" onclick="start_alg(grid);">Start</button>
-        <button type="button" name="button" class="btn btn-dark mx-1" onclick="reset(grid);">Reset</button>
+        <button type="button" name="button" class="btn btn-dark mx-1" onclick="reset();">Reset</button>
         <button class="btn btn-dark mx-1" type="button" data-bs-toggle="collapse" data-bs-target="#algorithmOptions" aria-expanded="false" aria-controls="collapseExample">Options</button>
         <a href="#how" class="navbar-brand mx-3">How does it work?</a>
       </div>
@@ -91,6 +91,9 @@
       </div>
       <div class="d-inline-flex">
         <button type="button" name="button" class="btn btn btn-outline-dark mx-1" id="maze_obst" onclick="moveActive('obstSelect', this); drawMaze();">Maze</button>
+      </div>
+      <div class="d-inline-flex">
+        <button type="button" name="button" class="btn btn btn-outline-dark mx-1" onclick="clearGrid();">Clear</button>
       </div>
     </div>
     <div class="d-inline-flex algoSelect">
@@ -130,13 +133,17 @@
 
       <div class="container">
         <h5 class="text_exp">
-          This is a visualization of the <a href="https://en.wikipedia.org/wiki/A*_search_algorithm" target=”_blank” class="link-dark text-decoration-none">A* algorithm</a>.
+          This is a visualization of different searching algorithms.
+        </h5>
+        <hr>
+        <h5 class="text_exp">
+          (1) The <a href="https://en.wikipedia.org/wiki/A*_search_algorithm" target=”_blank” class="link-dark text-decoration-none">A* algorithm</a>.
         </h5>
         <p class="text_exp">
           Based on the famous Dikstra's search algorithm, the A* algorithm includes the use of a <i>heuristic</i> function to prioritize searching in the direction of the target.
         </p>
         <p class="text_exp">
-          The A* algorithm is a weighted search algorithm that is <b>guaranteed</b> to find the shortest path between start and end goals.
+          The A* algorithm is guaranteed to find a path from start to end goal (unless this is impossible due to obstacles), and will always find the optimal <i>shortest</i> path.
         </p>
         <p class="text_exp">
           In this visualization the different kinds of cells are highlighted in different colours:
@@ -171,11 +178,33 @@
             <div style="color:gold;float:left;">&#9632;</div> - Gold cells represent the solution path (guaranteed to be shortest possible) from start point to end point.
           </li>
         </ul>
-        <p class="text_exp">As mentioned above the key ingredient in the A* algorithm is how the next cell to be examined is chosen. A heuristic function is used to evaluate the cells in the open set and the best looking candidates are chosen to be
+        <p class="text_exp">The key ingredient in the A* algorithm is how the next cell to be examined is chosen. A heuristic function is used to evaluate the cells in the open set and the best looking candidates are chosen to be
           checked first. This helps avoid needlessly checking options that are unlikely to work (unless no other options are available).</p>
-
-
-      </div>
+        <hr>
+        <h5 class="text_exp">
+          (2) The <a href="https://en.wikipedia.org/wiki/Breadth-first_search" target=”_blank” class="link-dark text-decoration-none">Breadth First Search algorithm</a>.
+        </h5>
+        <p class="text_exp">
+          Breadth first search (BFS) algorithm is based on the basic idea that in order to find the end goal you should prioritize searching <i>wide</i> (not deep).
+        </p>
+        <p class="text_exp">The BFS algorithm is guaranteed to find a path from start to end goal (unless this is impossible due to obstacles), and will always find the optimal <i>shortest</i> path.</p>
+        <p class="text_exp">
+          BFS is commonly implemented using a queue to determine the cell exploration order. A queue follows the FIFO convention: (First In First Out). When a new cell is visited its connected neighbours are added to the queue. A new cell is then chosen from the back of the queue and visited. Any valid neighbours this new cell has are then added to the back of the search queue and so will be visited only <i>after</i> all neighbours of the original cell have been visited.
+        </p>
+        <hr>
+        <h5 class="text_exp">
+          (3) The <a href="https://en.wikipedia.org/wiki/Depth-first_search" target=”_blank” class="link-dark text-decoration-none">Depth First Search algorithm</a>.
+        </h5>
+        <p class="text_exp">
+          In contrast with DFS Depth first search (DFS) algorithm prioritizes searching <i>deep</i> (not wide).
+        </p>
+        <p class="text_exp">
+          The DFS algorithm is guaranteed to find a path from start to end goal (unless this is impossible due to obstacles), but is NOT guaranteed to find the optimal <i>shortest</i> path - in fact in most cases the DFS algorithm produces very convoluted pathing.
+        </p>
+        <p class="text_exp">
+          DFS algorithm is most commonly implemented recursively but can be implemented iteratively using a stack to determine the cell exploration order. A stack follows the LIFO convention: (Last In First Out). When a new cell is visited its connected neighbours are added to the stack. A new cell is then chosen from the top of the stack and visited. Any valid neighbours this new cell has are then added to the top of the search stack and so will be visited <i>before</i> any neighbours of the original cell are visited.
+        </p>
+        </div>
     </div>
   </section>
 
