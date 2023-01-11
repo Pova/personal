@@ -569,10 +569,10 @@ function mouseDragged() {
       col_num = Math.floor((mouseX/width)*cols);
       row_num = Math.floor((mouseY/height)*rows);
       grid[col_num][row_num].wall = true;
+      return false;
     }
   }
   // prevent default
-  return false;
 }
 
 function mousePressed() {
@@ -581,10 +581,10 @@ function mousePressed() {
       col_num = Math.floor((mouseX/width)*cols);
       row_num = Math.floor((mouseY/height)*rows);
       grid[col_num][row_num].wall = true;
+      return false;
     }
   }
   // prevent default
-  return false;
 }
 
 // Custom shapes for canvas using p5.js

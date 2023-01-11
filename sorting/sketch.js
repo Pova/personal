@@ -29,22 +29,42 @@ async function sort_array() {
   if (alg != undefined) {
     if (animate === false) {
       await resume_animation();
+      const start = Date.now();
       if (alg === 'quick') {
+        var alg_title = 'Quick Sort';
         await quicksort(values, 0, values.length - 1);
       } else if (alg === 'bubble') {
+        var alg_title = 'Bubble Sort';
         await bubblesort(values);
       } else if (alg === 'insert') {
+        var alg_title = 'Insertion Sort';
         await insertsort(values);
       } else if (alg === 'select') {
+        var alg_title = 'Selection Sort';
         await selectsort(values);
       } else if (alg === 'merge') {
+        var alg_title = 'Merge Sort';
         await mergesort(values);
       } else if (alg === 'heap') {
+        var alg_title = 'Heap Sort';
         await heapsort(values);
       }
       animate_array();
       console.log('DONE');
       pause_animation();
+      const end = Date.now();
+      push();
+      fill('#6c757d');
+      textSize(64);
+      text('Algorithm:', 100, 100);
+      fill(255);
+      text(alg_title,415,100)
+      fill('#6c757d');
+      text('Time elapsed:',100, 200);
+      fill(255);
+      text(((end-start)/1000) + ' sec', 525, 200);
+      pop();
+      console.log(`Execution time: ${end - start} ms`);
     }
   } else {
     console.log('pick an algorithm!')
@@ -151,7 +171,7 @@ async function insertsort(values) {
   }
   for (let i = 1; i < values.length; i++) {
     states[i] = 3;
-    await sleep(100);
+    //await sleep(100);
     let final_position = i;
     for (let j = i; j > 0; j--) {
       if (values[j - 1] > values[j]) {
