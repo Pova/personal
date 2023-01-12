@@ -25,8 +25,10 @@ function setup() {
 
   flowfield = new Array(cols * rows);
 
-  for (var i = 0; i < 1000; i++) {
-    particles[i] = new Particle(); //Create 1000 particles, place in a list
+  const particle_count = Math.floor((height*width)/2000);
+
+  for (var i = 0; i < particle_count; i++) {
+    particles[i] = new Particle();
   }
   background(0);
 }

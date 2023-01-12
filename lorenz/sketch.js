@@ -14,6 +14,7 @@ let points = new Array();
 let a = 10; //sigma
 let b = 28; //rho
 let c = 8.0 / 3.0; //beta
+let hu = 0;
 
 let pause = false;
 
@@ -23,9 +24,16 @@ function setup() {
 
 	background(0);
 	cursor('grab');
-
 	camera(175, -175, 200, 0, 0, 0, 0, 1, 0);
-	colorMode(HSB);
+
+	critical_pt_1_x = Math.sqrt(c*(b-1));;
+	critical_pt_1_y = Math.sqrt(c*(b-1));;
+	critical_pt_1_z = b-1;
+	critical_pt_1 = new p5.Vector(critical_pt_1_x,critical_pt_1_y,critical_pt_1_z);
+	critical_pt_2_x = -Math.sqrt(c*(b-1));;
+	critical_pt_2_y = -Math.sqrt(c*(b-1));;
+	critical_pt_2_z = b-1;
+	critical_pt_2 = new p5.Vector(critical_pt_2_x,critical_pt_2_y,critical_pt_2_z);
 }
 
 function resetSketch(){
@@ -78,17 +86,21 @@ function draw() {
 	scale(3);
 	stroke(255);
 
-	let hu = 0;
-	let br = 255;
-
 	push();
 	beginShape();
 	for (let v of points) {
 		noFill();
 		stroke(255);
-	strokeWeight(1);
+		strokeWeight(.5);
 		vertex(v.x, v.y, v.z);
 	}
 	endShape();
+	pop();
+
+	push();
+	strokeWeight(10);
+	stroke(100);
+	point(critical_pt_1);
+	point(critical_pt_2);
 	pop();
 }
