@@ -17,9 +17,6 @@ function setup() {
     canvas = createCanvas(cols*scl,rows*scl);
     canvas.parent("#canvas_container");
 
-    // rows = Math.floor((height) / scl);
-    // cols = Math.floor((width) / scl);
-
     width_size = scl * cols;
     height_size = scl * rows;
 
@@ -127,10 +124,12 @@ function draw() {
             while (found_pos === false) {
                 let maybe_food = createVector((floor(random(0,cols)) * scl), (floor(random(0, rows)) * scl));
                 if (!s.check(maybe_food.x, maybe_food.y)) {
-                    found_pos = true;
+                    food = new Food(maybe_food.x, maybe_food.y);
+                    break;
+                } else {
+                    continue;
                 }
             }
-            food = new Food(maybe_food.x, maybe_food.y);
         }
         s.death();
         s.update();
