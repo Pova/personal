@@ -32,9 +32,9 @@ function Snake(pos_x, pos_y) { //Constructor
 
     this.death = function() {
         if (this.tail.length > 0) {
-            for (var i = 0; i < this.tail.length; i++) {
-                var pos = this.tail[i];
-                var d = dist(this.x, this.y, pos.x, pos.y);
+            for (let i = 0; i < this.tail.length; i++) {
+                let pos = this.tail[i];
+                let d = dist(this.x, this.y, pos.x, pos.y);
                 if (d < 1 && this.tail.length > 1) {
                     this.reset(); 
                 }
@@ -44,7 +44,7 @@ function Snake(pos_x, pos_y) { //Constructor
 
     this.update = function() {
         if (this.total === this.tail.length) { 
-            for (var i = 0; i < this.tail.length - 1; i++) {
+            for (let i = 0; i < this.tail.length - 1; i++) {
                 this.tail[i] = this.tail[i + 1]; 
                 //s[0] is the back of the snake
             }
@@ -75,7 +75,7 @@ function Snake(pos_x, pos_y) { //Constructor
             return true;
         }
         if (this.tail.length > 0) {
-            for (var i = 0; i < this.tail.length; i++) {
+            for (let i = 0; i < this.tail.length; i++) {
                 if (this.tail[i].x === pos_x && this.tail[i].y === pos_y) {
                     return true;
                 }
@@ -93,11 +93,11 @@ function Snake(pos_x, pos_y) { //Constructor
     this.show = function() {
         push();
         colorMode(HSB);
-        var hue = -2.55;
-        var sat = 100;
-        var bri = 78;
+        let hue = -2.55;
+        let sat = 100;
+        let bri = 78;
 
-        for (var i = -1; i < this.tail.length; i++) {
+        for (let i = -1; i < this.tail.length; i++) {
             if (hue > 255){
                 hue = hue-255;
             } else{
@@ -117,9 +117,11 @@ function Snake(pos_x, pos_y) { //Constructor
     }
 
     this.reset = function() {
-        if (this.total+1 > highScore) {
-            highScore = this.total+1;
-            localStorage.setItem('hiscore', highScore);
+        console.log('trigger',this.total,highscore)
+        if (this.total+1 > highscore) {
+            console.log('trigger')
+            highscore = this.total+1;
+            localStorage.setItem('highscore', highscore);
         }
         gameStarted = false;
         s = new Snake();

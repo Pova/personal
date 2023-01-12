@@ -20,10 +20,10 @@ function setup() {
     width_size = scl * cols;
     height_size = scl * rows;
 
-    if (localStorage.getItem('hiscore')===null){
-        localStorage.setItem('hiscore', 0);
+    if (localStorage.getItem('highscore')===null){
+        localStorage.setItem('highscore', 0);
     } 
-    highscore = localStorage.getItem('hiscore');
+    highscore = localStorage.getItem('highscore');
     highscore_elt = document.getElementById('highscore');
     currentscore_elt = document.getElementById('currentscore');
     highscore_elt.innerHTML = highscore.toString();
@@ -125,9 +125,7 @@ function draw() {
                 let maybe_food = createVector((floor(random(0,cols)) * scl), (floor(random(0, rows)) * scl));
                 if (!s.check(maybe_food.x, maybe_food.y)) {
                     food = new Food(maybe_food.x, maybe_food.y);
-                    break;
-                } else {
-                    continue;
+                    found_pos = true;
                 }
             }
         }
