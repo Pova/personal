@@ -80,8 +80,8 @@
   </nav>
 
   <section class="bg-secondary p-3 collapse" id="algorithmOptions">
-    <div class="container-fluid d-flex align-items-center justify-content-around">
-      <div class="d-inline-flex obstSelect">
+    <div class="container-fluid d-xl-flex align-items-center justify-content-around">
+      <div class="d-inline-flex obstSelect flex-row py-1 py-lg-0">
         <span class="navbar-brand align-middle mx-4">Obstacles:</span>
       <div class="d-inline-flex">
         <button type="button" name="button" class="btn btn-outline-dark mx-1 active" id="diy_obst" onclick="moveActive('obstSelect', this);drawYourOwn();">Draw your own</button>
@@ -96,7 +96,7 @@
         <button type="button" name="button" class="btn btn btn-outline-dark mx-1" onclick="clearGrid();">Clear</button>
       </div>
     </div>
-    <div class="d-inline-flex algoSelect">
+    <div class="d-inline-flex algoSelect flex-row py-1 py-lg-0">
       <span class="navbar-brand align-middle mx-4">Algorithm:</span>
       <div class="d-inline-flex">
         <button type="button" name="button" class="btn btn-outline-dark mx-1 active" onclick="moveActive('algoSelect', this); chooseAStar();">A*</button>
@@ -108,7 +108,7 @@
         <button type="button" name="button" class="btn btn-outline-dark mx-1" onclick="moveActive('algoSelect', this); chooseDFS();">DFS</button>
       </div>
     </div>
-    <div class="d-inline-flex diagSelect">
+    <div class="d-inline-flex diagSelect flex-row py-1 py-lg-0">
       <span class="navbar-brand align-middle mx-4">Diagonals allowed?</span>
       <div class="d-inline-flex">
         <button type="button" name="button" class="btn btn-outline-dark mx-1" onclick="moveActive('diagSelect', this); diagonalsAllowed();">Yes</button>
