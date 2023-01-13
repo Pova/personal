@@ -14,6 +14,10 @@ body {
   font-size: 28px;
 }
 
+.latex_eqn{
+  font-size: 20px;
+}
+
 #defaultCanvas0{
   display: block;
 }
