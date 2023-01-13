@@ -8,6 +8,7 @@ function path_0(t){
 //Path 1 - Helix (around z)
 
 function path_1(t){
+  animation_const = 1;
 
   curve_name_elt.innerHTML = "Helix";
   curve_name_elt.style.color = '#65C6FF';
@@ -25,7 +26,7 @@ function path_2(t){
 
   //R = 1, a = .4, w = 40, h = .3
 
-  animation_const = 0.1
+  animation_const = 0.1;
 
   curve_name_elt.innerHTML = "Slinky Curve";
   curve_name_elt.style.color = '#65C6FF';
@@ -40,6 +41,7 @@ function path_2(t){
 //Path 3 - Conical Spiral
 
 function path_3(t){
+  animation_const = 1;
 
   curve_name_elt.innerHTML = "Conical spiral";
   curve_name_elt.style.color = '#65C6FF';
@@ -54,6 +56,7 @@ function path_3(t){
 //Path 4 - Spherical Spiral
 
 function path_4(t){
+  animation_const = 1;
 
   curve_name_elt.innerHTML = "Spherical spiral";
   curve_name_elt.style.color = '#65C6FF';
@@ -68,6 +71,7 @@ function path_4(t){
 //Path 5 - Viviani's Curve
 
 function path_5(t){
+  animation_const = 1;
 
   curve_name_elt.innerHTML = "Viviani's curve";
   curve_name_elt.style.color = '#65C6FF';
@@ -82,6 +86,7 @@ function path_5(t){
 //Path 6 - Twisted Cubic
 
 function path_6(t){
+  animation_const = 1;
 
   curve_name_elt.innerHTML = "Twisted Cubic";
   curve_name_elt.style.color = '#65C6FF';
@@ -96,6 +101,7 @@ function path_6(t){
 //Path 7 - Spherical Epitrochoid
 
 function path_7(t){
+  animation_const = 1;
 
   curve_name_elt.innerHTML = "Spherical Epitrochoid";
   curve_name_elt.style.color = '#65C6FF';
@@ -110,6 +116,7 @@ function path_7(t){
 //Path 8 - Trefoil Knot
 
 function path_8(t){
+  animation_const = 1;
 
   curve_name_elt.innerHTML = "Trefoil Knot";
   curve_name_elt.style.color = '#65C6FF';
@@ -121,13 +128,10 @@ function path_8(t){
   return new p5.Vector(x,y,z)
 }
 
-// x = pow(t, 2); <-- y
-// y = -pow(t, 3); <-- -z
-// z = pow(t, 1); <-- x
-
 //Path 9 - Star
 
 function path_9(t){
+  animation_const = 1;
 
   curve_name_elt.innerHTML = "Star";
   curve_name_elt.style.color = '#65C6FF';
@@ -142,7 +146,7 @@ function path_9(t){
 //Path 10 - Torus
 
 function path_10(t){
-  animation_const = 0.15
+  animation_const = 0.15;
 
   curve_name_elt.innerHTML = "Torus";
   curve_name_elt.style.color = '#65C6FF';
