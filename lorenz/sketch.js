@@ -99,7 +99,7 @@ function draw() {
 
 	push();
 	strokeWeight(10);
-	stroke(100);
+	stroke(150);
 	point(critical_pt_1);
 	point(critical_pt_2);
 	pop();
