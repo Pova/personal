@@ -18,6 +18,10 @@
   <script language="javascript" type="text/javascript" src="curves.js"></script>
   <script language="javascript" type="text/javascript" src="sketch.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
 
 </head>
 
@@ -105,19 +109,19 @@
           <!-- DIV 1 (Slinky) -->
           <div class="d-lg-inline-flex align-items-center" >
           <div class="container text-center" id="slinky_R_container" style="display: none;">
-            <label for="customRange1" class="sliderText align-items-center">Slinky R</label>
+            <label for="customRange1" class="sliderText align-items-center">Slinky \(R\)</label>
             <input type="range" class="form-range" min="-2" max="6" step="0.1" value="1" id="slinky_R">
           </div>
           <div class="container text-center" id="slinky_a_container" style="display: none;">
-            <label for="customRange3" class="sliderText">Slinky a</label>
+            <label for="customRange3" class="sliderText">Slinky \(a\)</label>
             <input type="range" class="form-range" min="-1" max="2" step="0.05" value="0.4" id="slinky_a">
           </div>
           <div class="container text-center" id="slinky_h_container" style="display: none;">
-            <label for="customRange1" class="sliderText align-items-center">Slinky h</label>
+            <label for="customRange1" class="sliderText align-items-center">Slinky \(h\)</label>
             <input type="range" class="form-range" min="-0.5" max="0.5" step="0.01" value="0.3" id="slinky_h">
           </div>
           <div class="container text-center" id="slinky_w_container" style="display: none;">
-            <label for="customRange3" class="sliderText">Slinky w</label>
+            <label for="customRange3" class="sliderText">Slinky \(\omega\)</label>
             <input type="range" class="form-range" min="0" max="50" step="1" value="40" id="slinky_w">
           </div>
           </div>
@@ -125,19 +129,19 @@
           <!-- DIV 2 (Spherical Epitrochoid) -->
           <div class="d-lg-inline-flex align-items-center" >
           <div class="container text-center" id="epi_a_container" style="display: none;">
-            <label for="customRange5" class="sliderText">Epitrochoid a</label>
+            <label for="customRange5" class="sliderText">Epitrochoid \(a\)</label>
             <input type="range" class="form-range" min="0" max="10" step="0.1" value="3" id="epi_a">
           </div>
           <div class="container text-center" id="epi_b_container" style="display: none;">
-            <label for="customRange1" class="sliderText align-items-center">Epitrochoid b</label>
+            <label for="customRange1" class="sliderText align-items-center">Epitrochoid \(b\)</label>
             <input type="range" class="form-range" min="0" max="1" step="0.01" value="0.5" id="epi_b">
           </div>
           <div class="container text-center" id="epi_c_container" style="display: none;">
-            <label for="customRange3" class="sliderText">Epitrochoid c</label>
+            <label for="customRange3" class="sliderText">Epitrochoid \(c\)</label>
             <input type="range" class="form-range" min="0" max="1" step="0.01" value="0.5" id="epi_c">
           </div>
           <div class="container text-center" id="epi_w_container" style="display: none;">
-            <label for="customRange5" class="sliderText">Epitrochoid &theta;</label>
+            <label for="customRange5" class="sliderText">Epitrochoid \(\theta\)</label>
             <input type="range" class="form-range" min="0" max="6.283" step="0.063" value="1.047" id="epi_w">
           </div>
           </div>
@@ -177,23 +181,94 @@
           This is a visualization of curves in 3D space.
         </h5>
         <p class="text_exp">
-          Many interesting curves can be represented in <a href="https://en.wikipedia.org/wiki/Parametric_equation" target=”_blank” class="link-dark text-decoration-none">parametric form</a> - meaning that the position of any point (in 3D space) on the curve can be expressed in terms of a single <i>parameter</i> (often denoted <b>t</b>). By varying the value of the parameter <b>t</b> within the animation and smoothly connecting the generated points we can trace out a curve in 3D space.
+          Many interesting curves can be represented in <a href="https://en.wikipedia.org/wiki/Parametric_equation" target=”_blank” class="link-dark text-decoration-none">parametric form</a> - meaning that the position of any point (in 3D space) on the curve can be expressed in terms of a single <i>parameter</i> (often denoted \(t\)). By varying the value of \(t\) within the animation and smoothly connecting the generated points we can trace out a curve in 3D space.
         </p>
         <p class="text_exp">I created this visualization during my time lecturing multivariable and vector calculus at UCSD. I noticed that students often had a difficult time connecting abstract parametric equations to the geometry of the resulting curves. Allowing students to actually <i>see</i> the results of the parametic equations increased student engagement with the mathematics they were studying.</p>
         <p class="text_exp">
           There are a variety of different curves to visualize:
-          <ul>
-            <li class="text_exp"><a href="https://en.wikipedia.org/wiki/Helix" target=”_blank” class="link-dark text-decoration-none">Helix</a></li>
+          <ol>
+            <li class="text_exp"><a href="https://en.wikipedia.org/wiki/Helix" target=”_blank” class="link-dark text-decoration-none" >Helix</a></li>
+            <p class="latex_eqn">
+              \begin{align}
+                x &= \cos(t)\\
+                y &= \sin(t)\\
+                z &= t
+              \end{align}
+            </p>
             <li class="text_exp">Torus</li>
+            <p class="latex_eqn">
+              \begin{align}
+                x &= (R+a\cos(\omega t))\cos(t)\\
+                y &= (R+a\cos(\omega t))\sin(t)\\
+                z &= a\sin(\omega t)\\
+              \end{align}
+            </p>
             <li class="text_exp">Slinky curve <span style="color: #65C6FF; font-size: xx-large;">*</span></li>
+            <p class="latex_eqn">
+              \begin{align}
+                x &= \cos(t)(R+a\cos(\omega t))\\
+                y &= \sin(t)(R+a\cos(\omega t))\\
+                z &= ht + a\sin(\omega t)\\
+              \end{align}
+            </p>
             <li class="text_exp"><a href="https://en.wikipedia.org/wiki/Conchospiral" target=”_blank” class="link-dark text-decoration-none">Conical spiral</a></li>
+            <p class="latex_eqn">
+              \begin{align}
+                x &= t\cos(t)\\
+                y &= t\sin(t)\\
+                z &= t\\
+              \end{align}
+            </p>
             <li class="text_exp">Spherical spiral</li>
-            <li class="text_exp"><a href="https://en.wikipedia.org/wiki/Viviani%27s_curve" target=”_blank” class="link-dark text-decoration-none">Viviani's curve</a></li>
+            <p class="latex_eqn">
+              \begin{align}
+              x &= \frac{\cos(t)}{\sqrt{1 + a^2t^2}}\\
+              y &= \frac{\sin(t)}{\sqrt{1 + a^2t^2}}\\
+              z &= \frac{-at}{\sqrt{1 + a^2t^2}}\\
+              \end{align}
+            </p>
+            <li class="text_exp"><a href="https://en.wikipedia.org/wiki/Viviani%27s_curve" target=”_blank” class="link-dark text-decoration-none">Viviani's curve</a>
+              <p class="latex_eqn">
+                \begin{align}
+                x &= \cos(t)\cos(t)\\
+                y &= \cos(t)\sin(t)\\
+                z &= \sin(t)\\
+                \end{align}
+              </p>
+            </li>
             <li class="text_exp">Trefoil Knot</li>
+            <p class="latex_eqn">
+              \begin{align}
+              x &= \sin(t)+2\sin(2t)\\
+              y &= \cos(t)-2\cos(2t)\\
+              z &= \sin(3t)\\
+              \end{align}
+            </p>
             <li class="text_exp">Star</li>
+            <p class="latex_eqn">
+              \begin{align}
+              x &= \alpha\sin(\beta t)\cos(t)\\
+              y &= \alpha\sin(\beta t)\sin(t)\\
+              z &= \sin(\beta t)\\
+              \end{align}
+            </p>
             <li class="text_exp"><a href="https://en.wikipedia.org/wiki/Twisted_cubic" target=”_blank” class="link-dark text-decoration-none">Twisted cubic</a></li>
+            <p class="latex_eqn">
+              \begin{align}
+              x &= t\\
+              y &= t^2\\
+              z &= t^3\\
+              \end{align}
+            </p>
             <li class="text_exp">Spherical epitrochoid <span style="color: #65C6FF; font-size: xx-large;">*</span></li>
-          </ul>
+            <p class="latex_eqn">
+              \begin{align}
+                x &= \cos (t) \left(a - \cos(\theta)\left(b-c\sin\left(\frac{at}{b}\right)\right)\right) - c\sin(t)\cos\left(\frac{at}{b}\right)\\ 
+                y &= \sin (t) \left(a - \cos(\theta)\left(b-c\sin\left(\frac{at}{b}\right)\right)\right) - c\cos(t)\cos\left(\frac{at}{b}\right)\\ 
+                z &= \sin (\theta) \left(b - c \sin\left(\frac{at}{b}\right) \right)\\
+              \end{align}
+            </p>
+          </ol>
           <span class="text_exp" style="color: #65C6FF">Click options to experiment with parameters controlling the geometry options of this curve. Can you figure out what each parameter is changing?</span>
         </p>
       </div>
