@@ -7,18 +7,25 @@ let slider;
 let speed;
 let status;
 
-
-
 function setup() {
 
-    rows = Math.floor((windowHeight-380) / scl);
-    cols = Math.floor((windowWidth-50) / scl);
+    const totalHeight = window.innerHeight;
+    const totalWidth = window.innerWidth;
 
-    canvas = createCanvas(cols*scl,rows*scl);
-    canvas.parent("#canvas_container");
+    const navBarHeight = document.getElementById('navBar').clientHeight;
+    const detailBarHeight = document.getElementById('detailBar').clientHeight;
 
-    width_size = scl * cols;
-    height_size = scl * rows;
+    canvasHeight = totalHeight-navBarHeight-detailBarHeight;
+    canvasWidth = totalWidth;
+
+    rows = Math.floor(canvasHeight / scl) - 2;
+    cols = Math.floor(totalWidth / scl) - 2;
+
+    canvas = createCanvas(canvasWidth,canvasHeight);
+    canvas.parent("#canvasContainer");
+
+    width_size = scl * cols; //width of grid
+    height_size = scl * rows; //height of grid
 
     if (localStorage.getItem('highscore')===null){
         localStorage.setItem('highscore', 0);
@@ -27,10 +34,18 @@ function setup() {
     highscore_elt = document.getElementById('highscore');
     currentscore_elt = document.getElementById('currentscore');
     highscore_elt.innerHTML = highscore.toString();
+
+    window.addEventListener("keydown", function(e) {
+        if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+            e.preventDefault();
+        }
+    }, false);
 }
 
 function draw() {
-    //translate(2,2);
+
+    translate((canvasWidth-width_size)/2,(canvasHeight-height_size)/2);
+
     background(255); 
     stroke(0);
     for (let i = 0; i < cols; i++) {
@@ -107,7 +122,17 @@ function draw() {
             stroke(0);
             textSize(20);
             textAlign(CENTER);
-            text('Press a direction to get started', width_size / 2, height / 2 + 60);
+            text('Use WASD or arrow keys to control the snake', width_size / 2, height / 2 + 60);
+            pop();
+        }
+
+        if (millis() >= 7000) {
+            push();
+            fill('#6c757d');
+            stroke(0);
+            textSize(20);
+            textAlign(CENTER);
+            text('Press a direction to get started', width_size / 2, height / 2 + 90);
             pop();
         }
     }
@@ -139,32 +164,32 @@ function draw() {
 
 function keyPressed() {
     if (gameStarted) {
-        if (keyCode === UP_ARROW && s.yspeed != 1) {
+        if ((keyCode === UP_ARROW || keyCode==87) && s.yspeed != 1) {
             s.dir(0, -1);
-        } else if (keyCode === DOWN_ARROW && s.yspeed != -1) {
+        } else if ((keyCode === DOWN_ARROW || keyCode==83) && s.yspeed != -1) {
             s.dir(0, 1);
-        } else if (keyCode === RIGHT_ARROW && s.xspeed != -1) {
+        } else if ((keyCode === RIGHT_ARROW || keyCode==68) && s.xspeed != -1) {
             s.dir(1, 0);
-        } else if (keyCode === LEFT_ARROW && s.xspeed != 1) {
+        } else if ((keyCode === LEFT_ARROW || keyCode==65) && s.xspeed != 1) {
             s.dir(-1, 0);
         }
     } else { //If game is not started
-        if (keyCode === UP_ARROW) {
+        if (keyCode === UP_ARROW || keyCode==87) {
             gameStarted = true;
             s = new Snake(floor(random(0, cols)) * scl, (rows-1) * scl);
             s.dir(0, -1);
             food = new Food(s.x, floor(random(0, rows-1)) * scl);
-        } else if (keyCode === DOWN_ARROW) {
+        } else if (keyCode === DOWN_ARROW || keyCode==83) {
             gameStarted = true;
             s = new Snake(floor(random(0, cols)) * scl, 0);
             s.dir(0, 1);
             food = new Food(s.x, floor(random(1, rows)) * scl);
-        } else if (keyCode === RIGHT_ARROW) {
+        } else if (keyCode === RIGHT_ARROW || keyCode==68) {
             gameStarted = true;
             s = new Snake(0, floor(random(0, rows)) * scl);
             s.dir(1, 0);
             food = new Food(floor(random(1, cols)) * scl, s.y);
-        } else if (keyCode === LEFT_ARROW) {
+        } else if (keyCode === LEFT_ARROW || keyCode==65) {
             gameStarted = true;
             s = new Snake((cols-1)*scl, floor(random(0,rows)) * scl);
             s.dir(-1, 0);
