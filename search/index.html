@@ -22,7 +22,7 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark" id="navBar">
     <div class="container">
       <a href="../" class="navbar-brand">
         <h1 class="display-4">Roman Kitsela</h1>
@@ -59,68 +59,68 @@
   </nav>
 
 
-  <nav class="navbar bg-secondary navbar-dark justify-content-between border-bottom border-dark border-2">
-    <div class="container">
-      <div class="d-inline-flex flex-row">
+  <nav class="navbar bg-secondary navbar-dark justify-content-between border-bottom border-dark border-2" id="detailBar">
+    <div class="container align-text-center">
+      <!-- <div class="d-inline-flex flex-row"> -->
         <a class="navbar-brand">
-          <h2>Search Algorithms</h2>
+          <h2 class="m-0">Search Algorithms</h2>
         </a>
-      </div>
-      <div class="d-inline-flex flex-row">
+      <!-- </div> -->
+      <div class="">
         <a class="navbar-brand">Algorithm: <span class="navbar-brand" id="alg_name">A*</span></a>
         <a class="navbar-brand" id="path_length"></a>
       </div>
-      <div class="d-inline-flex flex-row">
-        <button type="button" name="button" class="btn btn-dark mx-1" onclick="start_alg(grid);">Start</button>
-        <button type="button" name="button" class="btn btn-dark mx-1" onclick="reset();">Reset</button>
-        <button class="btn btn-dark mx-1" type="button" data-bs-toggle="collapse" data-bs-target="#algorithmOptions" aria-expanded="false" aria-controls="collapseExample">Options</button>
-        <a href="#how" class="navbar-brand mx-3">How does it work?</a>
+      <div class="">
+        <button type="button" name="button" class="btn btn-dark m-0 mx-lg-1" onclick="start_alg(grid);">Start</button>
+        <button type="button" name="button" class="btn btn-dark m-0 mx-lg-1" onclick="reset();">Reset</button>
+        <button class="btn btn-dark m-0 mx-lg-1" type="button" data-bs-toggle="collapse" data-bs-target="#algorithmOptions" aria-expanded="false" aria-controls="collapseExample">Options</button>
       </div>
+      <a href="#how" class="navbar-brand mx-3">How does it work?</a>
     </div>
   </nav>
 
-  <section class="bg-secondary p-3 collapse" id="algorithmOptions">
-    <div class="container-fluid d-xl-flex align-items-center justify-content-around">
+  <section class="bg-secondary p-1 p-md-3 collapse" id="algorithmOptions">
+    <div class="d-xl-flex align-items-center justify-content-around">
       <div class="d-inline-flex obstSelect flex-row py-1 py-lg-0">
-        <span class="navbar-brand align-middle mx-4">Obstacles:</span>
+        <span class="navbar-brand align-middle mx-lg-4">Obstacles:</span>
       <div class="d-inline-flex">
-        <button type="button" name="button" class="btn btn-outline-dark mx-1 active" id="diy_obst" onclick="moveActive('obstSelect', this);drawYourOwn();">Draw your own</button>
+        <button type="button" name="button" class="btn btn-outline-dark mx-lg-1 active" id="diy_obst" onclick="moveActive('obstSelect', this);drawYourOwn();">DIY</button>
       </div>
       <div class="d-inline-flex">
-        <button type="button" name="button" class="btn btn-outline-dark mx-1" id="rand_obst" onclick="moveActive('obstSelect', this); grid = randomGrid(grid);">Random</button>
+        <button type="button" name="button" class="btn btn-outline-dark mx-lg-1" id="rand_obst" onclick="moveActive('obstSelect', this); grid = randomGrid(grid);">Random</button>
       </div>
       <div class="d-inline-flex">
-        <button type="button" name="button" class="btn btn btn-outline-dark mx-1" id="maze_obst" onclick="moveActive('obstSelect', this); drawMaze();">Maze</button>
+        <button type="button" name="button" class="btn btn btn-outline-dark mx-lg-1" id="maze_obst" onclick="moveActive('obstSelect', this); drawMaze();">Maze</button>
       </div>
       <div class="d-inline-flex">
-        <button type="button" name="button" class="btn btn btn-outline-dark mx-1" onclick="clearGrid();">Clear</button>
+        <button type="button" name="button" class="btn btn btn-outline-dark mx-lg-1" onclick="clearGrid();">Clear</button>
       </div>
     </div>
     <div class="d-inline-flex algoSelect flex-row py-1 py-lg-0">
-      <span class="navbar-brand align-middle mx-4">Algorithm:</span>
+      <span class="navbar-brand align-middle mx-lg-4">Algorithm:</span>
       <div class="d-inline-flex">
-        <button type="button" name="button" class="btn btn-outline-dark mx-1 active" onclick="moveActive('algoSelect', this); chooseAStar();">A*</button>
+        <button type="button" name="button" class="btn btn-outline-dark mx-lg-1 active" onclick="moveActive('algoSelect', this); chooseAStar();">A*</button>
       </div>
       <div class="d-inline-flex">
-        <button type="button" name="button" class="btn btn-outline-dark mx-1" onclick="moveActive('algoSelect', this); chooseBFS();">BFS</button>
+        <button type="button" name="button" class="btn btn-outline-dark mx-lg-1" onclick="moveActive('algoSelect', this); chooseBFS();">BFS</button>
       </div>
       <div class="d-inline-flex">
-        <button type="button" name="button" class="btn btn-outline-dark mx-1" onclick="moveActive('algoSelect', this); chooseDFS();">DFS</button>
+        <button type="button" name="button" class="btn btn-outline-dark mx-lg-1" onclick="moveActive('algoSelect', this); chooseDFS();">DFS</button>
       </div>
     </div>
     <div class="d-inline-flex diagSelect flex-row py-1 py-lg-0">
-      <span class="navbar-brand align-middle mx-4">Diagonals allowed?</span>
+      <span class="navbar-brand align-middle mx-lg-4">Diagonals allowed?</span>
       <div class="d-inline-flex">
-        <button type="button" name="button" class="btn btn-outline-dark mx-1" onclick="moveActive('diagSelect', this); diagonalsAllowed();">Yes</button>
+        <button type="button" name="button" class="btn btn-outline-dark mx-lg-1" onclick="moveActive('diagSelect', this); diagonalsAllowed();">Yes</button>
       </div>
       <div class="d-inline-flex">
-        <button type="button" name="button" class="btn btn-outline-dark mx-1 active" onclick="moveActive('diagSelect', this); diagonalsNotAllowed();">No</button>
+        <button type="button" name="button" class="btn btn-outline-dark mx-lg-1 active" onclick="moveActive('diagSelect', this); diagonalsNotAllowed();">No</button>
       </div>
     </div>     
     </div>
   </section>
 
-  <div class="d-flex justify-content-center py-4" id="canvas_container">
+  <div id="canvasContainer">
   </div>
 
   <!-- Showcase -->
