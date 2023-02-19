@@ -14,18 +14,27 @@ var boxes = false; //this will control debug mode
 
 
 function setup() {
+  const totalHeight = window.innerHeight;
+  const totalWidth = window.innerWidth;
+
+  const navBarHeight = document.getElementById('navBar').clientHeight;
+  const detailBarHeight = document.getElementById('detailBar').clientHeight;
+
+  canvasHeight = totalHeight-navBarHeight-detailBarHeight;
+  canvasWidth = totalWidth;
+
   hue_change_val = 1;
 
-  var canvas = createCanvas(windowWidth, windowHeight-180);
-  canvas.parent('canvas_container');
+  var canvas = createCanvas(canvasWidth, canvasHeight);
+  canvas.parent('canvasContainer');
 
   colorMode(HSB, 255);
-  cols = floor(width / scl);
-  rows = floor(height / scl);
+  cols = floor(canvasWidth / scl);
+  rows = floor(canvasHeight / scl);
 
   flowfield = new Array(cols * rows);
 
-  const particle_count = Math.floor((height*width)/2000);
+  const particle_count = Math.floor((canvasHeight*canvasWidth)/2000);
 
   for (var i = 0; i < particle_count; i++) {
     particles[i] = new Particle();
@@ -36,7 +45,7 @@ function setup() {
 function draw() {
   smooth();
 
-  translate(width/2, height/2);
+  translate(canvasWidth/2, canvasHeight/2);
 
   // Perlin Noise
 
