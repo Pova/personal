@@ -28,9 +28,18 @@ let path_dict = {
 let frame_rates = [];
 
 function setup() {
+  const totalHeight = window.innerHeight;
+  const totalWidth = window.innerWidth;
+
+  const navBarHeight = document.getElementById('navBar').clientHeight;
+  const detailBarHeight = document.getElementById('detailBar').clientHeight;
+
+  canvasHeight = totalHeight-navBarHeight-detailBarHeight;
+  canvasWidth = totalWidth;
+
   smooth();
-  let canvas = createCanvas(windowWidth, windowHeight-180, WEBGL);
-  canvas.parent('canvas_container');
+  let canvas = createCanvas(canvasWidth, canvasHeight, WEBGL);
+  canvas.parent('canvasContainer');
   background(0);
 
   colorMode(HSB, 255);
