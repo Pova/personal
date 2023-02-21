@@ -6,6 +6,13 @@ let gameStarted = false;
 let slider;
 let speed;
 let status;
+let snakeFontSize = 128;
+let animationHorizontalOffset = 100;
+let animationVerticalOffset = 0;
+
+function windowResized() {
+    setup();
+  }
 
 function setup() {
 
@@ -27,6 +34,13 @@ function setup() {
     width_size = scl * cols; //width of grid
     height_size = scl * rows; //height of grid
 
+    if (totalWidth<625){
+        snakeFontSize = 64;
+        animationHorizontalOffset = 50;
+        animationVerticalOffset = 50;
+    }
+
+    // Scoring
     if (localStorage.getItem('highscore')===null){
         localStorage.setItem('highscore', 0);
     } 
@@ -75,45 +89,45 @@ function draw() {
             push();
             fill('#6c757d');
             stroke(0);
-            textSize(128);
+            textSize(snakeFontSize);
             textAlign(CENTER);
-            text('S', width_size / 2 - 200, height / 2);
+            text('S', width_size / 2 - 2*animationHorizontalOffset, height / 2 - animationVerticalOffset);
             pop();
         }
         if (millis() >= 2000) {
             push();
             fill('#6c757d');
             stroke(0);
-            textSize(128);
+            textSize(snakeFontSize);
             textAlign(CENTER);
-            text('N', width_size / 2 - 100, height / 2);
+            text('N', width_size / 2 - animationHorizontalOffset, height / 2 - animationVerticalOffset);
             pop();
         }
         if (millis() >= 3000) {
             push();
             fill('#6c757d');
             stroke(0);
-            textSize(128);
+            textSize(snakeFontSize);
             textAlign(CENTER);
-            text('A', width_size / 2, height / 2);
+            text('A', width_size / 2, height / 2 - animationVerticalOffset);
             pop();
         }
         if (millis() >= 4000) {
             push();
             fill('#6c757d');
             stroke(0);
-            textSize(128);
+            textSize(snakeFontSize);
             textAlign(CENTER);
-            text('K', width_size / 2 + 100, height / 2);
+            text('K', width_size / 2 + animationHorizontalOffset, height / 2 - animationVerticalOffset);
             pop();
         }
         if (millis() >= 5000) {
             push();
             fill('#6c757d');
             stroke(0);
-            textSize(128);
+            textSize(snakeFontSize);
             textAlign(CENTER);
-            text('E', width_size / 2 + 200, height / 2);
+            text('E', width_size / 2 + 2*animationHorizontalOffset, height / 2 - animationVerticalOffset);
             pop();
         }
         if (millis() >= 6000) {
