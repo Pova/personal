@@ -13,6 +13,10 @@ let j = 0;
 let starting_hue = 100;
 let animation_speed = 0;
 
+function windowResized() {
+  setup();
+}
+
 function setup() {
 
   const totalHeight = window.innerHeight;
