@@ -14,6 +14,28 @@ body {
   font-size: 28px;
 }
 
+@media only screen and (max-width: 660px) {
+  .criticalPoints {
+    font-size: 24px;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .criticalPoints {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .criticalPoints {
+    font-size: 16px;
+  }
+}
+
+.text_exp_small{
+  font-size: 18px;
+}
+
 #defaultCanvas0{
   display: block;
 }
