@@ -29,6 +29,10 @@ function moveActive(groupname, elem){
   }
 }
 
+function windowResized() {
+  setup();
+}
+
 function setup() {
   h = 30;
   w = 30;
