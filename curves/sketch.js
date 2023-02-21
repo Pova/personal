@@ -27,6 +27,12 @@ let path_dict = {
  
 let frame_rates = [];
 
+// fixing resizing issue
+
+function windowResized() {
+  setup();
+}
+
 function setup() {
   const totalHeight = window.innerHeight;
   const totalWidth = window.innerWidth;
