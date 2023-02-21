@@ -18,6 +18,10 @@ let hu = 0;
 
 let pause = false;
 
+function windowResized() {
+    setup();
+  }
+
 function setup() {
 	const totalHeight = window.innerHeight;
 	const totalWidth = window.innerWidth;
