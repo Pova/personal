@@ -12,6 +12,9 @@ let path_thickness;
 let toggle_flow = false;
 var boxes = false; //this will control debug mode
 
+function windowResized() {
+  setup();
+}
 
 function setup() {
   const totalHeight = window.innerHeight;
