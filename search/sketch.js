@@ -29,23 +29,37 @@ function moveActive(groupname, elem){
   }
 }
 
+function windowResized() {
+  setup();
+}
+
 function setup() {
   h = 30;
   w = 30;
 
-  rows = Math.floor((windowHeight - 200) / h);
+  const totalHeight = window.innerHeight;
+  const totalWidth = window.innerWidth;
+
+  const navBarHeight = document.getElementById('navBar').clientHeight;
+  const detailBarHeight = document.getElementById('detailBar').clientHeight;
+
+  canvasHeight = totalHeight-navBarHeight-detailBarHeight;
+  canvasWidth = totalWidth;
+
+  rows = Math.floor(canvasHeight / h) - 1;
   if (rows%2===0){
     rows -= 1;
   }
-  cols = Math.floor((windowWidth - 30) / w);
+  cols = Math.floor(canvasWidth / w) - 1;
   if (cols%2===0){
     cols -= 1;
   }
-  console.log('rows = ',rows)
-  console.log('cols = ', cols)
 
-  canvas = createCanvas(w * cols, h * rows);
-  canvas.parent("#canvas_container");
+  canvas = createCanvas(canvasWidth, canvasHeight);
+  canvas.parent("#canvasContainer");
+
+  width_size = cols*w;
+  height_size = rows*h;
 
   alg_name_elt = document.getElementById('alg_name');
   alg_name_elt.style.color = '#65C6FF';
@@ -78,6 +92,9 @@ function start_alg(){
 }
 
 function draw() {
+
+  translate((canvasWidth-width_size)/2,(canvasHeight-height_size)/2);
+
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
       if (grid[i][j].wall) {
@@ -157,7 +174,7 @@ function draw() {
   } else {
     fill(255, 0, 0);
   }
-  translate(width-w/2,height-h/2);
+  translate(width_size-w/2,height_size-h/2);
   rotate(frameCount / 100.0);
   star(0, 0, 5, 10, 5);
   pop();

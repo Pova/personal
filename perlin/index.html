@@ -21,7 +21,7 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark" id="navBar">
     <div class="container">
       <a href="../" class="navbar-brand">
         <h1 class="display-4">Roman Kitsela</h1>
@@ -58,7 +58,7 @@
   </nav>
 
 
-  <nav class="navbar navbar-dark bg-secondary border-bottom border-dark border-2 justify-content-between">
+  <nav class="navbar navbar-dark bg-secondary border-bottom border-dark border-2 justify-content-between" id="detailBar">
     <div class="container">
     <div class="d-flex">
       <a class="navbar-brand">
@@ -66,9 +66,9 @@
       </a>
       </div>
       <div class="d-inline-flex align-text-center">
-          <button type="button" class="btn btn-dark mx-1" onclick="clearBG()" ;>Clear Background</button>
+          <button type="button" class="btn btn-dark mx-1" onclick="clearBG()" ;>Clear</button>
         <button class="btn btn-dark mx-1" type="button" data-bs-toggle="collapse" data-bs-target="#visualizationOptions" aria-expanded="false" aria-controls="collapseExample">Options</button>
-        <a class="navbar-brand mx-3" href="#how">How does this work?</a>
+        <a class="navbar-brand mx-1 mx-lg-3" href="#how">How does this work?</a>
       </div>
     </div>
   </nav>
@@ -109,19 +109,19 @@
 
 
   <section>
-    <div id="canvas_container">
+    <div id="canvasContainer">
     </div>
   </section>
 
   <!-- Showcase -->
   <section class="bg-secondary text-light p-md-5 text-center text-lg-start" id="how">
 
-    <div class="d-xl-flex align-items-center justify-content-around" >
+    <div class="align-items-center justify-content-around" >
       <div class="container py-5 text-center">
         <h1 class="display-1">What am I looking at?</h1>
       </div>
 
-      <div class="container">
+      <div class="container py-1">
         <h5 class="text_exp">
           This is a visualization of <a href="https://en.wikipedia.org/wiki/Perlin_noise" target=”_blank” class="link-dark text-decoration-none">perlin noise</a>.
         </h5>

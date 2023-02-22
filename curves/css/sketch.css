@@ -15,7 +15,49 @@ body {
 }
 
 .latex_eqn{
-  font-size: 20px;
+  font-size: 28px;
+}
+
+@media only screen and (max-width: 992px) {
+  .latex_eqn {
+    font-size: 24px;
+  }
+}
+
+@media only screen and (max-width: 920px) {
+  .latex_eqn {
+    font-size: 22px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .latex_eqn {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .latex_eqn {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .latex_eqn {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .latex_eqn {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 440px) {
+  .latex_eqn {
+    font-size: 10px;
+  }
 }
 
 #defaultCanvas0{

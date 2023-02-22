@@ -18,9 +18,22 @@ let hu = 0;
 
 let pause = false;
 
+function windowResized() {
+    setup();
+  }
+
 function setup() {
-	let canvas = createCanvas(windowWidth, windowHeight-180, WEBGL);
-  	canvas.parent('canvas_container');
+	const totalHeight = window.innerHeight;
+	const totalWidth = window.innerWidth;
+  
+	const navBarHeight = document.getElementById('navBar').clientHeight;
+	const detailBarHeight = document.getElementById('detailBar').clientHeight;
+  
+	canvasHeight = totalHeight-navBarHeight-detailBarHeight;
+	canvasWidth = totalWidth;
+
+	let canvas = createCanvas(canvasWidth, canvasHeight, WEBGL);
+  	canvas.parent('canvasContainer');
 
 	background(0);
 	cursor('grab');

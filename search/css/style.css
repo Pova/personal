@@ -4,7 +4,8 @@ html,
 body {
   margin: 0;
   padding: 0;
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
+  text-align: center;
 }
 
 
@@ -15,29 +16,6 @@ body {
 
 .text_exp{
   font-size: 28px;
-}
-
-.row {
-    display : flex;
-    align-items : center;
-    margin-bottom: 15px;
-}
-
-.box {
-  height: 20px;
-  width: 20px;
-  margin-bottom: 15px;
-  border: 1px solid black;
-}
-
-.red {
-  background-color: red;
-}
-
-.green {
-  background-color: green;
-}
-
-.blue {
-  background-color: blue;
+  margin-bottom: 0;
+  padding-bottom: 20px;
 }
