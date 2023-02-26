@@ -1,0 +1,213 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Roman Kitsela" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vector Fields</title>
+  <!-- Bootstrap import -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Extra custom styling -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- p5 Library files HERE -->
+  <script src="lib/p5.min.js" type="text/javascript"></script>
+  <!-- Javascript files HERE -->
+  <script language="javascript" type="text/javascript" src="sketch.js"></script>
+  <script language="javascript" type="text/javascript" src="particle.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark" id="navBar">
+    <div class="container">
+      <a href="../" class="navbar-brand">
+        <h1 class="display-4">Roman Kitsela</h1>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon">
+        </span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a href="../bio/index.html" class="nav-link">Bio</a>
+          </li>
+          <li class="nav-item">
+            <a href="../cv_2023.pdf" class="nav-link">CV</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Projects
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="dropdown-item" href="../sorting/index.html">Sorting Algorithms</a></li>
+              <li><a class="dropdown-item" href="../search/index.html">Search Algorithms</a></li>
+              <li><a class="dropdown-item active">Vector Fields</a></li>
+              <li><a class="dropdown-item" href="../perlin/index.html">Perlin Noise</a></li>
+              <li><a class="dropdown-item" href="../curves/index.html">Curves in Space</a></li>
+              <li><a class="dropdown-item" href="../lorenz/index.html">Lorenz Attractor</a></li>
+              <li><a class="dropdown-item" href="../snake/index.html">Snake Game</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <nav class="navbar navbar-dark bg-secondary border-bottom border-dark border-2 justify-content-between" id="detailBar">
+    <div class="container">
+    <div class="d-flex">
+      <a class="navbar-brand">
+        <h2>Vector Fields</h2>
+      </a>
+      </div>
+      <div class="d-inline-flex align-text-center">
+          <button type="button" class="btn btn-dark mx-1" onclick="clearBG()" ;>Clear</button>
+        <button class="btn btn-dark mx-1" type="button" data-bs-toggle="collapse" data-bs-target="#visualizationOptions" aria-expanded="false" aria-controls="collapseExample" style="background-color:#65C6FF;color: #000;">Options</button>
+        <a class="navbar-brand mx-1 mx-lg-3" href="#how" style="color: #65C6FF;">How does this work?</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="p-3 collapse" id="visualizationOptions" style="background-color:#65C6FF">
+    <div class="container-fluid">
+
+      <div class=" align-items-center justify-content-around">
+
+        <!-- Div 1 -->
+        <div class="d-lg-flex align-items-center">
+          <div class="container text-center">
+            <label for="customRange2" class="sliderText">Thickness</label>
+            <input type="range" class="form-range" min="0" max="5" step=".1" value="3" id="thickness">
+          </div>
+            <div class="container text-center">
+              <label for="customRange2" class="sliderText">Hue Change</label>
+              <input type="range" class="form-range" min="0" max="2.5" step="0.01" value=".1" id="hue_change">
+            </div>
+          <div class="container text-center">
+            <label for="customRange1" class="sliderText align-items-center">Saturation</label>
+            <input type="range" class="form-range" min="0" max="255" step="5" value="200" id="saturation">
+          </div>
+          <div class="container text-center">
+            <label for="customRange3" class="sliderText">Brightness</label>
+            <input type="range" class="form-range" min="0" max="255" step="5" value="175" id="brightness">
+          </div>
+          <div class="container text-center">
+            <label for="customRange5" class="sliderText">Max Speed</label>
+            <input type="range" class="form-range" min="0" max="8" step="0.25" value="2.5" id="effect">
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <div id="canvasContainer">
+    </div>
+  </section>
+
+  <!-- Showcase -->
+  <section class="bg-secondary text-light p-md-5 text-center text-lg-start" id="how">
+
+    <div class="align-items-center justify-content-around">
+      <div class="container py-5 text-center">
+        <h1 class="display-1">What am I looking at?</h1>
+      </div>
+
+      <div class="container py-1">
+        <h5 class="text_exp">
+          This is a visualization of a 2D <a href="https://en.wikipedia.org/wiki/Vector_field" target=”_blank” class="link-dark text-decoration-none">vector field</a>.
+        </h5>
+        <p class="text_exp">
+          In mathematics there is an important distinction made between <i>scalars</i> (quantities represented by a number - such as mass and speed) and <i>vectors</i> which have both a magnitude and direction (such as weight and velocity), as a result vectors are the perfect mathematical objects for modelling real-world forces in physics. A vector field is simply a function takes points (in 2 or 3 dimensions) as inputs and returns vectors (in 2 or 3 dimensions) as outputs.
+        </p>
+        <p class="text_exp">I created this visualization during my time lecturing vector calculus at UCSD. I noticed that students often had a difficult time connecting the abstract way vector field functions are represented to the <i>effect</i> the vector field would have on objects. Allowing students to actually <i>see</i> the results of the vector field itself increased student engagement with the mathematics they were studying.</p>
+        <p class="text_exp">
+          An invisible grid of squares is constructed and vector forces are calculated for each grid position. Many particles are then created in random locations and are acted upon by the vector forces in their immediate vicinity. By updating each particle's position (subject to their local force) and tracing the resulting path we can visualize the flow lines of the vector field.
+        </p>
+        <p class="text_exp">
+          The current vector field you're looking at is:
+        </p>
+        <p class="text_exp">
+          \begin{align}
+          \mathbf{F}(x,y) = (300+y)\mathbf{i} + (200+x)\mathbf{j}
+          \end{align}
+        </p>
+        <p class="text_exp">
+        <p class="text_exp"><span style="color: #65C6FF">Click options above to experiment with different examples of vector fields</span></p>
+      </div>
+    </div>
+  </section>
+
+  <script type="text/javascript">
+  // Thickness Slider
+  thickness_elt = document.getElementById('thickness');
+  path_thickness = parseFloat(thickness_elt.value);
+  thickness_elt.addEventListener("input", function() {
+    path_thickness = parseFloat(thickness_elt.value);
+  });
+  // // Hue change Slider
+  hue_elt = document.getElementById('hue_change');
+  path_hue = parseFloat(hue_elt.value);
+  hue_elt.addEventListener("input", function() {
+    path_hue = parseFloat(hue_elt.value);
+  });
+  // Saturation Slider
+  saturation_elt = document.getElementById('saturation');
+  path_saturation = parseFloat(saturation_elt.value);
+  saturation_elt.addEventListener("input", function() {
+    path_saturation = parseFloat(saturation_elt.value);
+  });
+  // Brightness Slider
+  brightness_elt = document.getElementById('brightness');
+  path_brightness = parseFloat(brightness_elt.value);
+  brightness_elt.addEventListener("input", function() {
+    path_brightness = parseFloat(brightness_elt.value);
+  });
+  // Effect Slider
+  effect_elt = document.getElementById('effect');
+  path_effect = parseFloat(effect_elt.value);
+  effect_elt.addEventListener("input", function() {
+    path_effect = parseFloat(effect_elt.value);
+  });
+  </script>
+
+
+  <!-- Footer -->
+  <footer class="bg-dark text-center text-white">
+
+    <!-- Grid container -->
+    <div class="container p-4">
+      <p class="lead text_exp">Contact Links</p>
+      <!-- Section: Social media -->
+      <section class="mb-4">
+
+        <!-- Google -->
+        <a class="btn btn-outline-light btn-floating m-1" href = "mailto: romankitsela@gmail.com" role="button"><i class="fab fa-google"></i></a>
+
+        <!-- Linkedin -->
+        <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/in/roman-kitsela-29615b133/" role="button"><i class="fab fa-linkedin-in"></i></a>
+
+        <!-- Github -->
+        <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/Pova" role="button"><i class="fab fa-github"></i></a>
+      </section>
+      <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+  </footer>
+
+</body>
+
+</html>
