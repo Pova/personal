@@ -47,9 +47,10 @@
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
               <li><a class="dropdown-item" href="../sorting/index.html">Sorting Algorithms</a></li>
               <li><a class="dropdown-item active">Search Algorithms</a></li>
+              <li><a class="dropdown-item" href="../fields/index.html">Vector Fields</a></li>
               <li><a class="dropdown-item" href="../perlin/index.html">Perlin Noise</a></li>
-              <li><a class="dropdown-item" href="../lorenz/index.html">Lorenz Attractor</a></li>
               <li><a class="dropdown-item" href="../curves/index.html">Curves in Space</a></li>
+              <li><a class="dropdown-item" href="../lorenz/index.html">Lorenz Attractor</a></li>
               <li><a class="dropdown-item" href="../snake/index.html">Snake Game</a></li>
             </ul>
           </li>
@@ -73,13 +74,13 @@
       <div class="">
         <button type="button" name="button" class="btn btn-dark m-0 mx-lg-1" onclick="start_alg(grid);">Start</button>
         <button type="button" name="button" class="btn btn-dark m-0 mx-lg-1" onclick="reset();">Reset</button>
-        <button class="btn btn-dark m-0 mx-lg-1" type="button" data-bs-toggle="collapse" data-bs-target="#algorithmOptions" aria-expanded="false" aria-controls="collapseExample">Options</button>
+        <button class="btn btn-dark m-0 mx-lg-1" type="button" data-bs-toggle="collapse" data-bs-target="#algorithmOptions" aria-expanded="false" aria-controls="collapseExample" style="background-color:#65C6FF;color: #000;">Options</button>
       </div>
-      <a href="#how" class="navbar-brand">How does it work?</a>
+      <a class="navbar-brand" href="#how" style="color:#65C6FF">What am I looking at?</a>
     </div>
   </nav>
 
-  <section class="bg-secondary p-1 p-md-3 collapse" id="algorithmOptions">
+  <section class="p-1 p-md-3 collapse border-bottom border-dark border-2" id="algorithmOptions" style="background-color:#65C6FF">
     <div class="d-xl-flex align-items-center justify-content-around">
       <div class="d-inline-flex obstSelect flex-row py-1 py-lg-0">
         <span class="navbar-brand align-middle mx-lg-4">Obstacles:</span>
@@ -140,7 +141,7 @@
           (1) The <a href="https://en.wikipedia.org/wiki/A*_search_algorithm" target=”_blank” class="link-dark text-decoration-none">A* algorithm</a>.
         </h5>
         <p class="text_exp">
-          Based on the famous Dikstra's search algorithm, the A* algorithm includes the use of a <i>heuristic</i> function to prioritize searching in the direction of the target.
+          Based on the famous <a href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm" target=”_blank” class="link-dark text-decoration-none">Dijkstra's search algorithm</a>, the A* algorithm includes the use of a <i>heuristic</i> function to prioritize searching in the direction of the target.
         </p>
         <p class="text_exp">
           The A* algorithm is guaranteed to find a path from start to end goal (unless this is impossible due to obstacles), and will always find the optimal <i>shortest</i> path.
@@ -172,10 +173,10 @@
             <div style="color:lightsteelblue;float:left;">&#9632;</div> - Light blue cells have already been checked - the <b>closed set</b>.
           </li>
           <li class="text_exp">
-            <div style="color:lightyellow;float:left;">&#9632;</div> - Light yellow cells represent the current path being examined.
+            <div style="color:gold;float:left;">&#9632;</div> - Gold cells represent the current path being examined.
           </li>
           <li class="text_exp">
-            <div style="color:gold;float:left;">&#9632;</div> - Gold cells represent the solution path (guaranteed to be shortest possible) from start point to end point.
+            <div style="color:rgb(101, 198, 255);float:left;">&#9632;</div> - Blue cells represent the solution path (guaranteed to be shortest possible) from start point to end point.
           </li>
         </ul>
         <p class="text_exp">The key ingredient in the A* algorithm is how the next cell to be examined is chosen. A heuristic function is used to evaluate the cells in the open set and the best looking candidates are chosen to be
