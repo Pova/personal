@@ -131,11 +131,11 @@ function draw() {
     if (!noSolution) {
       if (current == end){
         for (let i = 0; i < path.length; i++) {
-          path[i].show(color(255, 215, 0)); //gold
+          path[i].show(color(101, 198, 255)); //blue
         }
       } else{
         for (let i = 0; i < path.length; i++) {
-          path[i].show(color(255,255,224)); //light yellow
+          path[i].show(color(255, 215, 0)); //gold
         }
       }
     }
@@ -148,7 +148,7 @@ function draw() {
     }
     if (!noSolution){
       for (let i = 0; i < path.length; i++) {
-        path[i].show(color(255, 215, 0)); //gold
+        path[i].show(color(101, 198, 255)); //blue
       }
       // Needs fixing
       // for (let i=path.length-1;i>0;i--){
