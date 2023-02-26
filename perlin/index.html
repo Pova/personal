@@ -46,9 +46,10 @@
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
               <li><a class="dropdown-item" href="../sorting/index.html">Sorting Algorithms</a></li>
               <li><a class="dropdown-item" href="../search/index.html">Search Algorithms</a></li>
+              <li><a class="dropdown-item" href="../fields/index.html">Vector Fields</a></li>
               <li><a class="dropdown-item active">Perlin Noise</a></li>
-              <li><a class="dropdown-item" href="../lorenz/index.html">Lorenz Attractor</a></li>
               <li><a class="dropdown-item" href="../curves/index.html">Curves in Space</a></li>
+              <li><a class="dropdown-item" href="../lorenz/index.html">Lorenz Attractor</a></li>
               <li><a class="dropdown-item" href="../snake/index.html">Snake Game</a></li>
             </ul>
           </li>
@@ -67,13 +68,13 @@
       </div>
       <div class="d-inline-flex align-text-center">
           <button type="button" class="btn btn-dark mx-1" onclick="clearBG()" ;>Clear</button>
-        <button class="btn btn-dark mx-1" type="button" data-bs-toggle="collapse" data-bs-target="#visualizationOptions" aria-expanded="false" aria-controls="collapseExample">Options</button>
-        <a class="navbar-brand mx-1 mx-lg-3" href="#how">How does this work?</a>
+        <button class="btn btn-dark mx-1" type="button" data-bs-toggle="collapse" data-bs-target="#visualizationOptions" aria-expanded="false" aria-controls="collapseExample" style="background-color:#65C6FF;color: #000;">Options</button>
+        <a class="navbar-brand mx-1 mx-lg-3" href="#how" style="color:#65C6FF">What am I looking at?</a>
       </div>
     </div>
   </nav>
 
-  <section class="bg-secondary p-3 collapse" id="visualizationOptions">
+  <section class="p-3 collapse" id="visualizationOptions" style="background-color:#65C6FF;color: #000;">
     <div class="container-fluid">
 
       <div class=" align-items-center justify-content-around">
@@ -89,7 +90,7 @@
               <input type="range" class="form-range" min="0" max="2.5" step="0.1" value="1" id="hue_change">
             </div>
           <div class="container text-center">
-            <label for="customRange1" class="sliderText align-items-center">Saturation</label>
+            <label for="customRange1" class="sliderText">Saturation</label>
             <input type="range" class="form-range" min="0" max="255" step="5" value="200" id="saturation">
           </div>
           <div class="container text-center">
@@ -100,13 +101,19 @@
             <label for="customRange5" class="sliderText">Max Speed</label>
             <input type="range" class="form-range" min="0" max="8" step="0.25" value="2.5" id="effect">
           </div>
-
+          <!-- Need to implement event listeners -->
+          <!-- <div class="container text-center">
+            <label for="customRange5" class="sliderText">Distance Variation</label>
+            <input type="range" class="form-range" min="0" max="8" step="0.25" value="2.5" id="effect">
+          </div>
+          <div class="container text-center">
+            <label for="customRange5" class="sliderText">Time Variation</label>
+            <input type="range" class="form-range" min="0" max="8" step="0.25" value="2.5" id="effect">
+          </div> -->
         </div>
-
       </div>
     </div>
   </section>
-
 
   <section>
     <div id="canvasContainer">
@@ -125,15 +132,15 @@
         <h5 class="text_exp">
           This is a visualization of <a href="https://en.wikipedia.org/wiki/Perlin_noise" target=”_blank” class="link-dark text-decoration-none">perlin noise</a>.
         </h5>
-        <p class="text_exp">
+        <!-- <p class="text_exp">
           By constructing an invisible grid of squares and calculating a vector force for each grid position we can approximate the effect of a <a href="https://en.wikipedia.org/wiki/Vector_field" target=”_blank” class="link-dark text-decoration-none">vector
             field</a>.
         </p>
         <p class="text_exp">
           In order to see the vector field in action 1000 particles are created in random positions and are subject to the vector forces in their immediate vicinity. By updating their position and tracing the resulting path we can visualize the flow lines of the vector field.
-        </p>
+        </p> -->
         <p class="text_exp">
-          For this visualization we use a 3 variable implementation of the Perlin noise algorithm. The inputs are two spacial dimensions (x,y) corresponding to position on the canvas and a third variable z which increments with time. The output is a unit vector that points in a particular random direction and varies over time.
+          For this simulation a 3-variable implementation of the Perlin noise algorithm is used to generate a vector field on the canvas which acts upon thousands of particles which in turn trace out beautiful chaotic paths. The inputs for the algorithm are two spacial dimensions (x,y) corresponding to position on the canvas and a third variable z which increments with time. The output is a unit vector that points in a particular random direction and varies over time.
           </p>
           <p class="text_exp">
             The special feature of the algorithm is that it produces a <i>smooth</i> randomness so that adjacent cells do not point in completely opposite directions.

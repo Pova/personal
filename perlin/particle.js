@@ -13,7 +13,7 @@ function Particle() {
     this.vel.add(this.acc);
     this.vel.limit(path_effect);
     this.pos.add(this.vel);
-    this.acc.mult(0); //Why is this here?
+    this.acc.mult(0); 
   }
 
 
@@ -37,6 +37,7 @@ function Particle() {
     }
 
     strokeWeight(path_thickness);
+    //stroke(this.h, path_saturation, path_brightness); //experimenting with alpha values
     stroke(this.h, path_saturation, path_brightness, max(0,100 * (1 - (this.age / this.max_age))));
     line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
     this.updatePrev();
@@ -48,25 +49,29 @@ function Particle() {
   }
 
   this.edges = function() {
-    if (this.pos.x > width / 2 + 50) {
+    if (this.pos.x > width / 2) {
       this.age = 0;
       this.pos = createVector(random(-windowWidth / 2 - 25, windowWidth / 2 + 25), random(-windowHeight / 2 - 25, windowHeight / 2 + 25));
-      this.updatePrev();
+      this.prevPos.x = this.pos.x;
+      this.prevPos.y = this.pos.y;
     }
-    if (this.pos.x < -width / 2 - 50) {
+    if (this.pos.x < -width / 2) {
       this.age = 0;
       this.pos = createVector(random(-windowWidth / 2 - 25, windowWidth / 2 + 25), random(-windowHeight / 2 - 25, windowHeight / 2 + 25));
-      this.updatePrev();
+      this.prevPos.x = this.pos.x;
+      this.prevPos.y = this.pos.y;
     }
-    if (this.pos.y > height / 2 + 50) {
+    if (this.pos.y > height / 2) {
       this.age = 0;
       this.pos = createVector(random(-windowWidth / 2 - 25, windowWidth / 2 + 25), random(-windowHeight / 2 - 25, windowHeight / 2 + 25));
-      this.updatePrev();
+      this.prevPos.x = this.pos.x;
+      this.prevPos.y = this.pos.y;
     }
-    if (this.pos.y < -height / 2 - 50) {
+    if (this.pos.y < -height / 2) {
       this.age = 0;
       this.pos = createVector(random(-windowWidth / 2 - 25, windowWidth / 2 + 25), random(-windowHeight / 2 - 25, windowHeight / 2 + 25));
-      this.updatePrev();
+      this.prevPos.x = this.pos.x;
+      this.prevPos.y = this.pos.y;
     }
   }
 
