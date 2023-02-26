@@ -60,15 +60,11 @@ body {
   }
 }
 
-#defaultCanvas0{
-  display: block;
-}
-
 /* slider styling */
 
 .sliderText{
   font-size: 20px;
-  color:white;
+  color:black;
 }
 
 input[type=range] {
