@@ -581,11 +581,22 @@ function heuristic(a, b) {
 // Function for draw your own obstacle functionality
 
 function mouseDragged() {
+  X = mouseX - (width - cols*w)/2
+  Y = mouseY - (height - rows*h)/2
+
   if (!alg_started && draw_allowed){
-    if (mouseX<width && mouseX>0 && mouseY<height && mouseY>0){
-      col_num = Math.floor((mouseX/width)*cols);
-      row_num = Math.floor((mouseY/height)*rows);
-      grid[col_num][row_num].wall = true;
+    if (X<width_size && X>0 && Y<height_size && Y>0){
+      col_num = Math.floor((X/width_size)*cols);
+      row_num = Math.floor((Y/height_size)*rows);
+      //console.log(col_num,row_num)
+      if(
+        (col_num != 0 || row_num != 0) &&
+        (col_num != cols-1 || row_num != rows-1)
+      ){
+        grid[col_num][row_num].wall = true;
+      } else{
+        console.log(col_num,row_num)
+      }
       return false;
     }
   }
@@ -593,11 +604,23 @@ function mouseDragged() {
 }
 
 function mousePressed() {
+
+  X = mouseX - (width - cols*w)/2
+  Y = mouseY - (height - rows*h)/2
+
   if (!alg_started && draw_allowed){
-    if (mouseX<width && mouseX>0 && mouseY<height && mouseY>0){
-      col_num = Math.floor((mouseX/width)*cols);
-      row_num = Math.floor((mouseY/height)*rows);
-      grid[col_num][row_num].wall = true;
+    if (X<width_size && X>0 && Y<height_size && Y>0){
+      col_num = Math.floor((X/width_size)*cols);
+      row_num = Math.floor((Y/height_size)*rows);
+      //console.log(col_num,row_num)
+      if (
+        (col_num != 0 || row_num != 0) &&
+        (col_num != cols-1 || row_num != rows-1)
+      ){
+        grid[col_num][row_num].wall = true;
+      } else{
+        console.log(col_num,row_num)
+      }
       return false;
     }
   }
@@ -655,6 +678,6 @@ function drawArrow(start_cell, end_cell) {
 //Possible additions:
 
 // 1) Allow choice of heuristic function (Done but not interesting enough)
-// 2) Implement maze options
+// 2) Implement maze options (Done)
 // 3) Implement other search algorithms - BFS, DFS (Done)
 // 4) Implement movable start and end points
