@@ -9,6 +9,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Default styling -->
+  <link rel="stylesheet" href="../global_css/main.css">
+  <link rel="stylesheet" href="../global_css/slider_styling.css">
   <!-- Extra custom styling -->
   <link rel="stylesheet" href="css/style.css">
   <!-- p5 Library files HERE -->
@@ -73,12 +76,12 @@
       <div class="d-inline-flex align-text-center">
           <button type="button" class="btn btn-dark mx-1" onclick="clearBG()" ;>Clear</button>
         <button class="btn btn-dark mx-1" type="button" data-bs-toggle="collapse" data-bs-target="#visualizationOptions" aria-expanded="false" aria-controls="collapseExample" style="background-color:#65C6FF;color: #000;">Options</button>
-        <a class="navbar-brand mx-1 mx-lg-3" href="#how" style="color: #65C6FF;">How does this work?</a>
+        <a class="navbar-brand mx-1 mx-lg-3" href="#how" style="color: #65C6FF;">What am I looking at?</a>
       </div>
     </div>
   </nav>
 
-  <section class="p-3 collapse" id="visualizationOptions" style="background-color:#65C6FF">
+  <section class="bg-secondary p-3 collapse" id="visualizationOptions" style="background-color:#65C6FF">
     <div class="container-fluid">
 
       <div class=" align-items-center justify-content-around">
@@ -87,7 +90,7 @@
         <div class="d-lg-flex align-items-center">
           <div class="container text-center">
             <label for="customRange2" class="sliderText">Thickness</label>
-            <input type="range" class="form-range" min="0" max="5" step=".1" value="3" id="thickness">
+            <input type="range" class="form-range" min="0.5" max="5" step=".1" value="1.5" id="thickness">
           </div>
             <div class="container text-center">
               <label for="customRange2" class="sliderText">Hue Change</label>
@@ -138,15 +141,15 @@
           An invisible grid of squares is constructed and vector forces are calculated for each grid position. Many particles are then created in random locations and are acted upon by the vector forces in their immediate vicinity. By updating each particle's position (subject to their local force) and tracing the resulting path we can visualize the flow lines of the vector field.
         </p>
         <p class="text_exp">
-          The current vector field you're looking at is:
+          The current vector field you're looking at is (a translated version of):
         </p>
         <p class="text_exp">
           \begin{align}
-          \mathbf{F}(x,y) = (300+y)\mathbf{i} + (200+x)\mathbf{j}
+          \mathbf{F}(x,y) = y\mathbf{i} + x\mathbf{j}
           \end{align}
         </p>
         <p class="text_exp">
-        <p class="text_exp"><span style="color: #65C6FF">Click options above to experiment with different examples of vector fields</span></p>
+        <p class="text_exp"><span style="color: #65C6FF">Click options above to experiment with some visual parameters of the simulation</span></p>
       </div>
     </div>
   </section>
