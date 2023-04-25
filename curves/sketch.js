@@ -78,7 +78,7 @@ function draw() {
   line(0, -1000, 0, 0, 1000, 0); //z-axis
   pop();
 
-  pt = path_dict[path](t)
+  pt = path_dict[path](t);
   points.push(pt);
 
   scale(scale_val);
