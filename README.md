@@ -6,7 +6,7 @@ I started working on basic website design while lecturing at UCSD. At the time I
 - vector fields
 - differential equations
 
-The current version of my website has updates to these projects (cleaner aesthetics, more interactivity).
+The current version of my website has updates to these projects (cleaner aesthetics, more interactive).
 
 <hr>
 
