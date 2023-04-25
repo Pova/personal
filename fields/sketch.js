@@ -1,6 +1,4 @@
-
-
-let scl = 10; //size of each grid element?
+let scl = 3; //size of each grid element
 let cols, rows; //rows and columns of grid
 
 let zoff = 0; //initialized zoff value, increments with z_inc
@@ -12,6 +10,20 @@ const flowfield = new Array();
 let path_thickness;
 let toggle_flow = false;
 let boxes = false; //this will control debug mode
+
+let vec_index = 1;
+const vec_dict = {
+  1:vf_1,
+  2:vf_2,
+  3:vf_3,
+  4:vf_4,
+  5:vf_5,
+  6:vf_6,
+  7:vf_7,
+  8:vf_8,
+  9:vf_9,
+  10:vf_10
+};
 
 
 
@@ -45,13 +57,17 @@ function setup() {
   }
   background(0);
 
+  // colour vector field name
+  field_name_elt = document.getElementById('field_name');
+  field_name_elt.style.color = '#65C6FF';
+
   let yoff = -canvasHeight/2; 
   for (let y = 0; y < rows; y++) {
     let xoff = -canvasWidth/2;
     for (let x = 0; x < cols; x++) {
       let index = x + y * cols;
-      v = new p5.Vector(300+yoff,200+xoff);
-      //console.log(index, v)
+      //v = new p5.Vector(yoff,xoff);
+      v = vec_dict[vec_index](xoff, yoff);
       flowfield[index] = v;
       xoff += scl;
     }
@@ -80,7 +96,6 @@ function draw() {
 
 }
 
-
 function clearBG() {
   background(0);
 }
@@ -98,4 +113,10 @@ function show_ff() {
   } else {
     toggle_flow = true;
   }
+}
+
+function vecChoice(n){
+  resetParticles();
+  console.log(n);
+  vec_index = n;
 }
