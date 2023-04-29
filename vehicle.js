@@ -1,4 +1,3 @@
-// var flee_force = 1.5;
 var G = 1; //Gravitational constant
 
 // Could add random weights to each particle
@@ -50,23 +49,6 @@ Vehicle.prototype.flee = function(target) { //Returns flee force away from targe
 Vehicle.prototype.applyForce = function(f) { //adds forces to acceleration
     this.acc.add(f);
 }
-
-// Vehicle.prototype.gravity = function(a, b) { //Returns the correct force to attract a to b
-//     // a and b will be vehicle objects
-//     var maxGrav = 5; //Max gravity force
-//     var a_to_b = p5.Vector.sub(b, a);
-//     var dist = a_to_b.mag();
-//     if (dist>1){
-//       var g = a_to_b.mult(G / (dist * dist)); //the force of gravity pushing a to b
-//       // g.limit(this.maxForce);
-//       g.limit(maxGrav);
-//       return g;
-//     }
-//     else{
-//       return createVector();
-//     }
-//
-// }
 
 // Main loop: behaviors --> update --> show
 
