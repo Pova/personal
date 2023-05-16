@@ -50,7 +50,7 @@ function setup() {
   cols = floor(canvasWidth / scl);
   rows = floor(canvasHeight / scl);
 
-  const particle_count = Math.floor((canvasHeight*canvasWidth)/2000);
+  const particle_count = Math.floor((canvasHeight*canvasWidth)/4000);
 
   for (let i = 0; i < particle_count; i++) {
     particles[i] = new Particle();
@@ -76,10 +76,7 @@ function setup() {
 }
 
 function draw() {
-  //background(0,0,0,255);
-  // if(frameCount%60===0){
-  //   background(0);
-  // }
+  background(0,0,0,10);
   smooth();
 
   translate(canvasWidth/2, canvasHeight/2);
