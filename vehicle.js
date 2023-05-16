@@ -77,7 +77,7 @@ Vehicle.prototype.show = function() {
     push();
     colorMode(HSB);
     stroke(this.hue % 360,255,255);
-    strokeWeight(2);
+    strokeWeight(4);
     point(this.pos.x, this.pos.y);
     pop();
 }
