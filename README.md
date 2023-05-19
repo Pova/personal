@@ -27,3 +27,12 @@ Recently I've decided to change careers from mathematics and education into the 
 As part of this journey I have put together this website and have been implementing various projects in javascript to demonstrate my progress. I have many ideas for upcoming visualization projects and will be continuing to update the website as these are completed. *If you have any ideas you'd like to suggest please let me know*.
 
 <hr>
+
+### Future plans:
+
+- [ ] Visualizating the infinite - *Mandelbrot set*
+- [ ] L-systems - *Fractal trees*
+- [ ] Chaotic behaviour - *Double pendulum*
+- [ ] N-body simulation -  *Mutual attraction*
+- [ ] Minimax algorithm - *Backgammon game*
+- [ ] Rotations in 4D - *The Tesseract*
