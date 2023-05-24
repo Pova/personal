@@ -36,3 +36,4 @@ As part of this journey I have put together this website and have been implement
 - [ ] N-body simulation -  *Mutual attraction*
 - [ ] Minimax algorithm - *Backgammon game*
 - [ ] Rotations in 4D - *The Tesseract*
+- [ ] Genetic algorithms - *Smart Rockets*
