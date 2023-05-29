@@ -28,6 +28,17 @@ As part of this journey I have put together this website and have been implement
 
 <hr>
 
+| Pages                                                           | Description                                                       | Preview |
+| --------------------------------------------------------------- | ----------------------------------------------------------------- | ------- |
+| [Landing](https://pova.github.io/personal/)                     | Interactive demonstration of steering behaviours                  |![ezgif-3-7dd285f54f](https://github.com/Pova/Pova/assets/25727048/541a836f-6d5a-4b1f-95ff-4a34e5461f02)|
+| [Sorting](https://pova.github.io/personal/sorting/index.html)   | Visualization of common sorting algorithms: <br><br> <ul><li>Bubble Sort</li><li>Insertion Sort</li><li>Selection Sort</li><li>Quick Sort</li><li>Merge Sort</li></ul>|![ezgif-4-1ce03661a3](https://user-images.githubusercontent.com/25727048/234423615-663824f9-02ea-45fe-b94b-8f7a556dac8b.gif)|
+| [Search](https://pova.github.io/personal/search/index.html)     | Interactive visualization of searching algorithms : <br><br> <ul><li>A*</li><li>Depth First Search</li><li>Breadth First Search</li></ul> <br><br> Features include: <br><br> <ul><li>Random, Maze, and Draw-Your-Own Obstacles</li><li>Optional Diagonal Pathing</li></ul>                 |![ezgif-1-f176201e57](https://user-images.githubusercontent.com/25727048/234435067-a7a8071d-fda1-4b50-ad26-e6aab662b8b5.gif)|
+| [Fields](https://pova.github.io/personal/fields/index.html)     | Visualization of vector fields in 2D                              |![ezgif-1-cbdf7edbde](https://github.com/Pova/Pova/assets/25727048/cfa8f3f0-4efc-43d7-81fe-96cb6dd73ebb)|
+| [Perlin](https://pova.github.io/personal/perlin/index.html)     | Interactive visualization of smooth randomness w/ Perlin noise    |![ezgif com-optimize](https://github.com/Pova/Pova/assets/25727048/cef4d4e2-0a30-4537-90f9-98cf22d8d7c1)|
+| [Curves](https://pova.github.io/personal/curves/index.html)     | Visualization of various curves in 3D space: <br><br> <ul><li>Helix</li><li>Torus</li><li>Slinky Curve</li><li>Conical Spiral</li><li>Spherical Spiral</li><li>Viviani's Curve</li><li>Trefoil Knot</li><li>Star</li><li>Twisted Cubic</li><li>Spherical Epitrochoid</li></ul>                        |![ezgif-1-a8ecf470b5](https://user-images.githubusercontent.com/25727048/234429233-f1347388-7039-4ff2-8352-85229c1f6d0b.gif)|
+| [Lorenz](https://pova.github.io/personal/lorenz/index.html)     | Visualization of chaotic systems (Lorenz attractor)               |![ezgif-1-6315dca29b](https://user-images.githubusercontent.com/25727048/234430074-3c92f32b-9715-45a3-962c-393f785db0d1.gif)|
+| [Snake](https://pova.github.io/personal/snake/index.html)       | Playable snake game                                               |![ezgif-2-604c41a9a0](https://user-images.githubusercontent.com/25727048/234431083-e680332a-7a20-4fc7-b591-6e02f291ab1a.gif)|
+
 ### Future plans:
 
 - [ ] Visualizating the infinite - *Mandelbrot set*
