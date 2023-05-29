@@ -39,6 +39,8 @@ As part of this journey I have put together this website and have been implement
 | [Lorenz](https://pova.github.io/personal/lorenz/index.html)     | Visualization of chaotic systems (Lorenz attractor)               |![ezgif-1-6315dca29b](https://user-images.githubusercontent.com/25727048/234430074-3c92f32b-9715-45a3-962c-393f785db0d1.gif)|
 | [Snake](https://pova.github.io/personal/snake/index.html)       | Playable snake game                                               |![ezgif-2-604c41a9a0](https://user-images.githubusercontent.com/25727048/234431083-e680332a-7a20-4fc7-b591-6e02f291ab1a.gif)|
 
+<hr>
+
 ### Future plans:
 
 - [ ] Visualizating the infinite - *Mandelbrot set*
