@@ -36,10 +36,8 @@ function Particle() {
     if (this.h > 255) {
       this.h = 0;
     }
-    //point(this.pos.x, this.pos.y);
     strokeWeight(path_thickness);
     stroke(this.h, path_saturation, path_brightness,50);
-    //stroke(this.h, path_saturation, path_brightness, 100);
     line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
     this.updatePrev();
   }
