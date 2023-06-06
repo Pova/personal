@@ -110,29 +110,6 @@
       </div>
     </nav>
 
-    <!-- <nav class="navbar navbar-dark bg-secondary border-bottom border-dark border-2 justify-content-around" id="buttonsBar">
-      <div id="vectorButtons" aria-label="Vector Fields">
-        <button type="button" class="btn btn-dark btn-selected" onclick="vecChoice('Gradient Field')">Gradient Field</button>
-        <button type="button" class="btn btn-dark" onclick="vecChoice('Hyperbolic Field')">Hyperbolic Field</button>
-        <button type="button" class="btn btn-dark" onclick="vecChoice('Circular Field')">Circular Field</button>
-        <button type="button" class="btn btn-dark" onclick="vecChoice('Uniform Field')">Uniform Field</button>
-        <button type="button" class="btn btn-dark" onclick="vecChoice('Skew Hyperbolic Field')">Skew Hyperbolic Field</button>
-
-        <button type="button" class="btn btn-dark" onclick="vecChoice('Improper Nodal Source')">Improper Nodal Source</button>
-        <button type="button" class="btn btn-dark" onclick="vecChoice('Improper Nodal Sink')">Improper Nodal Sink</button>
-        <button type="button" class="btn btn-dark" onclick="vecChoice('Spiral Source')">Spiral Source</button>
-        <button type="button" class="btn btn-dark" onclick="vecChoice('Stable Center')">Stable Center</button>
-        <button type="button" class="btn btn-dark" onclick="vecChoice('Spiral Sink')">Spiral Sink</button>
-        <button type="button" class="btn btn-dark" onclick="vecChoice('Sine Cosine Field')">Sine Cosine Field</button>
-        <button type="button" class="btn btn-dark" onclick="vecChoice('Rotating Sine Field')">Rotating Sine Field</button>
-        <button type="button" class="btn btn-dark" onclick="vecChoice('Parabolic Spiral Field')">Parabolic Spiral Field</button>
-        <button type="button" class="btn btn-dark" onclick="vecChoice('Quadratic Field A')">Quadratic Field A</button>
-        <button type="button" class="btn btn-dark" onclick="vecChoice('Quadratic Field B')">Quadratic Field B</button>
-        <button type="button" class="btn btn-dark" onclick="vecChoice('Cubic Field A')">Cubic Field A</button>
-        <button type="button" class="btn btn-dark" onclick="vecChoice('Cubic Field B')">Cubic Field B</button>
-      </div>
-    </nav> -->
-
     <section class="bg-secondary p-3 collapse" id="visualizationOptions" style="background-color:#65C6FF">
       <div class="container-fluid">
 
@@ -169,7 +146,12 @@
 
 
     <section>
-      <div id="canvasContainer">
+      <div id="canvasContainer" style="position: relative;">
+        <p id="vector_field_formula">
+          \begin{align}
+          \mathbf{F}(x,y) = x \mathbf{i} + y \mathbf{j}
+          \end{align}
+        </p>
       </div>
     </section>
 
@@ -192,15 +174,6 @@
           <p class="text_exp">
             An invisible grid of squares is constructed and vector forces are calculated for each grid position. Many particles are then created in random locations and are acted upon by the vector forces in their immediate vicinity. By updating each particle's position (subject to their local force) and tracing the resulting path we can visualize the flow lines of the vector field.
           </p>
-          <p class="text_exp">
-            The current vector field you're looking at is (a translated version of):
-          </p>
-          <p class="text_exp">
-            \begin{align}
-            \mathbf{F}(x,y) = y\mathbf{i} + x\mathbf{j}
-            \end{align}
-          </p>
-          <p class="text_exp">
           <p class="text_exp"><span style="color: #65C6FF">Click options above to experiment with some visual parameters of the simulation</span></p>
         </div>
       </div>
