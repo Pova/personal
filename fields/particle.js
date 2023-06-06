@@ -5,8 +5,8 @@ function Particle() {
   //this.h = Math.floor(random(0,255));
   this.h = 0;
   this.prevPos = this.pos.copy();
-  this.max_age = random(200,500);
-  this.age = Math.floor(Math.random(0,this.max_age));
+  this.max_age = Math.floor(random(40,80));
+  this.age = 0;
   
 
   //Updating position of particle
@@ -28,7 +28,7 @@ function Particle() {
     this.vel.add(this.acc);
     this.vel.limit(path_effect);
     this.pos.add(this.vel);
-    this.acc.mult(0); 
+    this.acc.mult(0);
   }
 
   this.show = function() {
