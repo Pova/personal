@@ -5,6 +5,8 @@
   color:#65C6FF;
 }
 
+/* Styling for button nav bar */
+
 #buttonsBar {
   display: flex;
   justify-content: center; 
@@ -24,4 +26,12 @@
 .btn-selected {
   background-color: #65C6FF !important; /* Override .btn-dark */
   color: #000 !important; /* Make text dark on light background */
+}
+
+/* Vector Field Formula */
+
+#vector_field_formula{
+  position: absolute; top: 10px; left: 50px;
+  color:antiquewhite;
+  font-size: 3em;
 }
