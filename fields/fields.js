@@ -31,7 +31,7 @@ function vf_uniform(x, y){
     return new p5.Vector(1, 1);
 }
 
-// Vector Field 7
+// Skew Hyperbolic Field
 
 function vf_skew_hyperbolic(x, y){
     field_name_elt.innerHTML = "Skew Hyperbolic Field";
@@ -45,7 +45,7 @@ function vf_skew_hyperbolic(x, y){
 function vf_sine_cosine(x, y){
     field_name_elt.innerHTML = "Sine Cosine Field";
     field_name_elt.style.color = '#65C6FF';
-    return new p5.Vector(Math.sin(2*TWO_PI*x/width), Math.cos(3*TWO_PI*y/height));
+    return new p5.Vector(Math.sin(4*TWO_PI*x/width), Math.cos(3*TWO_PI*y/height));
 }
 
 // Rotating Sine Field
@@ -135,7 +135,6 @@ function vf_spiral_sink(x, y){
     field_name_elt.style.color = '#65C6FF';
     return new p5.Vector(-1*x-4*y,2*x-3*y);
 }
-
 
 // THESE NEED REWORKING
 
