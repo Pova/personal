@@ -14,6 +14,18 @@ function doublePendulum(l_1,l_2,m_1,m_2,theta_1,theta_2) { //Constructor
         return [this.l_1*sin(this.theta_1), this.l_1*cos(this.theta_1)]
     }
 
+    this.update_theta_1 = function(theta){
+        this.theta_1 = theta;
+        this.ang_vel_1 = 0;
+        this.ang_vel_2 = 0;
+    }
+
+    this.update_theta_2 = function(theta){
+        this.theta_2 = theta;
+        this.ang_vel_1 = 0;
+        this.ang_vel_2 = 0;
+    }
+
     this.update_length_1 = function(l_1){
         this.l_1 = l_1;
         // this.ang_vel_1 = 0;
@@ -37,6 +49,8 @@ function doublePendulum(l_1,l_2,m_1,m_2,theta_1,theta_2) { //Constructor
     }
 
     this.update = function(){
+        if (!isDragging){
+
         // update position
 
         // Pendulum 1
@@ -54,13 +68,21 @@ function doublePendulum(l_1,l_2,m_1,m_2,theta_1,theta_2) { //Constructor
         const ang_acc_2 = numerator_2/denominator_2;
 
         this.ang_vel_1 += ang_acc_1*time_increment;
+        this.ang_vel_1 -= this.ang_vel_1*dampening;
         this.theta_1 += this.ang_vel_1*time_increment;
+        this.theta_1 = normalizeTheta(this.theta_1);
 
         this.ang_vel_2 += ang_acc_2*time_increment;
-        this.theta_2 += this.ang_vel_2*time_increment*(1-dampening);
+        this.ang_vel_2 -= this.ang_vel_2*dampening;
+        this.theta_2 += this.ang_vel_2*time_increment;
+        this.theta_2 = normalizeTheta(this.theta_2);    
+    } else{
+        this.adjustPosition();
     }
+}
 
     this.draw = function(){
+
         // draw the pendulum
         const mid = this.calc_mid();
         push();
@@ -78,7 +100,46 @@ function doublePendulum(l_1,l_2,m_1,m_2,theta_1,theta_2) { //Constructor
         point(mid[0]+this.l_2*sin(this.theta_2),mid[1]+this.l_2*cos(this.theta_2));
         pop();
 
-        points.push([mid[0]+this.l_2*sin(this.theta_2),mid[1]+this.l_2*cos(this.theta_2)])
+        if (!isDragging){
+            points.push([mid[0]+this.l_2*sin(this.theta_2),mid[1]+this.l_2*cos(this.theta_2)])
+        }
+        
     }
 
+    this.checkMouseDistance = function (point) {
+        const mousePos = createVector(mouseX - width / 2, mouseY - height / 3);
+        return p5.Vector.dist(mousePos, point) < 20; // adjust the distance as required
+      };
+      
+      this.adjustPosition = function () {
+        const mousePos = createVector(mouseX - width / 2, mouseY - height / 3);
+        const mid = this.calc_mid();
+        const mid_pt = createVector(mid[0], mid[1]);
+        const end_pt = createVector(mid[0] + this.l_2 * sin(this.theta_2), mid[1] + this.l_2 * cos(this.theta_2));
+        
+        if (this.checkMouseDistance(mid_pt)) {
+
+            angle_diff = atan2(mousePos.y,mousePos.x) - atan2(initialMousePos.y,initialMousePos.x)
+            this.theta_1 = initial_theta_1 + angle_diff;
+
+            // this.theta_1 = atan2(mousePos.y - mid.y, mousePos.x - mid.x) - PI/2;
+            this.ang_vel_1 = 0; // reset the velocities to prevent sudden jumps
+            this.ang_vel_2 = 0;
+        } else if (this.checkMouseDistance(end_pt)) {
+            this.theta_2 = atan2(mousePos.y - end_pt.y, mousePos.x - end_pt.x) - PI/2;
+            this.ang_vel_1 = 0; // reset the velocities to prevent sudden jumps
+            this.ang_vel_2 = 0;
+        }
+      };
+          
 }
+
+function normalizeTheta(theta) {
+    while (theta > Math.PI) {
+        theta -= 2 * Math.PI;
+    }
+    while (theta < -Math.PI) {
+        theta += 2 * Math.PI;
+    }
+    return theta;
+  }
