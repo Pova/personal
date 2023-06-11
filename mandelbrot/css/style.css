@@ -1,0 +1,14 @@
+/* slider styling */
+
+.sliderText{
+  font-size: 20px;
+  color:#65C6FF;
+}
+
+/* Vector Field Formula */
+
+#warning_text{
+  position: absolute; top: 10px; left: 50px;
+  color:antiquewhite;
+  font-size: 3em;
+}
