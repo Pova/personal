@@ -1,0 +1,14 @@
+/* slider styling */
+
+.sliderText{
+  font-size: 20px;
+  color:#65C6FF;
+}
+
+/* L-system text */
+
+#system_text{
+  position: absolute; top: 30px; left: 50px;
+  color:antiquewhite;
+  font-size: 2em;
+}
