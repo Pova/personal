@@ -38,6 +38,7 @@ As part of this journey I have put together this website and have been implement
 | [Curves](https://pova.github.io/personal/curves/index.html)     | Visualization of various curves in 3D space: <br><br> <ul><li>Helix</li><li>Torus</li><li>Slinky Curve</li><li>Conical Spiral</li><li>Spherical Spiral</li><li>Viviani's Curve</li><li>Trefoil Knot</li><li>Star</li><li>Twisted Cubic</li><li>Spherical Epitrochoid</li></ul>                        |![ezgif-1-a8ecf470b5](https://user-images.githubusercontent.com/25727048/234429233-f1347388-7039-4ff2-8352-85229c1f6d0b.gif)|
 | [Double Pendulum](https://pova.github.io/personal/lorenz/index.html)     | Visualization of a double pendulum (a simple example of a chaotic system)              |![ezgif-5-f6f359d42b](https://github.com/Pova/personal/assets/25727048/7c97559a-926d-4224-918c-c05d9bda293d)|
 | [Lorenz](https://pova.github.io/personal/lorenz/index.html)     | Visualization of a Lorenz attractor (a more sophisticated chaotic system)               |![ezgif-1-6315dca29b](https://user-images.githubusercontent.com/25727048/234430074-3c92f32b-9715-45a3-962c-393f785db0d1.gif)|
+| [L-systems](https://pova.github.io/personal/l-systems/index.html)     | Interactive visualization of various L-systems producing a variety of complex fractal-like shapes                |PREVIEW NEEDED HERE|
 | [Snake](https://pova.github.io/personal/snake/index.html)       | Playable snake game                                               |![ezgif-2-604c41a9a0](https://user-images.githubusercontent.com/25727048/234431083-e680332a-7a20-4fc7-b591-6e02f291ab1a.gif)|
 
 <hr>
@@ -45,7 +46,7 @@ As part of this journey I have put together this website and have been implement
 ### Future plans:
 
 - [ ] Visualizating the infinite - *Mandelbrot set*
-- [ ] L-systems - *Fractal trees*
+- [x] L-systems - *Fractal trees*
 - [x] Chaotic behaviour - *Double pendulum*
 - [ ] N-body simulation -  *Mutual attraction*
 - [ ] Minimax algorithm - *Backgammon game*
