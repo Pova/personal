@@ -3,10 +3,8 @@ let axiom;
 let rules;
 let sentence;
 let sentenceLength;
-let starting_len = 100;
 let angle;
 let limit;
-let len = starting_len;
 let scaling_factor;
 let trans_scaling; // in terms of (scale**recursion)*length/2
 
@@ -15,9 +13,12 @@ let recursionDepth = 0;
 const system_dict = {
     "Bush-1":LS_Bush1,
     "Big-H":LS_BigH,
+    "Bend-Big-H":LS_BendBigH,
     "Weed-1":LS_Weed1,
+    "Weed-2":LS_Weed2,
     "Carpet":LS_Carpet,
-    "Koch-Island":LS_Koch_Island
+    "Koch-Island":LS_Koch_Island,
+    "Twig":LS_Twig
   };
 
 function generate(){
@@ -64,7 +65,6 @@ function turtle(){
     if (trans_scaling[0] != 0){
         const trans_x = (trans_scaling[0]**recursionDepth)*(len/2);
         translate(trans_x,0);
-        console.log(trans_scaling[0],recursionDepth,len,trans_x);
         
     } 
     if (trans_scaling[1] != 0) {
@@ -76,6 +76,9 @@ function turtle(){
     translate(after_translations[0],after_translations[1]); // Ordering might matter here
 
     stroke(119,163,122,100); //green
+
+    level = 0 + depth_offset;
+
     for (let i=0;i<sentence.length;i++){
         let current_char = sentence.charAt(i);
         
@@ -86,10 +89,18 @@ function turtle(){
             rotate(angle);
         } else if (current_char == "-"){
             rotate(-angle);
+            if (sentence.charAt(i-1) == "-"){
+                level++;
+            }
         } else if (current_char == "["){
             push();
+            level++;
         } else if (current_char == "]"){
             pop();
+            level--;
+        } else if (current_char == "|"){
+            line(0,0,0,-original_length*(scaling_factor)**(level));
+            translate(0,-original_length*(scaling_factor)**(level));
         }
     }
 }
@@ -101,7 +112,7 @@ function draw(){
 
 function resetCanvas(){
     sentence = axiom;
-    len = starting_len;
+    len = original_length;
     background(0);
     turtle();
     recursionDepth = 0;
@@ -125,16 +136,23 @@ function adjustCanvasSize() {
 function systemChoice(system_name){
     // Update variables
     system = system_dict[system_name]
+    name = system['name'];
     axiom = system['axiom'];
     rules = system['rules'];
     angle = radians(system['draw_angle']);
+    depth_offset = system['depth_offset'];
     limit = system['limit'];
     sentence = axiom;
-    len = starting_len;
     scaling_factor = system['scaling_factor'];
+    original_length = system['original_length'];
+    len = original_length;
     trans_scaling = system['trans_scaling'];
     after_translations = system['after_translations'];
     after_rotation = system['after_rotation'];
+
+    //
+    const system_label = document.getElementById("system_name");
+    system_label.innerHTML = name;
 
     // Reset text
     recursionDepth = 0;
