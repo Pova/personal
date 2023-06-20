@@ -48,6 +48,8 @@ function setup(){
     const canvas = createCanvas(canvasWidth, canvasHeight);
     canvas.parent('canvasContainer');
 
+    pixelDensity(1);
+
     systemChoice('Bush-1');
 
     recursionDepth = 0;
@@ -75,7 +77,7 @@ function turtle(){
     rotate(after_rotation);
     translate(after_translations[0],after_translations[1]); // Ordering might matter here
 
-    stroke(119,163,122,100); //green
+    stroke(119,163,122,150); //green
 
     level = 0 + depth_offset;
 
