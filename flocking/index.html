@@ -58,9 +58,9 @@
               <li><a class="dropdown-item" href="../curves/index.html">Curves in Space</a></li>
               <li><a class="dropdown-item" href="../double-pendulum/index.html">Double Pendulum</a></li>
               <li><a class="dropdown-item" href="../lorenz/index.html">Lorenz Attractor</a></li>
+              <li><a class="dropdown-item active">Flocking Behaviour</a></li>
               <li><a class="dropdown-item" href="../l-systems/index.html">L-systems</a></li>
               <li><a class="dropdown-item" href="../mandelbrot/index.html">Mandelbrot Set</a></li>
-              <li><a class="dropdown-item active">Flocking Behaviour</a></li>
               <li><a class="dropdown-item" href="../snake/index.html">Snake Game</a></li>
             </ul>
           </li>
@@ -85,9 +85,8 @@
     </div>
   </nav>
 
-  <section class="bg-secondary p-3 collapse" id="visualizationOptions" style="background-color:#65C6FF">
+  <section class="bg-secondary p-2 collapse" id="visualizationOptions" style="background-color:#65C6FF">
     <div class="container-fluid">
-
       <div class=" align-items-center justify-content-around">
 
         <!-- Sliders -->
@@ -125,19 +124,24 @@
 
       <div class="container py-1">
         <h5 class="text_exp">
-          This is a visualization of <a href="" target=”_blank” class="link-dark text-decoration-none"></a>flocking behaviour</a>.
+          This is a visualization of <a href="https://en.wikipedia.org/wiki/Flocking_(behavior)" target=”_blank” class="link-dark text-decoration-none"></a>flocking behaviour</a>, an emergent property seen in many real-world species, from flocks of birds to schools of fish. This demonstration employs several computational <a href="https://en.wikipedia.org/wiki/Boids" target=”_blank” class="link-dark text-decoration-none">boids</a> (an abbreviation of "bird-oids") to simulate this behavior.
         </h5>
         <p class="text_exp">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat, ea eius. Distinctio eum velit nisi! Culpa, adipisci officia at veniam, magnam id temporibus recusandae dolorem minus maxime doloribus illo perspiciatis.
+          The boids follow three basic rules:
+          <ol class="text_exp">
+            <li><b>Alignment:</b> Each boid attempts to align its direction with those of nearby boids.</li>
+            <li><b>Cohesion:</b> Each boid is drawn towards the average position of its nearby peers, resulting in a tendency to stick together as a group.</li>
+            <li><b>Separation:</b> Each boid tries to maintain a safe distance from its peers, avoiding overcrowding and collision.</li>
+          </ol> 
         </p>
+        <p class="text_exp">
+          From tightly clustered swarms to loose, flowing formations, this demonstration offers a glimpse into the complex dynamics that arise from simple rules. It's a striking example of how complex and coordinated group behavior can emerge from the interaction of individuals following simple, local rules.
+        </p>
+        <p class="text_exp">You can manipulate the balance of these rules using the sliders at the bottom of the screen. Each slider represents the relative influence of one of the rules. By adjusting these, you can observe how different emphasis on alignment, cohesion, and separation changes the behavior of the flock.</p>
         <p class="text_exp"><span style="color: #65C6FF">Click options above to experiment with the parameters for the simulation</span></p>
       </div>
     </div>
   </section>
-
-  
-  alignment
-  cohesion
 
   <script type="text/javascript">
   // Separation Slider
