@@ -7,12 +7,10 @@ const flock = [];
 const flock_size = 100;
 
 function setup() {
-    adjustCanvasSize()
+    adjustCanvasSize();
     
     const canvas = createCanvas(canvasWidth, canvasHeight);
     canvas.parent('canvasContainer');
-
-    // angleMode(RADIANS);
 
     for (let i=0;i<flock_size; i++){
         flock.push(new Boid());
@@ -20,11 +18,12 @@ function setup() {
   }
 
   function draw(){
-    background(51);
+    background('#212529');
 
     for (let boid of flock){
         boid.flock_calculation(flock);
         boid.update();
+        boid.edges()
         boid.show();
     }
   }
