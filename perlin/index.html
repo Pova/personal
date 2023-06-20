@@ -54,6 +54,7 @@
               <li><a class="dropdown-item" href="../curves/index.html">Curves in Space</a></li>
               <li><a class="dropdown-item" href="../double-pendulum/index.html">Double Pendulum</a></li>
               <li><a class="dropdown-item" href="../lorenz/index.html">Lorenz Attractor</a></li>
+              <li><a class="dropdown-item" href="../flocking/index.html">Flocking Behaviour</a></li>
               <li><a class="dropdown-item" href="../l-systems/index.html">L-systems</a></li>
               <li><a class="dropdown-item" href="../mandelbrot/index.html">Mandelbrot Set</a></li>
               <li><a class="dropdown-item" href="../snake/index.html">Snake Game</a></li>
@@ -80,7 +81,7 @@
     </div>
   </nav>
 
-  <section class="bg-secondary p-3 collapse" id="visualizationOptions">
+  <section class="bg-secondary p-2 collapse" id="visualizationOptions">
     <div class="container-fluid">
 
       <div class=" align-items-center justify-content-around">
@@ -107,15 +108,6 @@
             <label for="customRange5" class="sliderText">Max Speed</label>
             <input type="range" class="form-range" min="0" max="8" step="0.25" value="2.5" id="effect">
           </div>
-          <!-- Need to implement event listeners -->
-          <!-- <div class="container text-center">
-            <label for="customRange5" class="sliderText">Distance Variation</label>
-            <input type="range" class="form-range" min="0" max="8" step="0.25" value="2.5" id="effect">
-          </div>
-          <div class="container text-center">
-            <label for="customRange5" class="sliderText">Time Variation</label>
-            <input type="range" class="form-range" min="0" max="8" step="0.25" value="2.5" id="effect">
-          </div> -->
         </div>
       </div>
     </div>
@@ -138,13 +130,6 @@
         <h5 class="text_exp">
           This is a visualization of <a href="https://en.wikipedia.org/wiki/Perlin_noise" target=”_blank” class="link-dark text-decoration-none">perlin noise</a>.
         </h5>
-        <!-- <p class="text_exp">
-          By constructing an invisible grid of squares and calculating a vector force for each grid position we can approximate the effect of a <a href="https://en.wikipedia.org/wiki/Vector_field" target=”_blank” class="link-dark text-decoration-none">vector
-            field</a>.
-        </p>
-        <p class="text_exp">
-          In order to see the vector field in action 1000 particles are created in random positions and are subject to the vector forces in their immediate vicinity. By updating their position and tracing the resulting path we can visualize the flow lines of the vector field.
-        </p> -->
         <p class="text_exp">
           For this simulation a 3-variable implementation of the Perlin noise algorithm is used to generate a vector field on the canvas which acts upon thousands of particles. The inputs for the algorithm are two spacial dimensions (x,y) corresponding to position on the canvas and a third variable z which increments with time. The output is a unit vector that points in a random direction varying over time, the particles subject to the vector field in turn trace out beautiful chaotic paths.
           </p>
