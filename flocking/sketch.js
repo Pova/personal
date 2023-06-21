@@ -18,7 +18,7 @@ function setup() {
   }
 
   function draw(){
-    background('#212529');
+    background(0);
 
     for (let boid of flock){
         boid.flock_calculation(flock);
