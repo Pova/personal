@@ -58,6 +58,8 @@ function setup() {
   canvas = createCanvas(canvasWidth, canvasHeight);
   canvas.parent("#canvasContainer");
 
+  background(0);
+
   width_size = cols*w;
   height_size = rows*h;
 
@@ -94,6 +96,7 @@ function start_alg(){
 function draw() {
 
   translate((canvasWidth-width_size)/2,(canvasHeight-height_size)/2);
+  background(0);
 
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
@@ -180,7 +183,7 @@ function draw() {
   pop();
 
   if (drawing_maze){
-    fill(255);
+    fill(0);
     stroke(0);
     textSize(128);
     textAlign(CENTER);
