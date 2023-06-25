@@ -13,15 +13,8 @@ function setup(){
 
     game_board = new Board(
         board_margin_h,
-        board_margin_v,
-        board_inner_side_margin,
-        board_inner_horizontal_space)
-
-    // const board_width = width-2*board_margin_h;
-    // const board_height = height-2*board_margin_v;
-
-    // const triangle_height = (board_height-board_inner_horizontal_space)/2;
-    // const triangle_width = (board_width-2*board_inner_side_margin-10)/12;
+        board_margin_v
+        )
 }
 
 function draw(){
