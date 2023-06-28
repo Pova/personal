@@ -4,8 +4,8 @@ class Vehicle {
         this.velocity = p5.Vector.random2D();
         this.velocity.setMag(random(2,4));
         this.acceleration = createVector();
-        this.maxForce = .2;
-        this.maxSpeed = 3;
+        this.maxForce = 0.5;
+        this.maxSpeed = 5;
     }
 
     // Need to update this
@@ -22,10 +22,24 @@ class Vehicle {
         }
     }
 
+    seek(target){
+        const desired = p5.Vector.sub(target,this.position)
+        desired.setMag(this.maxSpeed);
+
+        const steer = p5.Vector.sub(desired,this.velocity);
+        steer.limit(this.maxforce);
+
+        this.applyForce(steer);
+    }
+
+    applyForce(force){
+        this.acceleration.add(force);
+    }
+
     update(){
         this.velocity.add(this.acceleration);
+        this.velocity.limit(this.maxSpeed);
         this.position.add(this.velocity);
-        this.velocity.limit(this.maxSpeed)
         this.acceleration.mult(0);   
     }
 
