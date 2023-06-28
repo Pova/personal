@@ -12,12 +12,17 @@ function setup() {
     const canvas = createCanvas(canvasWidth, canvasHeight);
     canvas.parent('canvasContainer');
 
+    vehicles.push(new Vehicle())
+
   }
 
   function draw(){
     background(0);
 
+    const target = createVector(mouseX,mouseY);
+
     for (let vehicle of vehicles){
+        vehicle.seek(target);
         vehicle.update();
         vehicle.edges()
         vehicle.show();
