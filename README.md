@@ -39,8 +39,10 @@ As part of this journey I have put together this website and have been implement
 | [Double Pendulum](https://pova.github.io/personal/lorenz/index.html)     | Visualization of a double pendulum (a simple example of a chaotic system)              |![ezgif-2-5ccc94487b](https://github.com/Pova/personal/assets/25727048/23646b3f-6021-411b-aee1-f0a3ca5b9fca)|
 | [Lorenz](https://pova.github.io/personal/lorenz/index.html)     | Visualization of a Lorenz attractor (a more sophisticated chaotic system)               |![ezgif-1-6315dca29b](https://user-images.githubusercontent.com/25727048/234430074-3c92f32b-9715-45a3-962c-393f785db0d1.gif)|
 | [Flocking](https://pova.github.io/personal/flocking/index.html)     | Demonstration with flocking behaviour of boids exhibiting: alignment, cohesion and separation              |![ezgif-5-552acef613](https://github.com/Pova/personal/assets/25727048/35b10254-7d6b-4b92-bc89-45fbbcd0d77c)|
+| [Evolutionary Steering](https://pova.github.io/personal/evolutionary_steering/index.html)     | Demonstration of steering behaviour and autonomous agents that learn to eat food and avoid poison with a genetic algorithm | preview here |
 | [L-systems](https://pova.github.io/personal/l-systems/index.html)     | Interactive visualization of various L-systems producing a variety of complex fractal-like shapes                |<img width="853" alt="Screenshot 2023-06-15 at 22 57 03" src="https://github.com/Pova/personal/assets/25727048/412666cb-24dc-46f7-9c69-991eab0b0fed">|
 | [Mandelbrot](https://pova.github.io/personal/mandelbrot/index.html)     | Zoomable visualization of the famous Mandelbrot set                |<img width="657" alt="Screenshot 2023-06-15 at 22 58 44" src="https://github.com/Pova/personal/assets/25727048/a8915498-6355-4a31-bc11-55a14bf2503e">|
+| [Backgammon Game](https://pova.github.io/personal/backgammon/index.html)     | Playable backgammon game (in progress) | preview here |
 | [Snake](https://pova.github.io/personal/snake/index.html)       | Playable snake game                                               |![ezgif-2-604c41a9a0](https://user-images.githubusercontent.com/25727048/234431083-e680332a-7a20-4fc7-b591-6e02f291ab1a.gif)|
 
 <hr>
@@ -51,7 +53,9 @@ As part of this journey I have put together this website and have been implement
 - [x] L-systems - *Fractal trees*
 - [x] Chaotic behaviour - *Double pendulum*
 - [x] Steering behaviour - *Flocking behaviour*
+- [x] Genetic algorithm - *Evolutionary Steering* (in progress)
+- [x] Minimax algorithm - *Backgammon game* (in progress)
+- [ ] Genetic algorithm - *Smart Rockets*
 - [ ] N-body simulation -  *Mutual attraction*
-- [ ] Minimax algorithm - *Backgammon game*
 - [ ] Rotations in 4D - *The Tesseract*
 - [ ] Genetic algorithms - *Smart Rockets*
