@@ -27,13 +27,27 @@ class Vehicle {
         desired.setMag(this.maxSpeed);
 
         const steer = p5.Vector.sub(desired,this.velocity);
-        steer.limit(this.maxforce);
+        steer.limit(this.maxForce);
 
         this.applyForce(steer);
     }
 
     applyForce(force){
         this.acceleration.add(force);
+    }
+
+    eat(list){
+        let closestIdx = -1;
+        let min_dist = Infinity;
+        for (let i=0;i<list.length;i++){
+            const d = this.position.dist(food[i].x,food[i].y);
+            if (d<min_dist){
+                min_dist = d;
+                closestIdx = i;
+            }
+        }
+
+        this.seek(food[closestIdx]);
     }
 
     update(){
