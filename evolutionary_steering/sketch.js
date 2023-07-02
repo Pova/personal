@@ -10,6 +10,8 @@ const poison_amount = 10;
 const food = [];
 const poison = [];
 
+let debug = false;
+
 
 function setup() {
     adjustCanvasSize();
@@ -72,3 +74,7 @@ function adjustCanvasSize() {
     canvasHeight = totalHeight - navBarHeight - detailBarHeight;
     canvasWidth = totalWidth;
   }
+
+function debug_toggle(){
+  debug = !debug;
+}
