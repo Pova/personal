@@ -23,6 +23,12 @@ function setup() {
       const y = random(height);
       food.push(createVector(x,y));
     }
+
+    for (let i=0;i<poison_amount;i++){
+      const x = random(width);
+      const y = random(height);
+      poison.push(createVector(x,y));
+    }
   }
 
   function draw(){
@@ -38,11 +44,19 @@ function setup() {
       pop();
     }
 
+    for (let i = 0; i<poison.length; i++){
+      push();
+      fill(255,0,0);
+      noStroke();
+      ellipse(poison[i].x,poison[i].y,6,6);
+      pop();
+    }
+
     for (let vehicle of vehicles){
-        //vehicle.seek(target);
-        vehicle.eat(food);
+        vehicle.behaviours(food,poison);
+
         vehicle.update();
-        vehicle.edges()
+        // vehicle.edges();
         vehicle.show();
     }
   }
