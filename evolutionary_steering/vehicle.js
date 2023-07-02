@@ -86,15 +86,31 @@ class Vehicle {
     }
 
     show(){
+        const angle = this.velocity.heading()+Math.PI/2;
+        
+
         push();
-        stroke(255);
         translate(this.position.x,this.position.y);
-        rectMode(CENTER);
-        rotate(this.velocity.heading()+Math.PI/2);
-        triangle(0,-vehicle_length/2,
-        -vehicle_width/2,vehicle_length/2,
-        vehicle_width/2,vehicle_length/2,
-        );
+        rotate(angle);
+
+        if (debug){
+            stroke(0,255,0);
+            strokeWeight(2);
+            line(0,0,0,-this.dna[0]*20);
+            stroke(255,0,0);
+            strokeWeight(3);
+            line(0,0,0,-this.dna[1]*20);
+        }
+
+
+        strokeWeight(1);
+        stroke(255);
+        fill(130);
+        beginShape();
+        vertex(0,-vehicle_length);
+        vertex(-vehicle_width,vehicle_length);
+        vertex(vehicle_width,vehicle_length);
+        endShape(CLOSE);
         pop();
     }
 
