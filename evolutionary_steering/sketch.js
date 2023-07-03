@@ -10,7 +10,7 @@ const poison_amount = 10;
 const food = [];
 const poison = [];
 
-let debug = false;
+let debug = true;
 
 
 function setup() {

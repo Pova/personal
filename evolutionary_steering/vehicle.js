@@ -95,11 +95,11 @@ class Vehicle {
 
         if (debug){
             stroke(0,255,0);
-            strokeWeight(2);
-            line(0,0,0,-this.dna[0]*20);
+            strokeWeight(1);
+            line(1,0,1,-this.dna[0]*20);
             stroke(255,0,0);
-            strokeWeight(3);
-            line(0,0,0,-this.dna[1]*20);
+            strokeWeight(1);
+            line(-1,0,-1,-this.dna[1]*20);
         }
 
 
