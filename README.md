@@ -58,4 +58,3 @@ As part of this journey I have put together this website and have been implement
 - [ ] Genetic algorithm - *Smart Rockets*
 - [ ] N-body simulation -  *Mutual attraction*
 - [ ] Rotations in 4D - *The Tesseract*
-- [ ] Genetic algorithms - *Smart Rockets*
