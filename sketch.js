@@ -1,18 +1,9 @@
-var font;
-var canvas;
-var points = []; //Need to define this globally.
+let font;
+const points = []; //Need to define this globally.
 
-var vehicles_1 = [];
-var vehicles_2 = [];
-var vehicles_3 = [];
-
-var slider1; //maxSpeed --used
-var slider2; //flee_distance --used
-var slider3; //max Desired -- not currently used (using slider 1 value...)
-var slider4; //max gravity Force
-var slider5; //Initial speed when created -- used once in constructor
-var slider6; //Max Steer
-var slider7; //Flee force
+const vehicles_1 = [];
+const vehicles_2 = [];
+const vehicles_3 = [];
 
 var xoff = 0;
 
@@ -22,17 +13,19 @@ function preload() {
 
 
 function setup() {
-  var canvas = createCanvas(windowWidth, windowHeight - 180);
-  canvas.parent("canvas_div");
+  adjustCanvasSize();
+  const canvas = createCanvas(canvasWidth, canvasHeight);
+  canvas.parent('canvasContainer');
+
 
   bbox_1 = font.textBounds('Welcome', 0, 0, 164);
   bbox_2 = font.textBounds('to my', 0, 0, 164);
   bbox_3 = font.textBounds('Website', 0, 0, 164)
 
   //Calculating positions
+  //Split up vertical distances 30-20-20-30
 
   vert_space = windowHeight - 100 - bbox_1.h - bbox_2.h - bbox_3.h
-  //Split up vertical distances 30-20-20-30
 
   pts_1_x = (windowWidth - bbox_1.w) / 2
   pts_1_y = 100 + vert_space * .3
@@ -82,10 +75,6 @@ function setup() {
 function draw() {
   background(0);
 
-  // if (frameCount % 30 == 0){
-  //   console.log(frameRate());
-  // }
-
   for (var i = 0; i < points_1.length; i++) {
     vehicles_1[i].behaviours();
     vehicles_1[i].update();
@@ -103,6 +92,17 @@ function draw() {
     vehicles_3[i].update();
     vehicles_3[i].show();
   }
-
-
 }
+
+function adjustCanvasSize() {
+  const totalHeight = window.innerHeight;
+  const totalWidth = window.innerWidth;
+
+  const navBarHeight = document.getElementById('navBar').clientHeight;
+  const detailBarHeight = document.getElementById('detailBar').clientHeight;
+
+  canvasHeight = totalHeight - navBarHeight - detailBarHeight;
+  canvasWidth = totalWidth;
+}
+
+
