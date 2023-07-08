@@ -25,7 +25,7 @@
 
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark" id="navBar">
     <div class="container">
       <a class="navbar-brand">
         <h1 class="display-4">Roman Kitsela</h1>
@@ -68,7 +68,7 @@
     </div>
   </nav>
 
-  <nav class="navbar navbar-dark bg-secondary border-bottom border-dark border-2 justify-content-between">
+  <nav class="navbar navbar-dark bg-secondary border-bottom border-dark border-2 justify-content-between" id="detailBar">
     <div class="container align-text-center">
       <div class="d-inline-flex">
         <a class="navbar-brand">
@@ -86,10 +86,10 @@
 
   <section class="bg-secondary p-2 collapse" id="visualizationOptions">
     <div class="container-fluid">
-      <div class="d-md-flex align-items-center justify-content-around">
+      <div class="align-items-center justify-content-around">
 
         <!-- Div 1 -->
-        <div class="d-lg-flex align-items-center ">
+        <div class="d-lg-flex align-items-center">
           <div class="container text-center">
             <label for="customRange1" class="sliderText">Desired Force</label>
             <input type="range" class="form-range" min="0" max="45" step="1" value="20" id="max_desired">
@@ -113,7 +113,7 @@
   </section>
 
   <section class="bg-dark">
-    <div id="canvas_div">
+    <div id="canvasContainer">
 
     </div>
   </section>
