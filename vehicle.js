@@ -1,76 +1,78 @@
 //constructor for Vehicle class, attracted to (x,y)
-function Vehicle(x, y) { 
-    this.pos = createVector(random(width), random(height));
-    this.vel = p5.Vector.random2D().mult(2);
-    this.acc = createVector(); //initially 0 acc
-    this.target = createVector(x, y);
-    this.max_d = p5.Vector.dist(this.pos, this.target);
-    this.init_d = p5.Vector.dist(this.pos, this.target);
-    this.hue = 200;
+class Vehicle {
+    constructor(x, y){
+        this.pos = createVector(random(width), random(height));
+        this.vel = p5.Vector.random2D().mult(2);
+        this.acc = createVector(); //initially 0 acc
+        this.target = createVector(x, y);
+        this.max_d = p5.Vector.dist(this.pos, this.target);
+        this.init_d = p5.Vector.dist(this.pos, this.target);
+        this.hue = 200;
+    }
 
-}
-
-Vehicle.prototype.arrive = function(target) {
-    var maxDesired = max_desired; // from sliders
-    var maxSteer = max_steer; // from sliders
-    var desired = p5.Vector.sub(target, this.pos); // this.pos --> target
-    var d = desired.mag();
-    var force = maxDesired;
+    arrive(target) {
+    const maxDesired = max_desired; // from sliders
+    const maxSteer = max_steer; // from sliders
+    let desired = p5.Vector.sub(target, this.pos); // this.pos --> target
+    const  d = desired.mag();
+    let force = maxDesired;
     if (d < 50) { 
-       var force = map(d, 0, 50, 0, maxDesired);
+       force = map(d, 0, 50, 0, maxDesired);
     }
     desired.limit(force);
-    var steer = p5.Vector.sub(desired, this.vel); // this.vel --> desired
+    let steer = p5.Vector.sub(desired, this.vel); // this.vel --> desired
     steer.limit(maxSteer);
     return steer;
 }
 
 //Returns flee force away from target
-Vehicle.prototype.flee = function(target) { 
-    var fleeDist = flee_dist; // from sliders
-    var fleeForce = flee_force; // from sliders
-    var desired = p5.Vector.sub(target, this.pos);
-    var d = p5.Vector.dist(target, this.pos);
+flee(target) { 
+    const fleeDist = flee_dist; // from sliders
+    const fleeForce = flee_force; // from sliders
+    let desired = p5.Vector.sub(target, this.pos);
+    const d = p5.Vector.dist(target, this.pos);
     if (d < fleeDist) {
-        force = map(d, 0, fleeDist, fleeForce, 0)
+        let force = map(d, 0, fleeDist, fleeForce, 0)
         desired.mult(-1);
-        var steer = p5.Vector.sub(desired, this.vel);
+        let steer = p5.Vector.sub(desired, this.vel);
         steer.setMag(force);
-        this.hue += steer.mag()*0.1;
+        this.hue = (this.hue + steer.mag()*0.1)%255;
         return steer;
     } else {
-        steer = createVector();
+        const steer = createVector();
         return steer;
     }
 }
 
 //adds forces to acceleration
-Vehicle.prototype.applyForce = function(f) { 
+applyForce(f) { 
     this.acc.add(f);
 }
 
 // Main loop: behaviors --> update --> show
 
-Vehicle.prototype.behaviours = function() { //Applies behaviours
-    var arrive = this.arrive(this.target);
-    var mouse = createVector(mouseX, mouseY);
-    var flee = this.flee(mouse);
+behaviours() { //Applies behaviours
+    const arrive = this.arrive(this.target);
+    const mouse = createVector(mouseX, mouseY);
+    const flee = this.flee(mouse);
     this.applyForce(arrive);
     this.applyForce(flee);
 }
 
-Vehicle.prototype.update = function() {
+update() {
     this.pos.add(this.vel);
     this.vel.add(this.acc);
     this.acc.mult(0);
 }
 
-Vehicle.prototype.show = function() {
+show() {
 
     push();
     colorMode(HSB);
-    stroke(this.hue % 360,255,255);
+    stroke(this.hue,255,255);
     strokeWeight(4);
     point(this.pos.x, this.pos.y);
     pop();
+}
+
 }
