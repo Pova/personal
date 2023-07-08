@@ -1,8 +1,5 @@
-var G = 1; //Gravitational constant
-
-// Could add random weights to each particle
-
-function Vehicle(x, y) { //constructor for Vehicle class, attracted to (x,y)
+//constructor for Vehicle class, attracted to (x,y)
+function Vehicle(x, y) { 
     this.pos = createVector(random(width), random(height));
     this.vel = p5.Vector.random2D().mult(2);
     this.acc = createVector(); //initially 0 acc
@@ -16,19 +13,20 @@ function Vehicle(x, y) { //constructor for Vehicle class, attracted to (x,y)
 Vehicle.prototype.arrive = function(target) {
     var maxDesired = max_desired; // from sliders
     var maxSteer = max_steer; // from sliders
-    var desired = p5.Vector.sub(target, this.pos); //Vector from this.pos to target
+    var desired = p5.Vector.sub(target, this.pos); // this.pos --> target
     var d = desired.mag();
     var force = maxDesired;
-    if (d < 50) { //distance to target is less than initial distance
+    if (d < 50) { 
        var force = map(d, 0, 50, 0, maxDesired);
     }
     desired.limit(force);
-    var steer = p5.Vector.sub(desired, this.vel); // vector from this.vel to desired
+    var steer = p5.Vector.sub(desired, this.vel); // this.vel --> desired
     steer.limit(maxSteer);
     return steer;
 }
 
-Vehicle.prototype.flee = function(target) { //Returns flee force away from target
+//Returns flee force away from target
+Vehicle.prototype.flee = function(target) { 
     var fleeDist = flee_dist; // from sliders
     var fleeForce = flee_force; // from sliders
     var desired = p5.Vector.sub(target, this.pos);
@@ -46,7 +44,8 @@ Vehicle.prototype.flee = function(target) { //Returns flee force away from targe
     }
 }
 
-Vehicle.prototype.applyForce = function(f) { //adds forces to acceleration
+//adds forces to acceleration
+Vehicle.prototype.applyForce = function(f) { 
     this.acc.add(f);
 }
 
@@ -54,21 +53,15 @@ Vehicle.prototype.applyForce = function(f) { //adds forces to acceleration
 
 Vehicle.prototype.behaviours = function() { //Applies behaviours
     var arrive = this.arrive(this.target);
-    //var gravity = this.gravity(this.pos, this.target)
     var mouse = createVector(mouseX, mouseY);
     var flee = this.flee(mouse);
-
-    //Could weight forces in a different way here.
-
     this.applyForce(arrive);
-    //this.applyForce(gravity);
     this.applyForce(flee);
 }
 
 Vehicle.prototype.update = function() {
-    this.pos.add(this.vel); //update position
+    this.pos.add(this.vel);
     this.vel.add(this.acc);
-    //this.vel.limit(100);
     this.acc.mult(0);
 }
 
