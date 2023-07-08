@@ -53,20 +53,20 @@ function setup() {
   });
 
 
-  for (var i = 0; i < points_1.length; i++) {
+  for (let i = 0; i < points_1.length; i++) {
     pt = points_1[i];
-    var vehicle = new Vehicle(pt.x, pt.y);
+    const vehicle = new Vehicle(pt.x, pt.y);
     vehicles_1.push(vehicle);
   }
 
-  for (var i = 0; i < points_2.length; i++) {
+  for (let i = 0; i < points_2.length; i++) {
     pt = points_2[i];
-    var vehicle = new Vehicle(pt.x, pt.y);
+    const vehicle = new Vehicle(pt.x, pt.y);
     vehicles_2.push(vehicle);
   }
-  for (var i = 0; i < points_3.length; i++) {
+  for (let i = 0; i < points_3.length; i++) {
     pt = points_3[i];
-    var vehicle = new Vehicle(pt.x, pt.y);
+    const vehicle = new Vehicle(pt.x, pt.y);
     vehicles_3.push(vehicle);
   }
 
@@ -75,19 +75,19 @@ function setup() {
 function draw() {
   background(0);
 
-  for (var i = 0; i < points_1.length; i++) {
+  for (let i = 0; i < points_1.length; i++) {
     vehicles_1[i].behaviours();
     vehicles_1[i].update();
     vehicles_1[i].show();
   }
 
-  for (var i = 0; i < points_2.length; i++) {
+  for (let i = 0; i < points_2.length; i++) {
     vehicles_2[i].behaviours();
     vehicles_2[i].update();
     vehicles_2[i].show();
   }
 
-  for (var i = 0; i < points_3.length; i++) {
+  for (let i = 0; i < points_3.length; i++) {
     vehicles_3[i].behaviours();
     vehicles_3[i].update();
     vehicles_3[i].show();
