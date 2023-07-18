@@ -4,7 +4,7 @@ const boid_width = 6; //width in pixels
 const perception = 50;
 
 const flock = [];
-const flock_size = 100;
+const flock_size = 250;
 
 function setup() {
     adjustCanvasSize();
