@@ -64,8 +64,44 @@ function set_alg_bubble() {
     let title = document.getElementById('alg_title');
     title.innerHTML = 'This is a visualization of the heap sort algorithm.'
     let element = document.getElementById('alg_explain');
-    element.innerHTML = 'Quite a cheeky algorithm';
+    element.innerHTML = '<b>Time Complexity:</b> O(nlog(n)) - where n is the length of the input array. <br><br> Heap Sort is a comparison-based sorting algorithm that uses a binary heap data structure. It divides its input into a sorted and an unsorted region, and iteratively shrinks the unsorted region by extracting the largest element and moving that to the sorted region. The improvement consists of the use of a heap data structure rather than a linear-time search to find the maximum.';
     let nav_bar_title = document.getElementById('algName');
     nav_bar_title.innerHTML = 'Heap Sort';
     nav_bar_title.style.color = '#65C6FF';
-  }
+}
+
+function set_alg_shell() {
+  alg = 'shell';
+  generateArray();
+  let title = document.getElementById('alg_title');
+  title.innerHTML = 'This is a visualization of the shell sort algorithm.'
+  let element = document.getElementById('alg_explain');
+  element.innerHTML = '<b>Time Complexity:</b> O(n<sup>1.5</sup>) - where n is the length of the input array. <br><br> Shell Sort is a generalized version of insertion sort. It first sorts elements far apart from each other and successively reduces the interval between the elements to be sorted. The unique "gap" approach improves the efficiency by allowing the comparison of elements that are far apart.';
+  let nav_bar_title = document.getElementById('algName');
+  nav_bar_title.innerHTML = 'Shell Sort';
+  nav_bar_title.style.color = '#65C6FF';
+}
+
+function set_alg_cocktail() {
+  alg = 'cocktail';
+  generateArray();
+  let title = document.getElementById('alg_title');
+  title.innerHTML = 'This is a visualization of the cocktail sort algorithm.'
+  let element = document.getElementById('alg_explain');
+  element.innerHTML = '<b>Time Complexity:</b> O(n<sup>2</sup>) - where n is the length of the input array. <br><br> Cocktail Sort, also known as bidirectional bubble sort, is a variation of Bubble sort where the sorting operation is performed in both directions. It bubbles to both ends of the array, which can be faster if the nearly sorted array has some elements out of place at the end.';
+  let nav_bar_title = document.getElementById('algName');
+  nav_bar_title.innerHTML = 'Cocktail Sort';
+  nav_bar_title.style.color = '#65C6FF';
+}
+
+function set_alg_radix() {
+  alg = 'radix';
+  generateArray();
+  let title = document.getElementById('alg_title');
+  title.innerHTML = 'This is a visualization of the radix sort algorithm.'
+  let element = document.getElementById('alg_explain');
+  element.innerHTML = '<b>Time Complexity:</b> O(nk) - where n is the number of elements and k is the number of digits of the maximum number. <br><br> Radix sort is a non-comparative integer sorting algorithm that sorts data with integer keys by grouping keys by the individual digits which share the same significant position and value. The radix is usually the base of the number system. The working of the algorithm is like counting sort with some modifications.';
+  let nav_bar_title = document.getElementById('algName');
+  nav_bar_title.innerHTML = 'Radix Sort';
+  nav_bar_title.style.color = '#65C6FF';
+}
