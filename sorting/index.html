@@ -89,7 +89,10 @@
           <a class="dropdown-item" onclick="set_alg_select();">Selection Sort</a>
           <a class="dropdown-item" onclick="set_alg_quick();">Quick Sort</a>
           <a class="dropdown-item" onclick="set_alg_merge();">Merge Sort</a>
-          <!-- <a class="dropdown-item" onclick="set_alg_heap();">Heap Sort</a> -->
+          <a class="dropdown-item" onclick="set_alg_heap();">Heap Sort</a>
+          <a class="dropdown-item" onclick="set_alg_shell();">Shell Sort</a>
+          <a class="dropdown-item" onclick="set_alg_cocktail();">Cocktail Sort</a>
+          <!-- <a class="dropdown-item" onclick="set_alg_radix();">Radix Sort</a> -->
         </div>
         </div>
         <button type="button" name="button" class="btn btn-dark mx-1" id="sort_btn" onclick="sort_array();">Sort</button>
@@ -102,10 +105,8 @@
     </div>
   </nav>
 
-  <!-- NAV BAR END -->
-
   <section >
-    <div class="d-flex justify-content-center" id="canvasDiv" style="background-color:black;">
+    <div class="d-flex justify-content-center" id="canvasContainer" style="background-color:black;">
 
     </div>
   </section>
