@@ -1,8 +1,10 @@
 // Board constants
 const board_margin_h = 400;
 const board_margin_v = 75;
-const board_inner_side_margin = 100;
-const board_inner_horizontal_space = 100;
+
+const GREEN_HEX = '#164623';
+const BROWN_HEX = '#5B270B';
+
 
 
 function setup(){
@@ -20,6 +22,7 @@ function setup(){
 function draw(){
     background(0);
     game_board.show();
+    noLoop();
 }
 
 // Sets the canvas size based on the window size
