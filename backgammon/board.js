@@ -18,15 +18,26 @@ class Board{
         this.triangle_height = (this.height-this.inner_v_whitespace)/2;
         this.triangle_width = (this.width-2*this.inner_side_padding-14)/12;
 
-        this.positions = [];
+        this.points = []; // Array of 24 points (1 is bottom right, 12 bottom left, 13 top left, 24 top right)
+
+        for (let i = 0; i<24; i++){
+            this.points.push(new Point(i+1));
+        }
     }
 
     show(){
         push();
-        fill('#5B270B'); //Brown
+        fill(BROWN_HEX); // Brown board colour
         stroke(255);
         strokeWeight(1);
         rect(this.margin_h,this.margin_v,this.width,this.height);
+        pop();
+
+        push();
+        fill(GREEN_HEX); // Brown board colour
+        stroke(255);
+        strokeWeight(1);
+        rect(this.margin_h + this.inner_side_padding,this.margin_v,this.width-this.inner_side_padding*2,this.height);
         pop();
         
         // Middle separation
@@ -36,67 +47,18 @@ class Board{
         rect(this.margin_h+this.width/2-5,this.margin_v,10,this.height);
         pop();
 
+        // Left and right lines
         stroke(255);
-        line(this.margin_h + this.inner_side_padding, this.margin_v ,this.margin_h + this.inner_side_padding, this.margin_v + this.height);
-        line(this.margin_h + this.width - this.inner_side_padding, this.margin_v ,this.margin_h + this.width - this.inner_side_padding, this.margin_v + this.height);
+        line(this.margin_h + this.inner_side_padding,this.margin_v,
+             this.margin_h + this.inner_side_padding,this.margin_v + this.height
+             );
+        line(this.margin_h + this.width - this.inner_side_padding,this.margin_v,
+            this.margin_h + this.width - this.inner_side_padding,this.margin_v + this.height
+            );
 
-        push();
-        translate(1,0);
-        for (let i = 0; i<6; i++){
-            noStroke();
-            if (i%2==0){
-                fill(0);
-            } else {
-                fill(255);
-            }
-            triangle(
-                this.margin_h + this.inner_side_padding + this.triangle_width*i, this.margin_v + .5,
-                this.margin_h + this.inner_side_padding + this.triangle_width + this.triangle_width*i, this.margin_v + .5,
-                this.margin_h + this.inner_side_padding + this.triangle_width/2 + this.triangle_width*i, this.margin_v + this.triangle_height + .5
-                )
+        // draw points
+        for (let i = 0; i<24; i++){
+            this.points[i].show_point();
         }
-
-        for (let i = 0; i<6; i++){
-            noStroke();
-            if (i%2==0){
-                fill(0);
-            } else {
-                fill(255);
-            }
-            triangle(
-                this.margin_h+this.width/2-this.inner_side_padding+5+this.inner_side_padding+this.triangle_width*i,this.margin_v+.5,
-                this.margin_h+this.width/2-this.inner_side_padding+5+this.inner_side_padding+this.triangle_width+this.triangle_width*i,this.margin_v+.5,
-                this.margin_h+this.width/2-this.inner_side_padding+5+this.inner_side_padding+this.triangle_width/2+this.triangle_width*i,this.margin_v+this.triangle_height+.5
-                )
-        }
-
-        for (let i = 0; i<6; i++){
-            noStroke();
-            if (i%2==1){
-                fill(0);
-            } else {
-                fill(255);
-            }
-            triangle(
-                this.margin_h+this.inner_side_padding+this.triangle_width*i,this.margin_v+this.height-.5,
-                this.margin_h+this.inner_side_padding+this.triangle_width+this.triangle_width*i,this.margin_v+this.height-.5,
-                this.margin_h+this.inner_side_padding+this.triangle_width/2+this.triangle_width*i,this.margin_v+this.height-this.triangle_height-.5
-                )
-        }
-
-        for (let i = 0; i<6; i++){
-            noStroke();
-            if (i%2==1){
-                fill(0);
-            } else {
-                fill(255);
-            }
-            triangle(
-                this.margin_h+this.width/2-this.inner_side_padding+5+this.inner_side_padding+this.triangle_width*i,this.margin_v+this.height-.5,
-                this.margin_h+this.width/2-this.inner_side_padding+5+this.inner_side_padding+this.triangle_width+this.triangle_width*i,this.margin_v+this.height-.5,
-                this.margin_h+this.width/2-this.inner_side_padding+5+this.inner_side_padding+this.triangle_width/2+this.triangle_width*i,this.margin_v+this.height-this.triangle_height-.5
-                )
-        }
-        pop();
     }
 }
