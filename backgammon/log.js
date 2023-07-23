@@ -1,6 +1,6 @@
 class gameLog{
     constructor(){
-        this.lines = ['Welcome to my backgammon!', 'Press Start Game to begin...'];
+        this.lines = ['Welcome to my backgammon game!', 'Press Start Game to begin...'];
         this.lineHeight = 30;
         this.x = game_board.width + game_board.margin_h + 40;
     }
@@ -33,5 +33,10 @@ class gameLog{
     async add_lines(text){
         await sleep(500);
         this.lines.push(text);
+    }
+
+    append_line(text){
+        this.lines[-1] += text;
+        this.print_lines();
     }
 }
