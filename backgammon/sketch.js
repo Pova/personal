@@ -1,9 +1,17 @@
 // Board constants
-const board_margin_h = 400;
-const board_margin_v = 75;
+const board_width = 800;
+const board_height = 800;
 
+const inner_side_padding_const = 0.05;
+const inner_v_whitespace_const = 0.15;
+const middle_separation_cost = 0.05;
+
+// Board colours
 const GREEN_HEX = '#164623';
 const BROWN_HEX = '#5B270B';
+const CREAM_HEX = '#FEFBEA';
+const RED_HEX = '#CA3433';
+const GOLD_HEX = '#D1B000';
 
 
 
@@ -14,8 +22,8 @@ function setup(){
     canvas.parent('canvasContainer');
 
     game_board = new Board(
-        board_margin_h,
-        board_margin_v
+        board_width,
+        board_height
         )
 }
 
