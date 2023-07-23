@@ -27,15 +27,19 @@ class Point {
     // Calculate x and y coordinate of the point
     get_coordinates() {
         let x, y;
-        if (this.q < 1) {
-            y = game_board.margin_v + game_board.height - .5;
+        if (this.q < 2) {
+            y = game_board.margin_v + game_board.height - game_board.inner_side_padding - 1;
         } else {
-            y = game_board.margin_v + .5;
+            y = game_board.margin_v + game_board.inner_side_padding + 1;
         }
-        if (this.q == 1 || this.q == 2) {
+        if (this.q == 1) {
+            x = game_board.margin_h + game_board.inner_side_padding + game_board.triangle_width * (5 - this.r);
+        } else if (this.q == 2) {
             x = game_board.margin_h + game_board.inner_side_padding + game_board.triangle_width * this.r;
+        } else if (this.q == 0){
+            x = game_board.margin_h + game_board.width / 2 - game_board.inner_side_padding + game_board.inner_middle_padding/2 + game_board.inner_side_padding + game_board.triangle_width * (5 - this.r);
         } else {
-            x = game_board.margin_h + game_board.width / 2 - game_board.inner_side_padding + 5 + game_board.inner_side_padding + game_board.triangle_width * this.r;
+            x = game_board.margin_h + game_board.width / 2 - game_board.inner_side_padding + game_board.inner_middle_padding/2 + game_board.inner_side_padding + game_board.triangle_width * this.r;
         }
         return {x, y};
     }
@@ -44,21 +48,22 @@ class Point {
     // Calculate the color of the triangle
     get_colour() {
         if ((this.number % 2 == 0 && this.q % 2 == 0) || (this.number % 2 == 1 && this.q % 2 == 1)) {
-            return 'red';
+            return RED_HEX;
         } else {
-            return 'white';
+            return CREAM_HEX;
         }
     }
 
     // Draw a checker on the point
     draw_checker(color, position) {
-        const radius = game_board.triangle_width / 1; // Define the appropriate radius
+        const radius = game_board.triangle_width; // Define the appropriate radius
         const coords = this.get_coordinates();
         let offset = (position+.5) * radius; // Use the position to stack the checkers
         fill(color);
-        if(this.q == 1 || this.q == 3){
+        if(this.q > 1){
             offset *= -1;
         }
+        stroke(150);
         circle(coords.x + game_board.triangle_width / 2, coords.y - offset, radius);
     }
 
@@ -81,23 +86,27 @@ class Point {
             triangle(
                 coords.x, coords.y,
                 coords.x + game_board.triangle_width, coords.y,
-                coords.x + game_board.triangle_width / 2, coords.y - game_board.triangle_height
+                coords.x + game_board.triangle_width / 2, coords.y + game_board.triangle_height
             );
         } else {
             // bottom triangles 
             triangle(
                 coords.x, coords.y,
                 coords.x + game_board.triangle_width, coords.y,
-                coords.x + game_board.triangle_width / 2, coords.y + game_board.triangle_height
+                coords.x + game_board.triangle_width / 2, coords.y - game_board.triangle_height
             );
         }
-        // console.log('drawing position: ',this.number, 'with checkers: ', this.checkers)
-        push();
-        fill(100,100,100);
-        text(this.number, coords.x, coords.y);
-        text(this.q, coords.x, coords.y+10);
-        text(this.r, coords.x, coords.y+20);
-        pop();
+
         this.draw_checkers();
+
+        // Debugging info 
+
+        // push();
+        // fill(200,200,200);
+        // text(this.number, coords.x, coords.y);
+        // text(this.q, coords.x, coords.y+10);
+        // text(this.r, coords.x, coords.y+20);
+        // pop();
+
     }
 }
