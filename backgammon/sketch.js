@@ -16,6 +16,7 @@ const GREEN_TEXT_HEX = '#90EE90';
 const FUCHSIA_HEX = '#FF77FF';
 
 const rollSound = new Audio('sounds/dice-142528.mp3');
+let isMusicMuted = false;
 const backgroundMusic = new Audio('sounds/background_music.mp3');
 
 function setup(){
@@ -57,4 +58,21 @@ function adjustCanvasSize() {
 
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  function toggleMusic() {
+    isMusicMuted = !isMusicMuted;
+    if (isMusicMuted) {
+        backgroundMusic.pause();
+        document.getElementById('musicToggle').classList.add('btn-muted');
+        document.getElementById('musicIcon').classList.remove('fa-volume-up');
+        document.getElementById('musicIcon').classList.add('fa-volume-mute');
+    } else {
+        if (game.game_started){
+            backgroundMusic.play();
+        }
+        document.getElementById('musicToggle').classList.remove('btn-muted');
+        document.getElementById('musicIcon').classList.remove('fa-volume-mute');
+        document.getElementById('musicIcon').classList.add('fa-volume-up');
+    }
   }
