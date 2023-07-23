@@ -4,3 +4,21 @@
   font-size: 20px;
   color:#65C6FF;
 }
+
+.btn-unmuted{
+  color:#65C6FF !important;
+}
+
+.btn-unmuted .btn-unmuted:hover .btn-unmuted:active .btn-unmuted:focus{
+  color:#65C6FF !important;
+  box-shadow: none !important;
+}
+
+.btn-muted{
+  color:red !important;
+}
+
+.btn-muted .btn-muted:hover .btn-muted:active .btn-muted:focus{
+  color:red !important;
+  box-shadow: none !important;
+}
