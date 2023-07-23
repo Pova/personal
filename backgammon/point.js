@@ -56,14 +56,14 @@ class Point {
 
     // Draw a checker on the point
     draw_checker(color, position) {
-        const radius = game_board.triangle_width; // Define the appropriate radius
+        const radius = game_board.triangle_width-5; // Define the appropriate radius
         const coords = this.get_coordinates();
         let offset = (position+.5) * radius; // Use the position to stack the checkers
         fill(color);
         if(this.q > 1){
             offset *= -1;
         }
-        stroke(150);
+        stroke(135);
         circle(coords.x + game_board.triangle_width / 2, coords.y - offset, radius);
     }
 
