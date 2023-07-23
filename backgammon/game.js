@@ -9,17 +9,19 @@ class Game{
     async start_game(){
         if (!this.game_started){
             this.game_started = true;
+
+            document.getElementById('startButton').classList.add('disabled');
+
+            await game_log.add_lines('Game Started!');
             backgroundMusic.play();
             await sleep(1000);
-            await game_log.add_lines('Game Started!');
+            
 
             this.initial_rolls();
         } else {
             await game_log.add_lines('Game has already began');
         }
         // step 1 - initial rolls to determine game order
-
-        // step 2 - 
     }
 
     async initial_rolls() {
