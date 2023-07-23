@@ -1,6 +1,6 @@
 // Board constants
-const board_width = 800;
-const board_height = 800;
+// const board_width = 600;
+// const board_height = 600;
 
 const inner_side_padding_const = 0.05;
 const inner_v_whitespace_const = 0.15;
@@ -20,6 +20,9 @@ function setup(){
 
     const canvas = createCanvas(canvasWidth, canvasHeight);
     canvas.parent('canvasContainer');
+
+    const board_width = canvasHeight*0.95;
+    const board_height = board_width;
 
     game_board = new Board(
         board_width,
