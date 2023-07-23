@@ -82,9 +82,11 @@
       </a>
       </div>
       <div class="d-inline-flex align-text-center">
-        <button type="button" class="btn btn-dark mx-1" onclick="game.start_game()" ;>Start Game</button>
-        <button type="button" class="btn btn-dark mx-1" onclick="Button_2()" ;>Button 2</button>
-        <button type="button" class="btn btn-dark mx-1" onclick="Button_3()" ;>Button 3</button>
+        <button id="startButton" type="button" class="btn btn-dark mx-1" onclick="game.start_game()" ;>Start Game</button>
+        <button id="musicToggle" type="button" class="btn btn-dark mx-1 btn-unmuted" onclick="toggleMusic()">
+          <span>Music </span><i id="musicIcon" class="fas fa-volume-up"></i>
+        </button>
+        <button type="button" class="btn btn-dark mx-1" onclick="Button_3()" ;>Roll Dice</button>
       </div>
     </div>
   </nav>
