@@ -10,8 +10,6 @@ class Board{
 
         this.margin_h = (width - board_width)/2;
         this.margin_v = (height - board_height)/2;
-
-        console.log()
         
         // Calculate other properties
 
