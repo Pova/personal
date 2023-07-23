@@ -12,8 +12,11 @@ const BROWN_HEX = '#5B270B';
 const CREAM_HEX = '#FEFBEA';
 const RED_HEX = '#CA3433';
 const GOLD_HEX = '#D1B000';
+const GREEN_TEXT_HEX = '#90EE90';
+const FUCHSIA_HEX = '#FF77FF';
 
-
+const rollSound = new Audio('sounds/dice-142528.mp3');
+const backgroundMusic = new Audio('sounds/background_music.mp3');
 
 function setup(){
     adjustCanvasSize();
@@ -28,12 +31,16 @@ function setup(){
         board_width,
         board_height
         )
+
+    game = new Game();
+    game_log = new gameLog();
 }
 
 function draw(){
     background(0);
     game_board.show();
-    noLoop();
+    game_log.print_lines();
+
 }
 
 // Sets the canvas size based on the window size
@@ -46,4 +53,8 @@ function adjustCanvasSize() {
   
     canvasHeight = totalHeight - navBarHeight - detailBarHeight;
     canvasWidth = totalWidth;
+  }
+
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
