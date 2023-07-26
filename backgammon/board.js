@@ -40,7 +40,7 @@ class Board{
         pop();
 
         push();
-        fill(GREEN_HEX); // Brown board colour
+        fill(GREEN_HEX); // Green play surface
         stroke(255);
         strokeWeight(1);
         rect(this.margin_h + this.inner_side_padding,this.margin_v + this.inner_side_padding,this.width-this.inner_side_padding*2,this.height - this.inner_side_padding*2);
@@ -79,4 +79,12 @@ class Board{
             this.points[i].show_point();
         }
     }
+
+    highlight_movable(){
+        const indices_to_highlight = findNonZeroCheckerIndices(game.current_player);
+        indices_to_highlight.forEach((index) => {
+            game_board.points[index].highlight_checker();
+          });
+    }
+
 }
