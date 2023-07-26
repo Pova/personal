@@ -7,7 +7,7 @@ class Food{
 
   show(){
     push();
-    fill(200, 0, 0);
+    fill(0, 200, 0);
     rect(this.x, this.y, scl, scl);
     pop();
   }
