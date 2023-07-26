@@ -5,6 +5,10 @@
   color:#65C6FF;
 }
 
+.hidden {
+  display: none;
+}
+
 /* Music mute button styling */
 
 .btn-unmuted{
