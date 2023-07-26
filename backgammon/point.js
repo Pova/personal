@@ -77,6 +77,11 @@ class Point {
         }
     }
 
+    highlight_checker(){
+        const checker_count = max(this.checkers[0],this.checkers[1])
+        this.draw_checker(AQUA_HEX,checker_count-1);
+    }
+
     show_point() {
         noStroke();
         fill(this.get_colour());
