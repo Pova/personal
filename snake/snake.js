@@ -1,48 +1,55 @@
-function Snake(pos_x, pos_y) { //Constructor
-
-    this.x = pos_x;
-    this.y = pos_y;
-    this.xspeed = 0;
-    this.yspeed = 0;
-    this.total = 0;
-    this.tail = []; 
-
-    this.eat = function(pos) {
+class Snake { //Constructor
+    constructor(pos_x, pos_y){
+        this.x = pos_x;
+        this.y = pos_y;
+        this.xspeed = 0;
+        this.yspeed = 0;
+        this.total = 0;
+        this.tail = [];
+    }
+     
+    eat(pos) {
         if (this.x + scl === pos.x && this.y === pos.y && this.xspeed > 0) { //right
             this.total++;
+            blipSound.play()
             return true;
         } else if (this.x - scl === pos.x && this.y === pos.y && this.xspeed < 0) { //left
             this.total++;
+            blipSound.play()
             return true;
         } else if (this.y + scl === pos.y && this.x === pos.x && this.yspeed > 0) { //down
             this.total++;
+            blipSound.play()
             return true;
         } else if (this.y - scl === pos.y && this.x === pos.x && this.yspeed < 0) { //up
             this.total++;
+            blipSound.play()
             return true;
         } else {
             return false;
         }
     }
 
-    this.dir = function(x, y) {
+    dir(x, y) {
         this.xspeed = x;
         this.yspeed = y;
     }
 
-    this.death = function() {
+    async death() {
         if (this.tail.length > 0) {
             for (let i = 0; i < this.tail.length; i++) {
                 let pos = this.tail[i];
                 let d = dist(this.x, this.y, pos.x, pos.y);
                 if (d < 1 && this.tail.length > 1) {
+                    loseMusic.play();
+                    gameOver = true;
                     this.reset(); 
                 }
             }
         }
     }
 
-    this.update = function() {
+    update() {
         if (this.total === this.tail.length) { 
             for (let i = 0; i < this.tail.length - 1; i++) {
                 this.tail[i] = this.tail[i + 1]; 
@@ -53,16 +60,24 @@ function Snake(pos_x, pos_y) { //Constructor
         //end of array becomes old position
 
         if (this.xspeed != 0 || this.yspeed != 0) { 
-            if (this.xspeed === -1 && this.x === 0) { 
+            if (this.xspeed === -1 && this.x === 0) {
+                loseMusic.play();
+                gameOver = true; 
                 this.reset();
-            } else if (this.xspeed === 1 && this.x === (width_size - scl)) { 
+            } else if (this.xspeed === 1 && this.x === (width_size - scl)) {
+                loseMusic.play();
+                gameOver = true; 
                 this.reset();
             } else {
                 this.x = this.x + this.xspeed * scl;
             }
-            if (this.yspeed === -1 && this.y === 0) { 
+            if (this.yspeed === -1 && this.y === 0) {
+                loseMusic.play();
+                gameOver = true; 
                 this.reset();
-            } else if (this.yspeed === 1 && this.y === (height_size - scl)) { 
+            } else if (this.yspeed === 1 && this.y === (height_size - scl)) {
+                loseMusic.play();
+                gameOver = true; 
                 this.reset();
             } else {
                 this.y = this.y + this.yspeed * scl;
@@ -70,7 +85,7 @@ function Snake(pos_x, pos_y) { //Constructor
         } 
     } 
 
-    this.check = function(pos_x, pos_y) {
+    check(pos_x, pos_y) {
         if (this.x === pos_x && this.y === pos_y) {
             return true;
         }
@@ -90,7 +105,7 @@ function Snake(pos_x, pos_y) { //Constructor
     }
 
 
-    this.show = function() {
+    show() {
         push();
         colorMode(HSB);
         let hue = -2.55;
@@ -116,10 +131,8 @@ function Snake(pos_x, pos_y) { //Constructor
         pop();
     }
 
-    this.reset = function() {
-        console.log('trigger',this.total,highscore)
+    reset() {
         if (this.total+1 > highscore) {
-            console.log('trigger')
             highscore = this.total+1;
             localStorage.setItem('highscore', highscore);
         }
