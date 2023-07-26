@@ -14,6 +14,7 @@ const RED_HEX = '#CA3433';
 const GOLD_HEX = '#D1B000';
 const GREEN_TEXT_HEX = '#90EE90';
 const FUCHSIA_HEX = '#FF77FF';
+const AQUA_HEX = '#40E0D0';
 
 const rollSound = new Audio('sounds/dice-142528.mp3');
 let isMusicMuted = false;
@@ -34,6 +35,7 @@ function setup(){
         )
 
     game = new Game();
+    player = new Player();
     game_log = new gameLog();
 }
 
@@ -41,7 +43,8 @@ function draw(){
     background(0);
     game_board.show();
     game_log.print_lines();
-
+    frameRate(10);
+    text(`fr = ${Math.floor(frameRate())}`,20,20);
 }
 
 // Sets the canvas size based on the window size
@@ -76,3 +79,11 @@ function adjustCanvasSize() {
         document.getElementById('musicIcon').classList.add('fa-volume-up');
     }
   }
+
+  function findNonZeroCheckerIndices(playerColour) {
+    const checkerIndex = playerColour === 'White' ? 0 : 1;
+    return game_board.points
+        .map((point, index) => ({index: index, checkers: point.checkers[checkerIndex]}))
+        .filter(point => point.checkers > 0)
+        .map(point => point.index) 
+}
