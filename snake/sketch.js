@@ -1,40 +1,34 @@
 let s;
-let scl = 30; //Scale variable
+const scl = 30; //Scale variable
 let food;
 let highScore;
 let gameStarted = false;
-let slider;
+let gameOver = false;
 let speed;
-let status;
 let snakeFontSize = 128;
-let animationHorizontalOffset = 100;
-let animationVerticalOffset = 0;
+const animationHorizontalOffset = 100;
+const animationVerticalOffset = 0;
+
+const blipSound = new Audio('sounds/blip.mp3');
+const loseMusic = new Audio('sounds/negative.mp3');
 
 function windowResized() {
     setup();
   }
 
 function setup() {
+    adjustCanvasSize()
 
-    const totalHeight = window.innerHeight;
-    const totalWidth = window.innerWidth;
+    const canvas = createCanvas(canvasWidth, canvasHeight);
+    canvas.parent('canvasContainer');
 
-    const navBarHeight = document.getElementById('navBar').clientHeight;
-    const detailBarHeight = document.getElementById('detailBar').clientHeight;
-
-    canvasHeight = totalHeight-navBarHeight-detailBarHeight;
-    canvasWidth = totalWidth;
-
-    rows = Math.floor(canvasHeight / scl) - 2;
-    cols = Math.floor(totalWidth / scl) - 2;
-
-    canvas = createCanvas(canvasWidth,canvasHeight);
-    canvas.parent("#canvasContainer");
+    rows = Math.floor(canvasHeight/scl) - 2;
+    cols = Math.floor(canvasWidth/scl) - 2;
 
     width_size = scl * cols; //width of grid
     height_size = scl * rows; //height of grid
 
-    if (totalWidth<625){
+    if (canvasWidth<625){
         snakeFontSize = 64;
         animationHorizontalOffset = 50;
         animationVerticalOffset = 50;
@@ -56,14 +50,14 @@ function setup() {
     }, false);
 }
 
-function draw() {
+async function draw() {
 
     translate((canvasWidth-width_size)/2,(canvasHeight-height_size)/2);
 
     background(255); 
     stroke(0);
     for (let i = 0; i < cols; i++) {
-        for (let j = 0; j <= rows; j++) {
+        for (let j = 0; j < rows; j++) {
             point(i * scl, j * scl);
             point((i + 1) * scl, j * scl);
             point(i * scl, (j + 1) * scl);
@@ -85,7 +79,7 @@ function draw() {
     // Intro animation
     if (!gameStarted) {
         currentscore_elt.innerHTML = "0";
-        if (millis() >= 1000) {
+        if (millis() >= 1000 || gameOver) {
             push();
             fill('#6c757d');
             stroke(0);
@@ -94,7 +88,7 @@ function draw() {
             text('S', width_size / 2 - 2*animationHorizontalOffset, height / 2 - animationVerticalOffset);
             pop();
         }
-        if (millis() >= 2000) {
+        if (millis() >= 2000 || gameOver) {
             push();
             fill('#6c757d');
             stroke(0);
@@ -103,7 +97,7 @@ function draw() {
             text('N', width_size / 2 - animationHorizontalOffset, height / 2 - animationVerticalOffset);
             pop();
         }
-        if (millis() >= 3000) {
+        if (millis() >= 3000 || gameOver) {
             push();
             fill('#6c757d');
             stroke(0);
@@ -112,7 +106,7 @@ function draw() {
             text('A', width_size / 2, height / 2 - animationVerticalOffset);
             pop();
         }
-        if (millis() >= 4000) {
+        if (millis() >= 4000 || gameOver) {
             push();
             fill('#6c757d');
             stroke(0);
@@ -121,7 +115,7 @@ function draw() {
             text('K', width_size / 2 + animationHorizontalOffset, height / 2 - animationVerticalOffset);
             pop();
         }
-        if (millis() >= 5000) {
+        if (millis() >= 5000 || gameOver) {
             push();
             fill('#6c757d');
             stroke(0);
@@ -130,7 +124,7 @@ function draw() {
             text('E', width_size / 2 + 2*animationHorizontalOffset, height / 2 - animationVerticalOffset);
             pop();
         }
-        if (millis() >= 6000) {
+        if (millis() >= 6000 || gameOver) {
             push();
             fill('#6c757d');
             stroke(0);
@@ -140,7 +134,7 @@ function draw() {
             pop();
         }
 
-        if (millis() >= 7000) {
+        if (millis() >= 7000 || gameOver) {
             push();
             fill('#6c757d');
             stroke(0);
@@ -212,3 +206,18 @@ function keyPressed() {
     }
 }
 
+// Sets the canvas size based on the window size
+function adjustCanvasSize() {
+    const totalHeight = window.innerHeight;
+    const totalWidth = window.innerWidth;
+  
+    const navBarHeight = document.getElementById('navBar').clientHeight;
+    const detailBarHeight = document.getElementById('detailBar').clientHeight;
+  
+    canvasHeight = totalHeight - navBarHeight - detailBarHeight;
+    canvasWidth = totalWidth;
+  }
+
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
