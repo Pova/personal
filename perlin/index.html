@@ -76,13 +76,13 @@
       </div>
       <div class="d-inline-flex align-text-center">
           <button type="button" class="btn btn-dark mx-1" onclick="clearBG()" ;>Clear</button>
-        <button class="btn btn-dark mx-1" type="button" data-bs-toggle="collapse" data-bs-target="#visualizationOptions" aria-expanded="false" aria-controls="collapseExample" style="background-color:#65C6FF;color: #000;">Options</button>
+        <button id="toggleOptionsBtn" class="btn btn-dark mx-1" type="button" data-bs-toggle="collapse" data-bs-target="#visualizationOptions" aria-expanded="false" aria-controls="collapseExample" style="background-color:#65C6FF;color: #000;">Hide Options</button>
         <a class="navbar-brand mx-1 mx-lg-3" href="#how" style="color:#65C6FF">What am I looking at?</a>
       </div>
     </div>
   </nav>
 
-  <section class="bg-secondary p-2 collapse" id="visualizationOptions">
+  <section class="bg-secondary p-2 collapse show" id="visualizationOptions">
     <div class="container-fluid">
 
       <div class=" align-items-center justify-content-around">
@@ -175,6 +175,21 @@
   });
   </script>
 
+<script>
+  // JavaScript to toggle button text
+  document.getElementById('toggleOptionsBtn').addEventListener('click', function () {
+    var collapseElement = document.getElementById('visualizationOptions');
+    var button = this;
+
+    collapseElement.addEventListener('hidden.bs.collapse', function () {
+      button.textContent = 'Show Options';
+    });
+
+    collapseElement.addEventListener('shown.bs.collapse', function () {
+      button.textContent = 'Hide Options';
+    });
+  });
+</script>
 
   <!-- Footer -->
   <footer class="bg-dark text-center text-white">

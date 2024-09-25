@@ -23,3 +23,18 @@ body::-webkit-scrollbar {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
+
+.btn-floating {
+  width: 40px; /* Set a fixed width */
+  height: 40px; /* Ensure the height matches the width */
+  padding: 0;   /* Remove any internal padding that may distort the shape */
+  border-radius: 50%; /* Make them perfectly circular */
+  display: inline-flex; /* Center the icon within the button */
+  align-items: center; /* Vertically center the icon */
+  justify-content: center; /* Horizontally center the icon */
+}
+
+.fab {
+  font-size: 20px; /* Set a consistent font size for icons */
+  line-height: 1; /* Prevent any vertical alignment issues */
+}

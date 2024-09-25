@@ -79,13 +79,13 @@
       <div class="">
         <button type="button" name="button" class="btn btn-dark m-0 mx-lg-1" onclick="start_alg(grid);">Start</button>
         <button type="button" name="button" class="btn btn-dark m-0 mx-lg-1" onclick="reset();">Reset</button>
-        <button class="btn btn-dark m-0 mx-lg-1" type="button" data-bs-toggle="collapse" data-bs-target="#algorithmOptions" aria-expanded="false" aria-controls="collapseExample" style="background-color:#65C6FF;color: #000;">Options</button>
+        <button id="toggleOptionsBtn" class="btn btn-dark m-0 mx-lg-1" type="button" data-bs-toggle="collapse" data-bs-target="#algorithmOptions" aria-expanded="false" aria-controls="collapseExample" style="background-color:#65C6FF;color: #000;">Hide Options</button>
       </div>
       <a class="navbar-brand" href="#how" style="color:#65C6FF">What am I looking at?</a>
     </div>
   </nav>
 
-  <section class="bg-secondary p-1 p-md-3 collapse border-bottom border-dark border-2" id="algorithmOptions" style="color:#65C6FF">
+  <section class="bg-secondary p-1 p-md-3 collapse border-bottom border-dark border-2 show" id="algorithmOptions" style="color:#65C6FF">
     <div class="d-xl-flex align-items-center justify-content-around">
       <div class="d-inline-flex obstSelect flex-row py-1 py-lg-0">
         <span class="navbar-brand align-middle mx-lg-4">Obstacles:</span>
@@ -238,6 +238,22 @@
     </div>
     <!-- Grid container -->
   </footer>
+
+  <script>
+    // JavaScript to toggle button text
+    document.getElementById('toggleOptionsBtn').addEventListener('click', function () {
+      var collapseElement = document.getElementById('algorithmOptions');
+      var button = this;
+  
+      collapseElement.addEventListener('hidden.bs.collapse', function () {
+        button.textContent = 'Show Options';
+      });
+  
+      collapseElement.addEventListener('shown.bs.collapse', function () {
+        button.textContent = 'Hide Options';
+      });
+    });
+  </script>
 
 </body>
 
