@@ -30,9 +30,9 @@
 
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark" id="navBar">
     <div class="container">
-      <a class="navbar-brand" href="../">
+      <a href="../" class="navbar-brand">
         <h1 class="display-4">Roman Kitsela</h1>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
@@ -41,28 +41,41 @@
 
       <div class="collapse navbar-collapse" id="navmenu">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" style="color:#65C6FF">Bio</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false">About</a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item active">Bio</a></li>
+            </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Projects
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><a class="dropdown-item" href="../sorting/index.html">Sorting Algorithms</a></li>
-              <li><a class="dropdown-item" href="../search/index.html">Search Algorithms</a></li>
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mathematics</a>
+            <ul class="dropdown-menu dropdown-menu-dark">
               <li><a class="dropdown-item" href="../fields/index.html">Vector Fields</a></li>
-              <li><a class="dropdown-item" href="../perlin/index.html">Perlin Noise</a></li>
               <li><a class="dropdown-item" href="../curves/index.html">Curves in Space</a></li>
+              <li><a class="dropdown-item" href="../mandelbrot/index.html">Mandelbrot Set</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Simulations</a>
+            <ul class="dropdown-menu dropdown-menu-dark">
               <li><a class="dropdown-item" href="../double-pendulum/index.html">Double Pendulum</a></li>
               <li><a class="dropdown-item" href="../lorenz/index.html">Lorenz Attractor</a></li>
-              <li><a class="dropdown-item" href="../flocking/index.html">Flocking Behaviour</a></li>
-              <!-- <li><a class="dropdown-item" href="../evolutionary_steering/index.html">Evolutionary Steering</a></li> -->
-              <!-- <li><a class="dropdown-item" href="../evolutionary_rockets/index.html">Evolutionary Rockets</a></li>-->
+              <li><a class="dropdown-item" href="../flocking/index.html">Flocking</a></li>
+              <li><a class="dropdown-item" href="../perlin/index.html">Perlin Noise</a></li>
               <li><a class="dropdown-item" href="../l-systems/index.html">L-systems</a></li>
-              <li><a class="dropdown-item" href="../mandelbrot/index.html">Mandelbrot Set</a></li>
-              <!-- <li><a class="dropdown-item" href="../backgammon/index.html">Backgammon Game</a></li> -->
-              <li><a class="dropdown-item" href="../snake/index.html">Snake Game</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Algorithms</a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="../sorting/index.html">Sorting</a></li>
+              <li><a class="dropdown-item" href="../search/index.html">Search</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Games</a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="../snake/index.html">Snake</a></li>
             </ul>
           </li>
         </ul>
