@@ -22,9 +22,7 @@ I have a passion for sharing knowledge and communicating ideas effectively. Beca
 - <b>interesting abstractly</b> - _representing an algorithm or concept worth thinking about_ 
 - <b>interactive</b> - _users are more interested in things fun to play around with_
 
-Recently I've decided to change careers from mathematics and education into the world of big data. 
-
-As part of this journey I have put together this website and have been implementing various projects (written in javascript) to demonstrate my progress. I have many ideas for upcoming visualization projects and will be continuing to update the website as these are completed. *If you have any ideas you'd like to suggest please let me know*.
+I have many ideas for upcoming visualization projects and will be continuing to update the website as these are completed. *If you have any ideas you'd like to suggest please let me know*.
 
 <hr>
 
@@ -39,8 +37,8 @@ As part of this journey I have put together this website and have been implement
 | [Double Pendulum](https://pova.github.io/personal/lorenz/index.html)     | Visualization of a double pendulum (a simple example of a chaotic system)              |![ezgif-2-5ccc94487b](https://github.com/Pova/personal/assets/25727048/23646b3f-6021-411b-aee1-f0a3ca5b9fca)|
 | [Lorenz](https://pova.github.io/personal/lorenz/index.html)     | Visualization of a Lorenz attractor (a more sophisticated chaotic system)               |![ezgif-1-6315dca29b](https://user-images.githubusercontent.com/25727048/234430074-3c92f32b-9715-45a3-962c-393f785db0d1.gif)|
 | [Flocking](https://pova.github.io/personal/flocking/index.html)     | Demonstration of flocking behaviour of "boids" exhibiting: alignment, cohesion and separation              |![ezgif-5-552acef613](https://github.com/Pova/personal/assets/25727048/35b10254-7d6b-4b92-bc89-45fbbcd0d77c)|
-| [Evolutionary Steering](https://pova.github.io/personal/evolutionary_steering/index.html)     | Demonstration of a genetic algorithm - autonomous agents "learn" to eat food and avoid poison | preview here |
-| Evolutionary Rockets (Under Constructions 🚧)    | Demonstration of a genetic algorithm to solve a pathfinding problem - rockets "learn" to avoid obstacles and reach a target goal | preview here |
+| Evolutionary Steering (Under Constructions 🚧)| Demonstration of a genetic algorithm - autonomous agents "learn" to eat food and avoid poison |  |
+| Evolutionary Rockets (Under Constructions 🚧)    | Demonstration of a genetic algorithm to solve a pathfinding problem - rockets "learn" to avoid obstacles and reach a target goal |  |
 | [L-systems](https://pova.github.io/personal/l-systems/index.html)     | Interactive visualization of various L-systems producing a variety of complex fractal-like shapes                |<img width="853" alt="Screenshot 2023-06-15 at 22 57 03" src="https://github.com/Pova/personal/assets/25727048/412666cb-24dc-46f7-9c69-991eab0b0fed">|
 | [Mandelbrot](https://pova.github.io/personal/mandelbrot/index.html)     | Zoomable visualization of the famous Mandelbrot set                |<img width="657" alt="Screenshot 2023-06-15 at 22 58 44" src="https://github.com/Pova/personal/assets/25727048/a8915498-6355-4a31-bc11-55a14bf2503e">|
 | Backgammon Game (Under Construction 🚧)    | Backgammon game playable against an AI | ![image](https://github.com/Pova/personal/assets/25727048/339dffac-b6a7-499a-a56b-4bd16626a03c)|
