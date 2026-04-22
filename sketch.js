@@ -95,8 +95,8 @@ function draw() {
 }
 
 function adjustCanvasSize() {
-  const totalHeight = window.innerHeight;
-  const totalWidth = window.innerWidth;
+  const totalHeight = document.documentElement.clientHeight;
+  const totalWidth = document.documentElement.clientWidth;
 
   const navBarHeight = document.getElementById('navBar').clientHeight;
   const detailBarHeight = document.getElementById('detailBar').clientHeight;

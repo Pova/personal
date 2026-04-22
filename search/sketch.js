@@ -37,8 +37,8 @@ function setup() {
   h = 30;
   w = 30;
 
-  const totalHeight = window.innerHeight;
-  const totalWidth = window.innerWidth;
+  const totalHeight = document.documentElement.clientHeight;
+  const totalWidth = document.documentElement.clientWidth;
 
   const navBarHeight = document.getElementById('navBar').clientHeight;
   const detailBarHeight = document.getElementById('detailBar').clientHeight;
