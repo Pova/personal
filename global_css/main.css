@@ -1,3 +1,7 @@
+html {
+  overflow-y: scroll;
+}
+
 html,
 body {
   margin: 0;
@@ -12,17 +16,6 @@ body {
 .text_exp{
   font-size: 28px;
 }
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-body::-webkit-scrollbar {
-    display: none;
-  }
-  
-  /* Hide scrollbar for IE, Edge and Firefox */
-  body {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
 
 .btn-floating {
   width: 40px; /* Set a fixed width */
