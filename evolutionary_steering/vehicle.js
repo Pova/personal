@@ -17,19 +17,25 @@ class Vehicle {
         this.dna[1] = random(-5,5);
     }
 
-    // Need to update this
-    // edges(){
-    //     if (this.position.x>width){
-    //         this.position.x = 0;
-    //     } else if (this.position.x<0){
-    //         this.position.x = width;
-    //     }
-    //     if (this.position.y>height){
-    //         this.position.y = 0;
-    //     } else if (this.position.y<0){
-    //         this.position.y = height;
-    //     }
-    // }
+    boundaries(){
+        
+        var d = 25; // Distance from boundary 
+        var desired = createVector(0,0);
+        
+        if (this.position.x<d){
+            desired = createVector(this.maxSpeed, this.velocity.y);
+        } else if (this.position.x > width-d){
+            desired = createVector(-this.maxSpeed, this.velocity.y);
+        }
+
+        if (this.position.y<d){
+            desired = createVector(this.velocity.x, this.maxSpeed);
+        } else if (this.position.y<0){
+            desired = createVector(this.velocity.x, -this.maxSpeed);
+        }
+
+        return desired;
+    }
 
 
     // Behaviours triggers eat twice

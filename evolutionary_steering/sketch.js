@@ -78,12 +78,10 @@ function setup() {
     }
 
     for (var i = vehicles.length-1; i>=0; i--){
+        vehicles[i].boundaries();
         vehicles[i].behaviours(food, poison);
-
         vehicles[i].update();
-        // vehicle.edges();
         vehicles[i].show();
-
         vehicles[i].applyHunger();
 
         if (vehicles[i].dead()){
