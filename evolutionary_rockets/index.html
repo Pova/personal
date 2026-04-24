@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="author" content="Roman Kitsela" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Evolutionary Rockets</title>
+  <title>Smart Rockets</title>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-85SP4HW3TX"></script>
@@ -80,7 +80,7 @@
             <ul class="dropdown-menu dropdown-menu-dark">
               <li><a class="dropdown-item" href="../self_driving_car/index.html">Self-driving car</a></li>
               <li><a class="dropdown-item" href="../evolutionary_steering/index.html">Evolutionary Steering</a></li>
-              <li><a class="dropdown-item active">Evolutionary Rockets</a></li>
+              <li><a class="dropdown-item active">Smart Rockets</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -99,7 +99,7 @@
     <div class="container-fluid px-lg-5">
     <div class="d-flex">
       <a class="navbar-brand">
-        <h2>Evolutionary Rockets</h2>
+        <h2>Smart Rockets</h2>
       </a>
       </div>
       <div class="d-inline-flex align-text-center">
@@ -150,12 +150,14 @@
 
       <div class="container py-1">
         <h5 class="text_exp">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae veritatis laborum repellendus commodi, consequatur nostrum reiciendis cumque, esse fugit fuga iusto obcaecati quasi laudantium nam quaerat eaque numquam nulla sed.
+          <span style="color: #65C6FF;">Under construction &mdash; this page is still being built.</span>
         </h5>
         <p class="text_exp">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam sapiente odit, aspernatur a inventore fuga! Modi totam recusandae, repudiandae sapiente veritatis repellat voluptatibus, at temporibus perspiciatis maxime laborum esse sed?
+          The plan is a recreation of Jer Thorp's &ldquo;smart rockets&rdquo; &mdash; a classic demonstration of a genetic algorithm. A population of rockets is spawned with a randomised &ldquo;DNA&rdquo; of thrust vectors; each generation they fire those thrusts in sequence, flying until they crash, time out, or reach the target. Rockets are then scored on how close they got (with penalties for hitting obstacles), the fittest genes are combined and mutated, and the cycle repeats. Over time the population &ldquo;learns&rdquo; a flight path to the goal.
         </p>
-        <p class="text_exp"><span style="color: #65C6FF">Click options above to experiment with the parameters for the simulation</span></p>
+        <p class="text_exp">
+          Inspired by, and following along with, Daniel Shiffman's <a class="link-light" href="https://www.youtube.com/watch?v=bGz7mv2vD6g" target="_blank" rel="noopener">Coding Train tutorial</a>.
+        </p>
       </div>
     </div>
   </section>
