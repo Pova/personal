@@ -31,3 +31,25 @@ body {
   font-size: 20px; /* Set a consistent font size for icons */
   line-height: 1; /* Prevent any vertical alignment issues */
 }
+
+/* ---------------------------------------------------------------
+   Shared contact footer.
+   Same markup is used on every page. Pages with body.bio-page
+   (landing, bio) are styled light by bio/css/style.css. All other
+   pages get a dark theme by default.
+   --------------------------------------------------------------- */
+.bio-footer {
+  padding: 2.5rem 0 2rem;
+}
+
+body:not(.bio-page) .bio-footer {
+  background: #212529;             /* matches Bootstrap bg-dark */
+  color: #fff;
+  border-top: 1px solid rgba(255, 255, 255, .08);
+}
+
+.contact-label {
+  display: inline-block;
+  margin-left: .5rem;
+  font-size: .95rem;
+}
