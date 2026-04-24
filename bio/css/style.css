@@ -1,7 +1,567 @@
-.text_exp_sm{
-  font-size: 20px;
+/* =========================================================
+   Bio page styles
+   Design goals:
+   - Single soft background across the page; sections separated
+     by whitespace + a thin rule, not by colour blocks.
+   - Alternating left/right rhythm via constrained content width.
+   - Typography hierarchy that emphasises current role.
+   - Re-usable primitives: .skill-icon, .project-card, .timeline.
+   ========================================================= */
+
+/* ---------- Theme tokens ---------- */
+:root {
+  --bio-bg:           #f5f2ec;  /* soft warm off-white */
+  --bio-fg:           #1c1c1f;
+  --bio-fg-muted:     #5a5a62;
+  --bio-accent:       #65C6FF;  /* site accent blue */
+  --bio-accent-ink:   #0c3d5a;  /* darker version for text on light */
+  --bio-divider:      #e3ddd1;
+  --bio-card:         #ffffff;
+  --bio-card-shadow:  0 1px 2px rgba(0, 0, 0, .05), 0 4px 14px rgba(0, 0, 0, .06);
+  --bio-section-py:   5rem;     /* consistent vertical padding */
+  --bio-content-max:  720px;    /* constrained content width for rhythm */
 }
 
-.active{
-  color:#65C6FF;
+/* ---------- Page-level ---------- */
+body.bio-page {
+  background: var(--bio-bg);
+  color: var(--bio-fg);
 }
+
+/* Skip link for keyboard users; hidden unless focused */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 1080;
+  background: var(--bio-fg);
+  color: #fff;
+  padding: .5rem 1rem;
+  border-radius: .25rem;
+}
+
+/* ---------- Section primitive ---------- */
+.bio-section {
+  padding-top: var(--bio-section-py);
+  padding-bottom: var(--bio-section-py);
+}
+
+.bio-section__content {
+  max-width: var(--bio-content-max);
+}
+
+.bio-section--left .bio-section__content  { margin-right: auto; margin-left: 0; }
+.bio-section--right .bio-section__content { margin-left: auto;  margin-right: 0; }
+
+@media (max-width: 991.98px) {
+  /* On smaller screens, centre everything — no alternating rhythm */
+  :root { --bio-section-py: 3rem; }
+  .bio-section--left .bio-section__content,
+  .bio-section--right .bio-section__content { margin-left: auto; margin-right: auto; }
+}
+
+.section-divider {
+  border: 0;
+  height: 1px;
+  background: var(--bio-divider);
+  margin: 0;
+}
+
+.section-eyebrow {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--bio-accent-ink);
+  margin-bottom: .75rem;
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------- Hero / summary section ---------- */
+.hero-headshot {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 1rem;
+  box-shadow: var(--bio-card-shadow);
+  margin: 0 auto;
+}
+
+.hero-lead {
+  font-size: 1.25rem;
+  line-height: 1.55;
+  color: var(--bio-fg);
+  margin-bottom: 1.5rem;
+}
+
+.hero-meta {
+  color: var(--bio-fg-muted);
+  font-size: .95rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-actions .btn {
+  min-width: 10rem;
+}
+
+/* ---------- Experience timeline ---------- */
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.timeline__item {
+  position: relative;
+  padding: 1.25rem 0 1.25rem 1.5rem;
+  border-left: 2px solid var(--bio-divider);
+}
+
+.timeline__item::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  top: 1.75rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bio-divider);
+}
+
+.timeline__item--current {
+  border-left-color: var(--bio-accent);
+}
+.timeline__item--current::before {
+  background: var(--bio-accent);
+  box-shadow: 0 0 0 4px rgba(101, 198, 255, .25);
+}
+.timeline__item--current .timeline__role {
+  color: var(--bio-accent-ink);
+}
+
+.timeline__role {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+}
+.timeline__org {
+  font-weight: 500;
+  color: var(--bio-fg-muted);
+}
+.timeline__period {
+  font-size: .9rem;
+  color: var(--bio-fg-muted);
+  margin-bottom: .5rem;
+}
+.timeline__summary {
+  margin-bottom: .5rem;
+}
+.timeline__item ul {
+  margin-bottom: 0;
+  padding-left: 1.25rem;
+}
+.timeline__item ul li {
+  margin-bottom: .25rem;
+}
+
+/* ---------- Education ---------- */
+.education-item {
+  padding: 1rem 0;
+}
+.education-item + .education-item {
+  border-top: 1px solid var(--bio-divider);
+}
+.education-item__degree {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0;
+}
+.education-item__institution {
+  color: var(--bio-fg-muted);
+  margin-bottom: .5rem;
+}
+.education-item__detail {
+  margin-bottom: .25rem;
+}
+.education-item__thesis {
+  font-style: italic;
+  color: var(--bio-fg-muted);
+}
+
+/* ---------- Skill icons & groups ---------- */
+.skill-group + .skill-group {
+  margin-top: 1.5rem;
+}
+
+.skill-group__title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: .75rem;
+  color: var(--bio-fg);
+}
+
+.skill-group__note {
+  font-size: .85rem;
+  color: var(--bio-fg-muted);
+  margin-bottom: .75rem;
+}
+
+.skill-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem .75rem;
+}
+
+.skill-item {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: var(--bio-card);
+  border: 1px solid var(--bio-divider);
+  padding: .4rem .75rem;
+  border-radius: 999px;
+  font-size: .95rem;
+  line-height: 1;
+  transition: border-color .15s, transform .15s;
+}
+.skill-item:hover {
+  border-color: var(--bio-accent);
+  transform: translateY(-1px);
+}
+
+.skill-group--familiar .skill-item {
+  opacity: .8;
+  background: transparent;
+}
+
+.skill-icon {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  display: inline-block;
+}
+
+/* ---------- Project cards ---------- */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  background: var(--bio-card);
+  border: 1px solid var(--bio-divider);
+  border-radius: .75rem;
+  overflow: hidden;
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.project-card:hover,
+.project-card:focus-visible {
+  color: inherit;
+  transform: translateY(-2px);
+  box-shadow: var(--bio-card-shadow);
+  border-color: var(--bio-accent);
+}
+
+.project-card__media {
+  aspect-ratio: 16 / 10;
+  background-color: var(--project-color, #dcd5c5);
+  background-image: linear-gradient(135deg,
+    rgba(255,255,255,.22) 0%,
+    rgba(255,255,255,0)   40%,
+    rgba(0,0,0,.12)       100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Placeholder label shown when no real image is present.
+   An <img> inside the media box layers on top and hides the label;
+   if the image 404s it removes itself via onerror, revealing the label. */
+.project-card__media::after {
+  content: attr(data-label);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, .9);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .25);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.project-card__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  display: block;
+}
+
+.project-card__body {
+  padding: 1rem 1.15rem 1.15rem;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 .35rem 0;
+}
+
+.project-card__description {
+  font-size: .95rem;
+  color: var(--bio-fg-muted);
+  margin: 0;
+}
+
+/* ---------- Outside work ---------- */
+.outside-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem .6rem;
+}
+
+.outside-list li {
+  background: var(--bio-card);
+  border: 1px solid var(--bio-divider);
+  padding: .35rem .75rem;
+  border-radius: 999px;
+  font-size: .95rem;
+  color: var(--bio-fg-muted);
+}
+
+/* ---------- Photo carousel (Outside work) ---------- */
+.photo-carousel {
+  position: relative;
+  margin-top: 2.5rem;
+}
+
+.photo-carousel__viewport {
+  overflow: hidden;
+  border-radius: .75rem;
+}
+
+.photo-carousel__track {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;            /* Firefox */
+  -ms-overflow-style: none;         /* IE/old Edge */
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  padding-bottom: .25rem;           /* breathing room for focus ring */
+}
+.photo-carousel__track::-webkit-scrollbar { display: none; }
+
+.photo-carousel__track:focus-visible {
+  outline: 2px solid var(--bio-accent);
+  outline-offset: 3px;
+  border-radius: .75rem;
+}
+
+.photo-carousel__track.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;            /* no fight with manual drag */
+  scroll-snap-type: none;
+}
+
+.photo-carousel__slide {
+  flex: 0 0 min(420px, 85%);
+  scroll-snap-align: center;
+}
+
+.photo-carousel__figure {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  background-color: var(--slide-color, #dcd5c5);
+  background-image: linear-gradient(135deg,
+    rgba(255,255,255,.22) 0%,
+    rgba(255,255,255,0)   40%,
+    rgba(0,0,0,.18)       100%);
+  border-radius: .75rem;
+  overflow: hidden;
+  box-shadow: var(--bio-card-shadow);
+}
+
+/* Placeholder label — same pattern as project cards. */
+.photo-carousel__figure::before {
+  content: attr(data-label);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, .9);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .25);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.photo-carousel__figure img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  display: block;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;             /* drags go to the track */
+}
+
+.photo-carousel__figure figcaption {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 2;
+  padding: .6rem .9rem;
+  background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0));
+  color: #fff;
+  font-size: .9rem;
+  pointer-events: none;
+}
+
+/* Nav buttons */
+.photo-carousel__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--bio-divider);
+  background: var(--bio-card);
+  color: var(--bio-fg);
+  box-shadow: var(--bio-card-shadow);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform .15s, border-color .15s, background .15s;
+}
+.photo-carousel__nav:hover {
+  border-color: var(--bio-accent);
+  transform: translateY(-50%) scale(1.05);
+}
+.photo-carousel__nav:focus-visible {
+  outline: 2px solid var(--bio-accent);
+  outline-offset: 2px;
+}
+.photo-carousel__nav--prev { left: -.25rem; }
+.photo-carousel__nav--next { right: -.25rem; }
+
+@media (min-width: 768px) {
+  .photo-carousel__nav--prev { left: -1.25rem; }
+  .photo-carousel__nav--next { right: -1.25rem; }
+}
+
+/* Dots */
+.photo-carousel__dots {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+}
+.photo-carousel__dots button {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--bio-divider);
+  cursor: pointer;
+  transition: background .15s, transform .15s;
+}
+.photo-carousel__dots button:hover { background: var(--bio-fg-muted); }
+.photo-carousel__dots button.is-active {
+  background: var(--bio-accent-ink);
+  transform: scale(1.25);
+}
+.photo-carousel__dots button:focus-visible {
+  outline: 2px solid var(--bio-accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 575.98px) {
+  .photo-carousel__slide { flex-basis: 88%; }
+  .photo-carousel__nav { width: 2.25rem; height: 2.25rem; }
+}
+
+/* ---------- Contact / footer override ---------- */
+.bio-page .bio-footer {
+  background: transparent;
+  color: var(--bio-fg);
+  border-top: 1px solid var(--bio-divider);
+  padding: 2.5rem 0 2rem;
+}
+
+.bio-page .bio-footer .btn-outline-light {
+  color: var(--bio-fg);
+  border-color: var(--bio-fg-muted);
+}
+.bio-page .bio-footer .btn-outline-light:hover {
+  background: var(--bio-fg);
+  color: var(--bio-bg);
+}
+
+.contact-label {
+  display: inline-block;
+  margin-left: .5rem;
+  font-size: .95rem;
+}
+
+/* ---------- Utility ---------- */
+.text-muted-bio { color: var(--bio-fg-muted); }
+
+/* Legacy class kept (in case other parts still reference it).
+   Prefer new primitives above for new work. */
+.text_exp_sm { font-size: 1.1rem; }
+.active      { color: var(--bio-accent); }

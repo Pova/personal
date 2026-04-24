@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="author" content="Roman Kitsela" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Me</title>
+
+  <title>Roman Kitsela &mdash; About</title>
+  <meta name="description" content="Roman Kitsela &mdash; mathematician and data engineer. PhD in Algebraic Number Theory, currently building data pipelines and analytics tooling at Amberside Energy.">
+
+  <!-- Open Graph / social share metadata -->
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Roman Kitsela &mdash; About">
+  <meta property="og:description" content="Mathematician and data engineer. PhD in Algebraic Number Theory, currently building data pipelines and analytics tooling at Amberside Energy.">
+  <meta property="og:image" content="img/headshot.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-85SP4HW3TX"></script>
@@ -13,39 +22,39 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-85SP4HW3TX');
   </script>
-  <!-- Bootstrap import -->
+
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
   <!-- Default styling -->
   <link rel="stylesheet" href="../global_css/main.css">
-  <!-- Extra custom styling -->
+  <!-- Bio-specific styling -->
   <link rel="stylesheet" href="css/style.css">
-  <!-- Javascript files  -->
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </head>
 
-<body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-md bg-dark navbar-dark" id="navBar">
+<body class="bio-page">
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Primary nav -->
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark" id="navBar" aria-label="Primary">
     <div class="container-fluid px-lg-5">
       <a href="../" class="navbar-brand">
         <h1 class="display-4">Roman Kitsela</h1>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navmenu">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false">About</a>
-            <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item active">Bio</a></li>
-            </ul>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page">About</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mathematics</a>
@@ -63,6 +72,7 @@
               <li><a class="dropdown-item" href="../flocking/index.html">Flocking</a></li>
               <li><a class="dropdown-item" href="../perlin/index.html">Perlin Noise</a></li>
               <li><a class="dropdown-item" href="../l-systems/index.html">L-systems</a></li>
+              <li><a class="dropdown-item" href="../steering/index.html">Steering</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -83,213 +93,633 @@
     </div>
   </nav>
 
-  <nav class="navbar navbar-dark bg-secondary border-bottom border-dark border-2 justify-content-between">
+  <!-- Page title bar -->
+  <nav class="navbar navbar-dark bg-secondary border-bottom border-dark border-2 justify-content-between" id="detailBar" aria-label="Page">
     <div class="container-fluid px-lg-5">
       <div class="d-inline-flex">
         <a class="navbar-brand">
-          <h2>About Me</h2>
+          <h2>About</h2>
         </a>
       </div>
     </div>
   </nav>
 
 
-  <!-- Intro -->
-  <section class="p-3">
-    <div class="container">
-      <div class="row align-items-center justify-content-between">
-        <div class="col-md">
-          <img src="img/headshot.jpg" class="img-fluid" alt="" />
-        </div>
-        <div class="col-md p-5">
-          <h2 class="display-4">About Me</h2>
-            <ul>
-              <li>Lived in: <b>Ukraine</b> | <b>London</b> | <b>San Diego</b></li>
-              <li>Describe myself as: <b>Analytical</b> | <b>Curious</b> | <b>Creative</b></li>
-              <li>Interests from the US: <b>Maths PhD</b> | <b>Frisbee</b> | <b>Succulents</b></li>
-              <li>Favourite Video Games: <b>Factorio</b> | <b>Rocket League</b> | <b>Valorant</b></li>
-              <li>Climbing Interests: <b>Bouldering</b> | <b>Sport Climbing</b> | <b>Alpine</b></li>
-            </ul>
-          <a href="#contact_links" class="btn btn-dark mt-3">
-            <i class="bi bi-chevron-right"></i> Contact Me
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <main id="main">
 
-  <!-- Technical Skills -->
-  <section class="p-5 bg-dark text-light">
-    <div class="container">
-      <div class="row align-items-center justify-content-between">
-        <div class="col-md p-5">
-          <h2 class="display-5">Technical Skills</h2>
-          <ul class="text_exp_sm">
-            <li><b>Programming languages</b>
-              <ul>
-                <li>Python <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" style=width:40px></li>
-                <li>Java <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" style=width:40px></li>
-                <li>Javascript <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" style="width:30px"></li>
-                <li>SQL <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" style=width:40px> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" style=width:40px></li>
-              </ul>
-            </li> 
-            <li>
-              <b>Technologies & Frameworks</b>
-              <p>Confident With:</p>
-              <p>
-                
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" style=width:40px>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" style=width:40px>
-                
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original-wordmark.svg" style=width:40px>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" style="width:35px">     
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original-wordmark.svg" style="width:50px">
-                
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" style=width:40px>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/latex/latex-original.svg" style=width:40px>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" style=width:40px>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/d3js/d3js-original.svg" style=width:40px>
-              </p>
-              
-              <!-- Familiar Technologies -->
-              <p>Familiar With:</p>
-              <p>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg" style=width:40px>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" style=width:40px>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matlab/matlab-original.svg" style=width:40px>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" style=width:40px>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" style=width:40px>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/processing/processing-original.svg" style=width:40px>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" style=width:40px>
-              </p></li>
-          </ul>
-        </div>
-        <div class="col-md">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Work Experience -->
-  <section class="p-5">
-    <div class="container">
-      <div class="row align-items-center justify-content-between">
-        <div class="col-md">
-          <!-- <img src="img/fundamentals.svg" class="img-fluid" alt="" /> -->
-        </div>
-        <div class="col-md p-5">
-          <h2 class="display-5">Employment History</h2>
-          <ul class="text_exp_sm">
-            <li>Data Engineer & Analyst - Amberside Energy (2023- )</li>
-            <li>Data Engineering Consultant - Xander Talent (2021-2022)</li>
-            <li>Lecturer - UCSD (2019-2020)</li>
-            <li>Associate Instructor - UCSD (2018)</li>
-            <li>Graduate Teaching Assistant - UCSD (2013-2018)</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Education -->
-  <section class="p-5 bg-dark text-light">
-    <div class="container">
-      <div class="row align-items-center justify-content-between">
-        <div class="col-md p-5">
-          <h2 class="display-5">Educational Background</h2>
-          <ul class="text_exp_sm">
-            <li><b>PhD</b> - Mathematics - University of California, San Diego, USA
-              <ul>
-                <li><i>Specialization:</i> Algebraic Number Theory, non-Archimedean Functional Analysis, p-adic Lie Groups</li>
-                <li>PhD Thesis: <i>A Tannaka-Krein Theorem for Profinite Groups</i></li>
-              </ul>
-            </li>
-            <li><b>MASt</b> - Mathematics - University of Cambridge, UK</li>
-            <li><b>BSc</b> - Mathematics - University College London, UK</li>
-          </ul>
-        </div>
-        <div class="col-md">
-          <!-- <img src="img/react.svg" class="img-fluid" alt="" /> -->
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section class="p-5">
-    <div class="container">
-      <div class="row align-items-center justify-content-between">
-        <div class="col-md">
-
-        </div>
-        <div class="col-md p-5">
-          <h2 class="display-5">Projects</h2>
-          <ul class="text_exp_sm">
-            <li><a class="link-dark text-decoration-none" href="../sorting/index.html">Sorting Algorithms</a></li>
-            <li><a class="link-dark text-decoration-none" href="../search/index.html">Search Algorithms</a></li>
-            <li><a class="link-dark text-decoration-none" href="../fields/index.html">Vector Fields</a></li>
-            <li><a class="link-dark text-decoration-none" href="../perlin/index.html">Perlin Noise</a></li>
-            <li><a class="link-dark text-decoration-none" href="../curves/index.html">Curves in Space</a></li>
-            <li><a class="link-dark text-decoration-none" href="../double-pendulum/index.html">Double Pendulum</a></li>
-            <li><a class="link-dark text-decoration-none" href="../lorenz/index.html">Lorenz Attractor</a></li>
-            <li><a class="link-dark text-decoration-none" href="../flocking/index.html">Flocking Behaviour</a></li>
-            <li><a class="link-dark text-decoration-none" href="../l-systems/index.html">L-systems</a></li>
-            <li><a class="link-dark text-decoration-none" href="../mandelbrot/index.html">Mandelbrot Set</a></li>
-            <li><a class="link-dark text-decoration-none" href="../snake/index.html">Snake Game</a></li>
-        </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-    <!-- Interests -->
-    <section class="p-5 bg-dark text-light">
+    <!-- ======================================================
+         SUMMARY / HERO
+         Left column: headshot.
+         Right column: professional summary + action buttons.
+         ====================================================== -->
+    <section class="bio-section" aria-labelledby="summary-heading">
       <div class="container">
-        <div class="row align-items-center justify-content-between">
-
-          <div class="col-md p-5">
-            <h2 class="display-5">Interests</h2>
-            <ul class="text_exp_sm">
-              <li>Climbing & Alpinism</li>
-              <li>Music</li>
-              <li>Programmatic Art</li>
-              <li>Visualizing Data</li>
-              <li>Video Games</li>
-          </ul>
+        <div class="row align-items-center g-5">
+          <div class="col-lg-5 col-md-6">
+            <img
+              src="img/headshot_little_crab.jpeg"
+              class="hero-headshot"
+              alt="Portrait of Roman Kitsela"
+              width="320" height="320" style="border-radius: 50%;" />
           </div>
-          <div class="col-md">
-            <!-- <img src="img/react.svg" class="img-fluid" alt="" /> -->
+          <div class="col-lg-7 col-md-6">
+            <span class="section-eyebrow">About</span>
+            <h2 id="summary-heading" class="visually-hidden">Professional summary</h2>
+
+            <p class="hero-lead">
+              I'm a data engineer and analyst with a PhD in mathematics. 
+              I drive data-focused decision making, build analytics pipelines and tooling for Amberside Management Solutions - a renewable energy asset management company. On the side I make interactive visualisations of maths and physics, build simulations and work on AI/ML side projects.
+            </p>
+
+            <p class="hero-meta">
+              Based in London, UK &middot;
+              Open to conversations about data, analytics, and mathematically-flavoured problems.
+            </p>
+
+            <div class="hero-actions d-flex flex-wrap gap-2">
+              <a href="mailto:romankitsela@gmail.com" class="btn btn-dark">
+                <i class="fas fa-envelope me-1" aria-hidden="true"></i> Get in touch
+              </a>
+
+              <!-- <a href="cv.pdf" class="btn btn-outline-dark" target="_blank" rel="noopener">
+                <i class="fas fa-file-arrow-down me-1" aria-hidden="true"></i> Download CV
+              </a> -->
+            </div>
           </div>
         </div>
       </div>
     </section>
 
+    <hr class="section-divider" />
 
-  <!-- Footer -->
-  <footer class="bg-dark text-center text-white">
+    <!-- ======================================================
+         EXPERIENCE (content left-aligned)
+         ====================================================== -->
+    <section class="bio-section bio-section--left" aria-labelledby="experience-heading">
+      <div class="container">
+        <div class="bio-section__content">
+          <span class="section-eyebrow">Work</span>
+          <h2 id="experience-heading" class="section-title">Experience</h2>
 
-    <!-- Grid container -->
-    <div class="container p-4" id="contact_links">
-      <p class="lead text_exp">Contact Links</p>
-      <!-- Section: Social media -->
-      <section class="mb-4">
+          <ol class="timeline">
 
-        <!-- Google -->
-        <a class="btn btn-outline-light btn-floating m-1" href="mailto: romankitsela@gmail.com" role="button"><i class="fab fa-google"></i></a>
+            <li class="timeline__item timeline__item--current">
+              <p class="timeline__role">
+                Data Engineer &amp; Analyst
+                <span class="timeline__org">&mdash; Amberside Management Solutions</span>
+              </p>
+              <p class="timeline__period">2024 &ndash; present</p>
+              <p class="timeline__summary">
+                Solar and battery storage asset management company.
+              </p>
+              <ul>
+                <li>Built ELT pipelines (Python, SQL, Airflow) ingesting generation and meter data from third-party APIs into the internal warehouse.</li>
+                <li>Led development of automated data processing workflows for generating daily, weekly and monthly reports.</li>
+                <li>Developed and maintained a data platform for tracking and analysing asset performance, using Python, SQL and Svelte.</li>
+              </ul>
+            </li>
 
-        <!-- Linkedin -->
-        <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/in/roman-kitsela-29615b133/" role="button"><i class="fab fa-linkedin-in"></i></a>
+            <li class="timeline__item">
+              <p class="timeline__role">
+                Data Engineer &amp; Analyst
+                <span class="timeline__org">&mdash; Amberside Energy</span>
+              </p>
+              <p class="timeline__period">2023 &ndash; 2024</p>
+              <p class="timeline__summary">
+                Renewable-energy developer focused on solar and battery storage.
+              </p>
 
-        <!-- Github -->
-        <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/Pova" role="button"><i class="fab fa-github"></i></a>
-      </section>
-      <!-- Section: Social media -->
+            </li>
+
+            <li class="timeline__item">
+              <p class="timeline__role">
+                Data Science Intern
+                <span class="timeline__org">&mdash; Twinkl</span>
+              </p>
+              <p class="timeline__period">2023</p>
+              <p class="timeline__summary">
+                Educational resource platform for teachers and students.
+              </p>
+            </li>
+
+            <li class="timeline__item">
+              <p class="timeline__role">
+                Data Engineering Consultant
+                <span class="timeline__org">&mdash; Xander Talent</span>
+              </p>
+              <p class="timeline__period">2023</p>
+              <p class="timeline__summary">
+                Graduate consultancy that trains and places technical consultants with client companies across data, engineering and software roles.
+              </p>
+            </li>
+
+            <li class="timeline__item">
+              <p class="timeline__role">
+                Career transition &mdash; academia to data
+              </p>
+              <p class="timeline__period">2020 &ndash; 2023</p>
+              <p class="timeline__summary">
+                Retrained from pure mathematics into CS, Data and ML/AI topics through structured courses, self-study and hands-on portfolio work.
+              </p>
+              <ul>
+                <li>Worked through the IBM Data Science Professional Certificate (Coursera), MIT's Introduction to Computer Science (OCW), and Stanford's Machine Learning course &mdash; lectures paired with the accompanying problem sets.</li>
+                <li>Built a self-taught stack in Python, SQL, JavaScript, pandas and D3.js, applied throughout the interactive simulations and visualisations on this site.</li>
+                <li>Sustained algorithms and data-structures practice via AlgoExpert.</li>
+                <li>Continued teaching alongside retraining: ACT/SAT tutoring at Huntington Learning Center (2021) and freelance maths tutoring.</li>
+              </ul>
+            </li>
+
+            <li class="timeline__item">
+              <p class="timeline__role">
+                Lecturer
+                <span class="timeline__org">&mdash; UC San Diego</span>
+              </p>
+              <p class="timeline__period">2019 &ndash; 2020</p>
+              <p class="timeline__summary">
+                Taught multivariable and vector calculus to undergraduate cohorts; some of the
+                interactive visualisations on this site originated as teaching aids for those classes.
+              </p>
+            </li>
+
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- ======================================================
+         EDUCATION (content right-aligned for rhythm)
+         ====================================================== -->
+    <section class="bio-section bio-section--right" aria-labelledby="education-heading">
+      <div class="container">
+        <div class="bio-section__content">
+          <span class="section-eyebrow">Academic</span>
+          <h2 id="education-heading" class="section-title">Education</h2>
+
+          <div class="education-item">
+            <p class="education-item__degree">PhD in Mathematics</p>
+            <p class="education-item__institution">University of California, San Diego &middot; 2013&ndash;2019</p>
+            <p class="education-item__detail">
+              <strong>Specialisation:</strong> Algebraic Number Theory, non-Archimedean Functional Analysis, p-adic Lie Groups.
+            </p>
+            <p class="education-item__detail">
+              <strong>Thesis:</strong> <em>A Tannaka&ndash;Krein Theorem for Profinite Groups.</em>
+            </p>
+            <p class="education-item__thesis">
+              A generalisation of the classical Tannaka&ndash;Krein duality Theorem for compact groups to profinite groups &mdash;
+              Answers the question: Can we recover the algebraic structure of a profinite group from its Banach space representations. Short answer: Yes.
+            </p>
+          </div>
+
+          <div class="education-item">
+            <p class="education-item__degree">MASt in Mathematics (Part&nbsp;III)</p>
+            <p class="education-item__institution">University of Cambridge</p>
+          </div>
+
+          <div class="education-item">
+            <p class="education-item__degree">BSc in Mathematics</p>
+            <p class="education-item__institution">University College London</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- ======================================================
+         SKILLS (content left-aligned)
+         ====================================================== -->
+    <section class="bio-section bio-section--left" aria-labelledby="skills-heading">
+      <div class="container">
+        <div class="bio-section__content">
+          <span class="section-eyebrow">Toolkit</span>
+          <h2 id="skills-heading" class="section-title">Skills</h2>
+
+          <div class="skill-group">
+            <h3 class="skill-group__title">Languages</h3>
+            <ul class="skill-list">
+              <li class="skill-item"><img class="skill-icon" src="img/icons/python.svg" alt=""><span>Python</span></li>
+              <li class="skill-item"><img class="skill-icon" src="img/icons/postgresql.svg" alt=""><span>SQL (Postgres)</span></li>
+              <li class="skill-item"><img class="skill-icon" src="img/icons/mysql.svg" alt=""><span>SQL (MySQL)</span></li>
+              <li class="skill-item"><img class="skill-icon" src="img/icons/javascript.svg" alt=""><span>JavaScript</span></li>
+              <li class="skill-item"><img class="skill-icon" src="img/icons/java.svg" alt=""><span>Java</span></li>
+            </ul>
+          </div>
+
+          <div class="skill-group">
+            <h3 class="skill-group__title">Data &amp; analytics</h3>
+            <ul class="skill-list">
+              <li class="skill-item"><img class="skill-icon" src="img/icons/pandas.svg" alt=""><span>pandas</span></li>
+              <li class="skill-item"><img class="skill-icon" src="img/icons/numpy.svg" alt=""><span>NumPy</span></li>
+              <li class="skill-item"><img class="skill-icon" src="img/icons/jupyter.svg" alt=""><span>Jupyter</span></li>
+              <li class="skill-item"><img class="skill-icon" src="img/icons/d3js.svg" alt=""><span>D3.js</span></li>
+            </ul>
+          </div>
+
+          <div class="skill-group">
+            <h3 class="skill-group__title">Engineering &amp; tooling</h3>
+            <ul class="skill-list">
+              <li class="skill-item"><img class="skill-icon" src="img/icons/git.svg" alt=""><span>Git</span></li>
+              <li class="skill-item"><img class="skill-icon" src="img/icons/docker.svg" alt=""><span>Docker</span></li>
+              <li class="skill-item"><img class="skill-icon" src="img/icons/flask.svg" alt=""><span>Flask</span></li>
+              <li class="skill-item"><img class="skill-icon" src="img/icons/html5.svg" alt=""><span>HTML</span></li>
+              <li class="skill-item"><img class="skill-icon" src="img/icons/css3.svg" alt=""><span>CSS</span></li>
+              <li class="skill-item"><img class="skill-icon" src="img/icons/bootstrap.svg" alt=""><span>Bootstrap</span></li>
+              <li class="skill-item"><img class="skill-icon" src="img/icons/latex.svg" alt=""><span>LaTeX</span></li>
+            </ul>
+          </div>
+
+          <div class="skill-group skill-group--familiar">
+            <h3 class="skill-group__title">Familiar with</h3>
+            <p class="skill-group__note">Used for specific projects but not day-to-day.</p>
+            <ul class="skill-list">
+              <li class="skill-item"><img class="skill-icon" src="img/icons/tensorflow.svg" alt=""><span>TensorFlow</span></li>
+              <li class="skill-item"><img class="skill-icon" src="img/icons/react.svg" alt=""><span>React</span></li>
+              <li class="skill-item"><img class="skill-icon" src="img/icons/matlab.svg" alt=""><span>MATLAB</span></li>
+              <li class="skill-item"><img class="skill-icon" src="img/icons/processing.svg" alt=""><span>Processing</span></li>
+              <li class="skill-item"><img class="skill-icon" src="img/icons/blender.svg" alt=""><span>Blender</span></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- ======================================================
+         SELECTED PROJECTS
+         Full-width grid. Each card has a gradient placeholder
+         that gets replaced once a real image exists at the
+         specified path in bio/img/projects/.
+         ====================================================== -->
+    <section class="bio-section bio-section--right" aria-labelledby="projects-heading">
+      <div class="container">
+        <div class="bio-section__content">
+        <span class="section-eyebrow">Made</span>
+        <h2 id="projects-heading" class="section-title">Selected projects</h2>
+        <p class="text-muted-bio" style="max-width: 720px;">
+          A small set of interactive visualisations and experiments. Full catalogue in the site nav.
+        </p>
+      </div>
+        <div class="project-grid">
+
+          <a class="project-card" href="../flocking/index.html">
+            <div class="project-card__media" data-label="Flocking" style="--project-color: #2c7fb8;">
+              <img src="img/projects/flocking.gif" alt="" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title">Flocking</h3>
+              <p class="project-card__description">Craig Reynolds-style boids with tunable separation, cohesion and alignment.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="../steering/index.html">
+            <div class="project-card__media" data-label="Steering" style="--project-color: #fec44f;">
+              <img src="img/projects/steering.gif" alt="" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title">Steering behaviour</h3>
+              <p class="project-card__description">Particles with desired/steering/flee forces reconstructing text, with a repulsive force from the mouse.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="../curves/index.html">
+            <div class="project-card__media" data-label="Curves in space" style="--project-color: #F08080;">
+              <img src="img/projects/curves.gif" alt="" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title">Curves in space</h3>
+              <p class="project-card__description">Interactive 3D renderings of parametric curves from multivariable calculus.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="../mandelbrot/index.html">
+            <div class="project-card__media" data-label="Mandelbrot" style="--project-color: #6a0dad;">
+              <img src="img/projects/mandelbrot.png" alt="" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title">Mandelbrot set</h3>
+              <p class="project-card__description">WebGL-accelerated deep-zoom into the Mandelbrot fractal, with palette controls.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="../lorenz/index.html">
+            <div class="project-card__media" data-label="Lorenz" style="--project-color: #1b9e77;">
+              <img src="img/projects/lorenz.gif" alt="" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title">Lorenz attractor</h3>
+              <p class="project-card__description">Visualising a stable solution to the famous Lorenz system.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="../perlin/index.html">
+            <div class="project-card__media" data-label="Perlin noise" style="--project-color: #65C6FF;">
+              <img src="img/projects/perlin.gif" alt="" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title">Perlin noise field</h3>
+              <p class="project-card__description">Thousands of particles advected by a smoothly-varying 3D Perlin noise vector field.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="../fields/index.html">
+            <div class="project-card__media" data-label="Vector fields" style="--project-color: #d95f02;">
+              <img src="img/projects/fields.gif" alt="" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title">Vector fields</h3>
+              <p class="project-card__description">Particle tracers revealing the structure of selected 2D vector fields.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="../double-pendulum/index.html">
+            <div class="project-card__media" data-label="Double pendulum" style="--project-color: #7570b3;">
+              <img src="img/projects/double-pendulum.gif" alt="" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title">Double pendulum</h3>
+              <p class="project-card__description">Numerical integration of the chaotic double-pendulum equations with trail rendering.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="../l-systems/index.html">
+            <div class="project-card__media" data-label="L-systems" style="--project-color: #2e7d32;">
+              <img src="img/projects/l-systems.png" alt="" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title">L-systems</h3>
+              <p class="project-card__description">Generative plant forms produced by context-free string-rewriting grammars.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="../sorting/index.html">
+            <div class="project-card__media" data-label="Sorting" style="--project-color: #b15928;">
+              <img src="img/projects/sorting.gif" alt="" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title">Sorting algorithms</h3>
+              <p class="project-card__description">Side-by-side visual comparison of classical comparison and distribution sorts.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="../search/index.html">
+            <div class="project-card__media" data-label="Search" style="--project-color: #377eb8;">
+              <img src="img/projects/search.gif" alt="" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title">Search algorithms</h3>
+              <p class="project-card__description">Pathfinding on a grid: BFS, DFS, Dijkstra, and A* with customisable heuristics.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="../snake/index.html">
+            <div class="project-card__media" data-label="Snake" style="--project-color: #4daf4a;">
+              <img src="img/projects/snake.gif" alt="" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title">Snake</h3>
+              <p class="project-card__description">The classic grid-based snake game, keyboard-playable in the browser.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="../snake/index.html">
+            <div class="project-card__media" data-label="Snake" style="--project-color: #4daf4a;">
+              <img src="img/projects/self-driving-car.gif" alt="" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title">Self Driving Car</h3>
+              <p class="project-card__description">A self driving car simulation using a neural network coded without any machine learning libraries.</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- ======================================================
+         OUTSIDE WORK (content right-aligned for rhythm)
+         ====================================================== -->
+    <section class="bio-section bio-section--left" aria-labelledby="outside-heading">
+      <div class="container">
+        <div class="bio-section__content">
+          <span class="section-eyebrow">Offline</span>
+          <h2 id="outside-heading" class="section-title">Outside work</h2>
+          <p class="text-muted-bio mb-3">
+            Miscellaneous interests.
+          </p>
+          <ul class="outside-list">
+            <li>Mountaineering</li>
+            <li>Kittens</li>
+            <li>Succulents</li>
+          </ul>
+        </div>
+
+        <!-- Draggable photo carousel.
+             Drop images into bio/img/outside/ matching the src below.
+             Missing images fall back to the gradient placeholder tile. -->
+        <div
+          class="photo-carousel"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Photos from outside work"
+        >
+          <button
+            type="button"
+            class="photo-carousel__nav photo-carousel__nav--prev"
+            aria-label="Previous photo"
+          >
+            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+          </button>
+
+          <div class="photo-carousel__viewport">
+            <ul class="photo-carousel__track" tabindex="0" aria-live="polite">
+
+              <li class="photo-carousel__slide">
+                <figure class="photo-carousel__figure" style="--slide-color: #2c7fb8;" data-label="Mountaineering">
+                  <img src="img/outside/alpine-1.jpeg" alt="" loading="lazy" draggable="false" onerror="this.remove()">
+                  <figcaption>Climbing &mdash; French Alps</figcaption>
+                </figure>
+              </li>
+
+              <li class="photo-carousel__slide">
+                <figure class="photo-carousel__figure" style="--slide-color: #7570b3;" data-label="Kittens">
+                  <img src="img/outside/kittens-1.jpeg" alt="" loading="lazy" draggable="false" onerror="this.remove()">
+                  <figcaption>Kittens &mdash; Cute</figcaption>
+                </figure>
+              </li>
+
+              <li class="photo-carousel__slide">
+                <figure class="photo-carousel__figure" style="--slide-color: #d95f02;" data-label="Succulents">
+                  <img src="img/outside/succulent-1.jpeg" alt="" loading="lazy" draggable="false" onerror="this.remove()">
+                  <figcaption>Succulents &mdash; Pretty</figcaption>
+                </figure>
+              </li>
+            </ul>
+          </div>
+
+          <button
+            type="button"
+            class="photo-carousel__nav photo-carousel__nav--next"
+            aria-label="Next photo"
+          >
+            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+
+          <ol class="photo-carousel__dots" role="tablist" aria-label="Select photo"></ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- Carousel behaviour: drag to pan, prev/next, dot pagination. -->
+    <script>
+      (function () {
+        const carousel = document.querySelector('.photo-carousel');
+        if (!carousel) return;
+
+        const track   = carousel.querySelector('.photo-carousel__track');
+        const slides  = Array.from(track.querySelectorAll('.photo-carousel__slide'));
+        const prevBtn = carousel.querySelector('.photo-carousel__nav--prev');
+        const nextBtn = carousel.querySelector('.photo-carousel__nav--next');
+        const dotsEl  = carousel.querySelector('.photo-carousel__dots');
+
+        // Build dots.
+        slides.forEach((_, i) => {
+          const li  = document.createElement('li');
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.setAttribute('role', 'tab');
+          btn.setAttribute('aria-label', `Go to photo ${i + 1}`);
+          btn.addEventListener('click', () => scrollToIndex(i));
+          li.appendChild(btn);
+          dotsEl.appendChild(li);
+        });
+        const dots = Array.from(dotsEl.querySelectorAll('button'));
+
+        function currentIndex() {
+          // Find the slide whose centre is closest to the viewport centre.
+          const viewportCentre = track.scrollLeft + track.clientWidth / 2;
+          let best = 0, bestDist = Infinity;
+          slides.forEach((s, i) => {
+            const c = s.offsetLeft + s.offsetWidth / 2;
+            const d = Math.abs(c - viewportCentre);
+            if (d < bestDist) { bestDist = d; best = i; }
+          });
+          return best;
+        }
+
+        function scrollToIndex(i) {
+          const clamped = Math.max(0, Math.min(slides.length - 1, i));
+          const s = slides[clamped];
+          track.scrollTo({
+            left: s.offsetLeft - (track.clientWidth - s.offsetWidth) / 2,
+            behavior: 'smooth'
+          });
+        }
+
+        function updateActiveDot() {
+          const i = currentIndex();
+          dots.forEach((d, di) => {
+            d.classList.toggle('is-active', di === i);
+            d.setAttribute('aria-selected', di === i ? 'true' : 'false');
+          });
+        }
+
+        prevBtn.addEventListener('click', () => scrollToIndex(currentIndex() - 1));
+        nextBtn.addEventListener('click', () => scrollToIndex(currentIndex() + 1));
+
+        // Keyboard nav when the track is focused.
+        track.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft')  { e.preventDefault(); scrollToIndex(currentIndex() - 1); }
+          if (e.key === 'ArrowRight') { e.preventDefault(); scrollToIndex(currentIndex() + 1); }
+        });
+
+        // Update dots on scroll (rAF-throttled).
+        let scrollTick = false;
+        track.addEventListener('scroll', () => {
+          if (!scrollTick) {
+            scrollTick = true;
+            requestAnimationFrame(() => {
+              updateActiveDot();
+              scrollTick = false;
+            });
+          }
+        });
+
+        // Mouse drag-to-pan. Native touch scrolling handles mobile.
+        let isDown = false, startX = 0, startScroll = 0, moved = false;
+        const DRAG_THRESHOLD = 5;
+
+        track.addEventListener('pointerdown', (e) => {
+          if (e.pointerType !== 'mouse') return; // let touch use native scroll
+          isDown = true;
+          moved = false;
+          startX = e.clientX;
+          startScroll = track.scrollLeft;
+          track.classList.add('is-dragging');
+          track.setPointerCapture(e.pointerId);
+        });
+
+        track.addEventListener('pointermove', (e) => {
+          if (!isDown) return;
+          const dx = e.clientX - startX;
+          if (Math.abs(dx) > DRAG_THRESHOLD) moved = true;
+          track.scrollLeft = startScroll - dx;
+        });
+
+        function endDrag(e) {
+          if (!isDown) return;
+          isDown = false;
+          track.classList.remove('is-dragging');
+          try { track.releasePointerCapture(e.pointerId); } catch (_) {}
+          // Snap to the nearest slide.
+          scrollToIndex(currentIndex());
+        }
+        track.addEventListener('pointerup', endDrag);
+        track.addEventListener('pointercancel', endDrag);
+
+        // Suppress click if the pointer actually dragged (so images aren't "clicked" after a drag).
+        track.addEventListener('click', (e) => {
+          if (moved) { e.preventDefault(); e.stopPropagation(); }
+        }, true);
+
+        // Initial state.
+        updateActiveDot();
+        window.addEventListener('resize', updateActiveDot);
+      })();
+    </script>
+
+  </main>
+
+
+  <!-- ======================================================
+       CONTACT FOOTER
+       Labelled icons (no more icon-only footer).
+       ====================================================== -->
+  <footer class="bio-footer text-center" id="contact_links" aria-labelledby="contact-heading">
+    <div class="container">
+      <h2 id="contact-heading" class="h4 mb-3">Contact</h2>
+      <nav aria-label="Contact links">
+        <a class="btn btn-outline-light btn-sm m-1" href="mailto:romankitsela@gmail.com">
+          <i class="fab fa-google" aria-hidden="true"></i>
+          <span class="contact-label">Email</span>
+        </a>
+        <a class="btn btn-outline-light btn-sm m-1" href="https://www.linkedin.com/in/roman-kitsela-29615b133/" rel="noopener" target="_blank">
+          <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+          <span class="contact-label">LinkedIn</span>
+        </a>
+        <a class="btn btn-outline-light btn-sm m-1" href="https://github.com/Pova" rel="noopener" target="_blank">
+          <i class="fab fa-github" aria-hidden="true"></i>
+          <span class="contact-label">GitHub</span>
+        </a>
+      </nav>
     </div>
-    <!-- Grid container -->
   </footer>
-
-
-
 
 </body>
 
