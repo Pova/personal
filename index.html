@@ -1,26 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="author" content="Roman Kitsela" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome</title>
-  <!-- Bootstrap import -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-  <!-- Default styling -->
-  <link rel="stylesheet" href="global_css/main.css">
-  <link rel="stylesheet" href="global_css/slider_styling.css">
-  <!-- Extra custom styling -->
-  <link rel="stylesheet" href="css/sketch.css">
-  <!-- p5 minified library -->
-  <script src="lib/p5.min.js" type="text/javascript"></script>
-  <!-- Javascript files  -->
-  <script src="sketch.js" type="text/javascript"></script>
-  <script src="vehicle.js" type="text/javascript"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+  <title>Roman Kitsela &mdash; Mathematician &amp; Data Engineer</title>
+  <meta name="description" content="PhD mathematician turned data engineer. I build data pipelines by day and mathematical visualisations by night.">
+
+  <!-- Open Graph / social share metadata -->
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Roman Kitsela &mdash; Mathematician &amp; Data Engineer">
+  <meta property="og:description" content="PhD mathematician turned data engineer. I build data pipelines by day and mathematical visualisations by night.">
+  <meta property="og:image" content="bio/img/headshot.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-85SP4HW3TX"></script>
@@ -32,26 +26,107 @@
     gtag('config', 'G-85SP4HW3TX');
   </script>
 
+  <!-- Bootstrap import -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Default styling -->
+  <link rel="stylesheet" href="global_css/main.css">
+  <!-- Bio styling (reused primitives: sections, cards, footer) -->
+  <link rel="stylesheet" href="bio/css/style.css">
+
+  <!-- p5 minified library -->
+  <script src="lib/p5.min.js" type="text/javascript"></script>
+  <script src="sketch.js" type="text/javascript"></script>
+  <script src="vehicle.js" type="text/javascript"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+  <style>
+    /* Landing-page-specific styling (small; everything else comes from bio/css/style.css). */
+    .landing-hero {
+      background: #000;
+      color: #fff;
+      padding: 0;
+    }
+    .landing-hero__canvas {
+      width: 100%;
+      height: clamp(280px, 50vh, 520px);
+      position: relative;
+    }
+    #canvasContainer { width: 100%; height: 100%; }
+    #canvasContainer canvas { display: block; }
+
+    .landing-hero__text {
+      text-align: center;
+      padding: 2rem 1rem 3rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .landing-hero__tagline {
+      font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+      line-height: 1.5;
+      color: rgba(255, 255, 255, .9);
+      margin-bottom: 1.75rem;
+    }
+    .landing-hero__actions .btn { min-width: 10rem; margin: .25rem; }
+
+    .landing-hero__animation-caption {
+      font-size: .9rem;
+      color: rgba(255, 255, 255, .55);
+      margin-top: 1.5rem;
+    }
+    .landing-hero__animation-caption a {
+      color: var(--bio-accent);
+      text-decoration: none;
+    }
+    .landing-hero__animation-caption a:hover { text-decoration: underline; }
+
+    /* About teaser: headshot + short blurb. */
+    .about-teaser {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .about-teaser__img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: var(--bio-card-shadow);
+      flex: 0 0 auto;
+    }
+    .about-teaser__body { flex: 1 1 280px; }
+    .about-teaser__body p { margin-bottom: 1rem; }
+    .about-teaser__link {
+      color: var(--bio-accent-ink);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .about-teaser__link:hover { text-decoration: underline; }
+  </style>
 </head>
 
-<body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-md bg-dark navbar-dark" id="navBar">
+<body class="bio-page">
+
+  <a href="#projects" class="skip-link">Skip to main content</a>
+
+  <!-- Primary nav -->
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark" id="navBar" aria-label="Primary">
     <div class="container-fluid px-lg-5">
-      <a class="navbar-brand">
+      <a href="." class="navbar-brand">
         <h1 class="display-4">Roman Kitsela</h1>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navmenu">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">About</a>
-            <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="bio/index.html">Bio</a></li>
-            </ul>
+          <li class="nav-item">
+            <a class="nav-link" href="bio/index.html">About</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mathematics</a>
@@ -69,6 +144,7 @@
               <li><a class="dropdown-item" href="flocking/index.html">Flocking</a></li>
               <li><a class="dropdown-item" href="perlin/index.html">Perlin Noise</a></li>
               <li><a class="dropdown-item" href="l-systems/index.html">L-systems</a></li>
+              <li><a class="dropdown-item" href="steering/index.html">Steering</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -89,145 +165,170 @@
     </div>
   </nav>
 
-  <nav class="navbar navbar-dark bg-secondary border-bottom border-dark border-2 justify-content-between" id="detailBar">
-    <div class="container-fluid align-text-center px-lg-5">
-      <div class="d-inline-flex">
-        <a class="navbar-brand">
-          <h2>Steering Behaviour</h2>
-        </a>
-      </div>
-      <div>
-      <div class="d-inline-flex">
-        <button id="toggleOptionsBtn" class="btn btn-dark mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#visualizationOptions" aria-expanded="false" aria-controls="collapseExample" style="background-color:#65C6FF;color: #000;">Hide Options</button>
-      </div>
-      <a class="navbar-brand" href="#how" style="color:#65C6FF;">What am I looking at?</a>
-    </div>
-    </div>
-  </nav>
+  <main>
 
-  <section class="bg-secondary p-2 collapse show" id="visualizationOptions">
-    <div class="container-fluid">
-      <div class="align-items-center justify-content-around">
+    <!-- ======================================================
+         HERO
+         Particle-steering animation spelling "Roman Kitsela",
+         followed by the tagline and primary CTAs.
+         ====================================================== -->
+    <section class="landing-hero" aria-labelledby="hero-heading">
+      <h2 id="hero-heading" class="visually-hidden">Roman Kitsela &mdash; introduction</h2>
 
-        <!-- Div 1 -->
-        <div class="d-lg-flex align-items-center">
-          <div class="container text-center">
-            <label for="customRange1" class="sliderText">Desired Force</label>
-            <input type="range" class="form-range" min="0" max="45" step="1" value="20" id="max_desired">
-          </div>
-          <div class="container text-center">
-            <label for="customRange2" class="sliderText">Steering Force</label>
-            <input type="range" class="form-range" min="0" max="50" step="1" value="10" id="max_steer">
-          </div>
-          <div class="container text-center">
-            <label for="customRange3" class="sliderText">Flee Force</label>
-            <input type="range" class="form-range" min="0" max="70" step="1" value="50" id="flee_force">
-          </div>
-          <div class="container text-center">
-            <label for="customRange4" class="sliderText">Flee Distance</label>
-            <input type="range" class="form-range" min="0" max="500" step="10" value="250" id="flee_dist">
-          </div>
+      <div class="landing-hero__canvas">
+        <div id="canvasContainer"
+             data-words="Roman|Kitsela"
+             data-font-src="assets/font2.otf"
+             data-font-size="140">
+        </div>
+      </div>
+
+      <div class="landing-hero__text">
+        <p class="landing-hero__tagline">
+          PhD mathematician turned data engineer. I build data pipelines by day and mathematical
+          visualisations by night.
+        </p>
+
+        <div class="landing-hero__actions d-flex flex-wrap justify-content-center">
+          <a href="bio/index.html" class="btn btn-light">
+            <i class="fas fa-user me-1" aria-hidden="true"></i> About me
+          </a>
+          <a href="#projects" class="btn btn-outline-light">
+            <i class="fas fa-wand-magic-sparkles me-1" aria-hidden="true"></i> See projects
+          </a>
+          <a href="mailto:romankitsela@gmail.com" class="btn btn-outline-light">
+            <i class="fas fa-envelope me-1" aria-hidden="true"></i> Get in touch
+          </a>
         </div>
 
+        <p class="landing-hero__animation-caption">
+          Curious about the animation?
+          <a href="steering/index.html">See the interactive steering demo &rarr;</a>
+        </p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="bg-dark">
-    <div id="canvasContainer">
+    <hr class="section-divider" />
 
-    </div>
-  </section>
-
-  <!-- Showcase -->
-  <section class="bg-secondary text-light p-md-5 text-center text-lg-start" id="how">
-
-    <div class="d-xl-flex align-items-center justify-content-around">
-      <div class="container py-5 text-center">
-        <h1 class="display-1">What am I looking at?</h1>
-      </div>
-
+    <!-- ======================================================
+         FEATURED PROJECTS
+         A small, curated set of things to click into.
+         Full catalogue lives in the nav.
+         ====================================================== -->
+    <section class="bio-section" id="projects" aria-labelledby="projects-heading">
       <div class="container">
-        <h5 class="text_exp">
-          This is a simple demonstration of steering behaviour.
-        </h5>
-        <p class="text_exp">
-          A collection of particles is created in a random position with random velocity - each particle has a particular <i>desired</i> target position on the edge of one of the words above.
-        </p>
-        <p class="text_exp">Each particle <i>wants</i> to be at its desired position and so moves according to a <i>desired</i> force which would take it straight to its desired location if it was standing still. Unfortunately... each particle already has a random starting velocity and so a <i>steering</i> force is calculated in order to correct the path of the particles.</p>
-        <p class="text_exp">Additionally the particles are acted upon by a repulsive force from the mouse position to further complicate matters.</p>
-        <p class="text_exp">
-          Using the options above you can experiment with interesting combinations of simulation variables.
-        </p>
+        <div class="text-center mb-4">
+          <span class="section-eyebrow">Made</span>
+          <h2 id="projects-heading" class="section-title">Featured projects</h2>
+          <p class="text-muted-bio" style="max-width: 640px; margin: 0 auto;">
+            A few interactive pieces. The full catalogue &mdash; simulations, fractals, algorithms
+            and more &mdash; lives in the site navigation.
+          </p>
+        </div>
+
+        <div class="project-grid">
+
+          <a class="project-card" href="bio/index.html#projects">
+            <div class="project-card__media" data-label="Self-driving car" style="--project-color: #4daf4a;">
+              <img src="bio/img/projects/self-driving-car.gif" alt="" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title">Self-driving car</h3>
+              <p class="project-card__description">Neural-network-driven vehicle simulation, implemented from scratch without ML libraries.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="search/index.html">
+            <div class="project-card__media" data-label="Search" style="--project-color: #377eb8;">
+              <img src="bio/img/projects/search.gif" alt="" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title">Search algorithms</h3>
+              <p class="project-card__description">Pathfinding on a grid: BFS, DFS, Dijkstra, and A* with tunable heuristics.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="curves/index.html">
+            <div class="project-card__media" data-label="Curves in space" style="--project-color: #F08080;">
+              <img src="bio/img/projects/curves.gif" alt="" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title">Curves in space</h3>
+              <p class="project-card__description">Interactive 3D renderings of parametric curves from multivariable calculus.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="fields/index.html">
+            <div class="project-card__media" data-label="Vector fields" style="--project-color: #d95f02;">
+              <img src="bio/img/projects/fields.gif" alt="" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title">Vector fields</h3>
+              <p class="project-card__description">Particle tracers revealing the structure of selected 2D vector fields.</p>
+            </div>
+          </a>
+
+        </div>
       </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- ======================================================
+         ABOUT TEASER
+         Short blurb drawn from the full bio hero. Links out.
+         ====================================================== -->
+    <section class="bio-section bio-section--right" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="bio-section__content">
+          <span class="section-eyebrow">About</span>
+          <h2 id="about-heading" class="section-title">A little about me</h2>
+
+          <div class="about-teaser">
+            <img
+              src="bio/img/headshot_alpine.jpeg"
+              alt="Portrait of Roman Kitsela"
+              class="about-teaser__img"
+              width="160" height="160" />
+            <div class="about-teaser__body">
+              <p>
+                I'm a data engineer and analyst with a PhD in algebraic number theory. By day I build
+                data pipelines and analytics tooling for a renewable-energy asset manager in London;
+                by night I build interactive mathematical visualisations, simulations, and AI/ML
+                side projects &mdash; most of which live on this site.
+              </p>
+              <a href="bio/index.html" class="about-teaser__link">
+                Read the full bio <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================
+       CONTACT FOOTER
+       ====================================================== -->
+  <footer class="bio-footer text-center" id="contact_links" aria-labelledby="contact-heading">
+    <div class="container">
+      <h2 id="contact-heading" class="h4 mb-3">Contact</h2>
+      <nav aria-label="Contact links">
+        <a class="btn btn-outline-light btn-sm m-1" href="mailto:romankitsela@gmail.com">
+          <i class="fab fa-google" aria-hidden="true"></i>
+          <span class="contact-label">Email</span>
+        </a>
+        <a class="btn btn-outline-light btn-sm m-1" href="https://www.linkedin.com/in/roman-kitsela-29615b133/" rel="noopener" target="_blank">
+          <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+          <span class="contact-label">LinkedIn</span>
+        </a>
+        <a class="btn btn-outline-light btn-sm m-1" href="https://github.com/Pova" rel="noopener" target="_blank">
+          <i class="fab fa-github" aria-hidden="true"></i>
+          <span class="contact-label">GitHub</span>
+        </a>
+      </nav>
     </div>
-  </section>
-
-  <script type="text/javascript">
-    // Max Speed
-    max_desired_elt = document.getElementById('max_desired');
-    max_desired = parseFloat(max_desired_elt.value);
-    max_desired_elt.addEventListener("input", function() {
-      max_desired = parseFloat(max_desired_elt.value);
-    });
-    // Steering Force
-    max_steer_elt = document.getElementById('max_steer');
-    max_steer = parseFloat(max_steer_elt.value);
-    max_steer_elt.addEventListener("input", function() {
-      max_steer = parseFloat(max_steer_elt.value);
-    });
-    // Flee Force
-    flee_force_elt = document.getElementById('flee_force');
-    flee_force = parseFloat(flee_force_elt.value);
-    flee_force_elt.addEventListener("input", function() {
-      flee_force = parseFloat(flee_force_elt.value);
-    });
-    // Flee Distance
-    flee_dist_elt = document.getElementById('flee_dist');
-    flee_dist = parseFloat(flee_dist_elt.value);
-    flee_dist_elt.addEventListener("input", function() {
-      flee_dist = parseFloat(flee_dist_elt.value);
-    });
-
-  </script>
-
-<script>
-  // JavaScript to toggle button text
-  document.getElementById('toggleOptionsBtn').addEventListener('click', function () {
-    var collapseElement = document.getElementById('visualizationOptions');
-    var button = this;
-
-    collapseElement.addEventListener('hidden.bs.collapse', function () {
-      button.textContent = 'Show Options';
-    });
-
-    collapseElement.addEventListener('shown.bs.collapse', function () {
-      button.textContent = 'Hide Options';
-    });
-  });
-</script>
-
-  <!-- Footer -->
-  <footer class="bg-dark text-center text-white">
-
-    <!-- Grid container -->
-    <div class="container p-4">
-      <p class="lead text_exp">Contact Links</p>
-      <!-- Section: Social media -->
-      <section class="mb-4">
-
-        <!-- Google -->
-        <a class="btn btn-outline-light btn-floating m-1" href = "mailto: romankitsela@gmail.com" role="button"><i class="fab fa-google"></i></a>
-
-        <!-- Linkedin -->
-        <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/in/roman-kitsela-29615b133/" role="button"><i class="fab fa-linkedin-in"></i></a>
-
-        <!-- Github -->
-        <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/Pova" role="button"><i class="fab fa-github"></i></a>
-      </section>
-      <!-- Section: Social media -->
-    </div>
-    <!-- Grid container -->
   </footer>
 
 </body>

@@ -1,108 +1,143 @@
+// Particle-steering behaviour sketch.
+// Configurable via data attributes on #canvasContainer:
+//   data-words="Welcome|to my|Website"   Pipe-separated lines to animate (default shown).
+//   data-font-src="assets/font2.otf"     Path to the OTF font, relative to the HTML page.
+//   data-font-size="164"                 Starting font size in px (default 164; may be scaled down to fit).
+//
+// Public function (attached to window) for pages with a live input:
+//   renderWords(text, opts)              Re-layout the animation with new text.
+//     text: string with "|" as line break, OR array of strings.
+//     opts.autoSize (bool, default true) Scale font down to fit canvas width.
+//
+// Sizing:
+//   If #canvasContainer has an explicit CSS height, the canvas fills the container.
+//   Otherwise it falls back to the viewport minus #navBar and optional #detailBar.
+
 let font;
-const points = []; //Need to define this globally.
+let vehicleLines = [];
+let fontSize = 164;
+let canvasWidth = 0;
+let canvasHeight = 0;
 
-const vehicles_1 = [];
-const vehicles_2 = [];
-const vehicles_3 = [];
+// Default simulation parameters used by Vehicle.arrive()/flee() in vehicle.js.
+// Pages with sliders (e.g. /steering/) overwrite these via their own input handlers;
+// pages without sliders (e.g. the landing page) rely on these defaults.
+var max_desired = 20;
+var max_steer = 10;
+var flee_force = 50;
+var flee_dist = 250;
 
-var xoff = 0;
+const MIN_FONT_SIZE = 40;
+const MAX_FONT_SIZE = 164;
 
-function preload() {
-  font = loadFont('assets/font2.otf');
+function readContainerConfig() {
+  const container = document.getElementById('canvasContainer');
+  const wordsAttr = (container && container.getAttribute('data-words')) || 'Welcome|to my|Website';
+  const fontSrc = (container && container.getAttribute('data-font-src')) || 'assets/font2.otf';
+  const fs = container && container.getAttribute('data-font-size');
+  return {
+    words: wordsAttr.split('|'),
+    fontSrc,
+    fontSize: fs ? parseFloat(fs) : MAX_FONT_SIZE
+  };
 }
 
+function preload() {
+  const { fontSrc } = readContainerConfig();
+  font = loadFont(fontSrc);
+}
 
 function setup() {
   adjustCanvasSize();
   const canvas = createCanvas(canvasWidth, canvasHeight);
   canvas.parent('canvasContainer');
 
+  const { words, fontSize: fs } = readContainerConfig();
+  fontSize = Math.min(fs, computeFittingFontSize(words, fs));
+  layoutVehicles(words);
+}
 
-  bbox_1 = font.textBounds('Welcome', 0, 0, 164);
-  bbox_2 = font.textBounds('to my', 0, 0, 164);
-  bbox_3 = font.textBounds('Website', 0, 0, 164)
+// Scale the requested font size down so the widest line fits within ~85% of the canvas width
+// and each line fits vertically. Clamped to [MIN_FONT_SIZE, MAX_FONT_SIZE].
+function computeFittingFontSize(words, requestedSize) {
+  if (!font || !words.length) return requestedSize;
+  const targetWidth = canvasWidth * 0.85;
+  const targetHeightPerLine = (canvasHeight * 0.7) / words.length;
 
-  //Calculating positions
-  //Split up vertical distances 30-20-20-30
-
-  vert_space = windowHeight - 100 - bbox_1.h - bbox_2.h - bbox_3.h
-
-  pts_1_x = (windowWidth - bbox_1.w) / 2
-  pts_1_y = 100 + vert_space * .3
-
-  points_1 = font.textToPoints('Welcome', pts_1_x, pts_1_y, 164, {
-    sampleFactor: .1,
-    simplifyThreshold: 0
-  });
-
-  pts_2_x = (windowWidth - bbox_2.w) / 2
-  pts_2_y = pts_1_y + bbox_1.h + vert_space * .2
-
-  points_2 = font.textToPoints('to my', pts_2_x, pts_2_y, 164, {
-    sampleFactor: .1,
-    simplifyThreshold: 0
-  });
-
-  pts_3_x = (windowWidth - bbox_3.w) / 2
-  pts_3_y = windowHeight - vert_space * .3 - bbox_3.h
-
-
-  points_3 = font.textToPoints('Website', pts_3_x, pts_3_y, 164, {
-    sampleFactor: .1,
-    simplifyThreshold: 0
-  });
-
-
-  for (let i = 0; i < points_1.length; i++) {
-    pt = points_1[i];
-    const vehicle = new Vehicle(pt.x, pt.y);
-    vehicles_1.push(vehicle);
+  let fs = Math.min(MAX_FONT_SIZE, requestedSize);
+  for (const word of words) {
+    if (!word) continue;
+    const bbox = font.textBounds(word, 0, 0, fs);
+    if (bbox.w > targetWidth) {
+      fs = Math.min(fs, Math.floor(fs * targetWidth / bbox.w));
+    }
+    if (bbox.h > targetHeightPerLine) {
+      fs = Math.min(fs, Math.floor(fs * targetHeightPerLine / bbox.h));
+    }
   }
+  return Math.max(MIN_FONT_SIZE, Math.min(MAX_FONT_SIZE, fs));
+}
 
-  for (let i = 0; i < points_2.length; i++) {
-    pt = points_2[i];
-    const vehicle = new Vehicle(pt.x, pt.y);
-    vehicles_2.push(vehicle);
-  }
-  for (let i = 0; i < points_3.length; i++) {
-    pt = points_3[i];
-    const vehicle = new Vehicle(pt.x, pt.y);
-    vehicles_3.push(vehicle);
-  }
+function layoutVehicles(words) {
+  const bboxes = words.map(w => font.textBounds(w, 0, 0, fontSize));
+  const totalTextHeight = bboxes.reduce((s, b) => s + b.h, 0);
+  const n = words.length;
 
+  const paddingTop = Math.max(20, canvasHeight * 0.15);
+  const vertSpace = Math.max(0, canvasHeight - paddingTop * 2 - totalTextHeight);
+  const gap = n > 1 ? vertSpace / (n - 1) : 0;
+
+  let cursorY = paddingTop;
+  vehicleLines = words.map((word, i) => {
+    const bbox = bboxes[i];
+    const x = (canvasWidth - bbox.w) / 2;
+    const baselineY = cursorY + bbox.h;
+    cursorY += bbox.h + gap;
+
+    const points = font.textToPoints(word, x, baselineY, fontSize, {
+      sampleFactor: 0.1,
+      simplifyThreshold: 0
+    });
+    return points.map(pt => new Vehicle(pt.x, pt.y));
+  });
 }
 
 function draw() {
   background(0);
-
-  for (let i = 0; i < points_1.length; i++) {
-    vehicles_1[i].behaviours();
-    vehicles_1[i].update();
-    vehicles_1[i].show();
-  }
-
-  for (let i = 0; i < points_2.length; i++) {
-    vehicles_2[i].behaviours();
-    vehicles_2[i].update();
-    vehicles_2[i].show();
-  }
-
-  for (let i = 0; i < points_3.length; i++) {
-    vehicles_3[i].behaviours();
-    vehicles_3[i].update();
-    vehicles_3[i].show();
+  for (const line of vehicleLines) {
+    for (const v of line) {
+      v.behaviours();
+      v.update();
+      v.show();
+    }
   }
 }
 
 function adjustCanvasSize() {
+  const container = document.getElementById('canvasContainer');
+  if (container && container.clientHeight > 0) {
+    canvasWidth = container.clientWidth;
+    canvasHeight = container.clientHeight;
+    return;
+  }
   const totalHeight = document.documentElement.clientHeight;
   const totalWidth = document.documentElement.clientWidth;
-
-  const navBarHeight = document.getElementById('navBar').clientHeight;
-  const detailBarHeight = document.getElementById('detailBar').clientHeight;
-
+  const navBar = document.getElementById('navBar');
+  const detailBar = document.getElementById('detailBar');
+  const navBarHeight = navBar ? navBar.clientHeight : 0;
+  const detailBarHeight = detailBar ? detailBar.clientHeight : 0;
   canvasHeight = totalHeight - navBarHeight - detailBarHeight;
   canvasWidth = totalWidth;
 }
 
-
+// Public entry point for pages that want to change the rendered text at runtime.
+window.renderWords = function (text, opts) {
+  const options = opts || {};
+  const words = Array.isArray(text)
+    ? text.filter(Boolean)
+    : String(text).split('|').map(w => w.trim()).filter(Boolean);
+  if (!words.length) return;
+  const autoSize = options.autoSize !== false;
+  fontSize = autoSize ? computeFittingFontSize(words, MAX_FONT_SIZE) : (options.fontSize || MAX_FONT_SIZE);
+  layoutVehicles(words);
+};
