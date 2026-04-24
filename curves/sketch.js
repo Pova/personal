@@ -2,7 +2,7 @@ let sensitivityZoom = 0.5;
 
 let t = -10; //initial time
 let t_inc = 0.05; //initial time interval
-var animation_const = 1;
+let animation_const = 1;
 let fr; //frame rate element
 let curve_name; //curve name variable
 

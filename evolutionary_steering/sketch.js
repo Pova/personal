@@ -20,7 +20,7 @@ let poison_health_loss = 0.5;
 const food = [];
 const poison = [];
 
-var debug = false;
+let debug = false;
 
 
 function setup() {
@@ -77,7 +77,7 @@ function setup() {
       pop();
     }
 
-    for (var i = vehicles.length-1; i>=0; i--){
+    for (let i = vehicles.length-1; i>=0; i--){
         vehicles[i].boundaries();
         vehicles[i].behaviours(food, poison);
         vehicles[i].update();

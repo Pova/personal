@@ -33,22 +33,22 @@ function setup() {
 //       await resume_animation();
 //       //const start = Date.now();
 //       if (alg === 'quick') {
-//         var alg_title = 'Quick Sort';
+//         let alg_title = 'Quick Sort';
 //         await quicksort(values, 0, values.length - 1);
 //       } else if (alg === 'bubble') {
-//         var alg_title = 'Bubble Sort';
+//         let alg_title = 'Bubble Sort';
 //         await bubblesort(values);
 //       } else if (alg === 'insert') {
-//         var alg_title = 'Insertion Sort';
+//         let alg_title = 'Insertion Sort';
 //         await insertsort(values);
 //       } else if (alg === 'select') {
-//         var alg_title = 'Selection Sort';
+//         let alg_title = 'Selection Sort';
 //         await selectsort(values);
 //       } else if (alg === 'merge') {
-//         var alg_title = 'Merge Sort';
+//         let alg_title = 'Merge Sort';
 //         await mergesort(values);
 //       } else if (alg === 'heap') {
-//         var alg_title = 'Heap Sort';
+//         let alg_title = 'Heap Sort';
 //         await heapsort(values);
 //       }
 //       animate_array();
@@ -76,7 +76,7 @@ function setup() {
 const sort_array = async () => {
   if (alg != undefined && animate === false) {
     await resume_animation();
-    var alg_title;
+    let alg_title;
     const algorithmMap = {
       'quick': {func: quicksort, title: 'Quick Sort', delay: 20},
       'bubble': {func: bubblesort, title: 'Bubble Sort', delay: 0},

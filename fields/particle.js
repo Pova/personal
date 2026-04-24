@@ -12,11 +12,11 @@ function Particle() {
   //Updating position of particle
 
   this.follow = function() {
-    var vectors = flowfield;
-    var x = floor((this.pos.x + canvasWidth / 2) / scl);
-    var y = floor((this.pos.y + canvasHeight / 2) / scl);
-    var index = x + y * cols;
-    var force = vectors[index];
+    const vectors = flowfield;
+    const x = floor((this.pos.x + canvasWidth / 2) / scl);
+    const y = floor((this.pos.y + canvasHeight / 2) / scl);
+    const index = x + y * cols;
+    const force = vectors[index];
     this.applyForce(force);
   }
 

@@ -17,8 +17,8 @@ let diag_allowed = false;
 let noSolution = false; //set to true if algorithm has no solution
 
 let counter = 0;
-var alg_started = false;
-var alg_finished = false;
+let alg_started = false;
+let alg_finished = false;
 let draw_allowed = true;
 let drawing_maze = false;
 

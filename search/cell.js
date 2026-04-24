@@ -32,8 +32,8 @@ function Cell(i, j, wall) {
   }
 
   this.addNeighbours = function(grid) {
-    var i = this.i;
-    var j = this.j;
+    const i = this.i;
+    const j = this.j;
 
     //Can be made more efficient
     if (i < cols - 1 && grid[i + 1][j].wall === false) {

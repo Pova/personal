@@ -206,8 +206,8 @@
 <script>
   // JavaScript to toggle button text
   document.getElementById('toggleOptionsBtn').addEventListener('click', function () {
-    var collapseElement = document.getElementById('visualizationOptions');
-    var button = this;
+    const collapseElement = document.getElementById('visualizationOptions');
+    const button = this;
 
     collapseElement.addEventListener('hidden.bs.collapse', function () {
       button.textContent = 'Show Options';

@@ -22,10 +22,10 @@ let canvasHeight = 0;
 // Default simulation parameters used by Vehicle.arrive()/flee() in vehicle.js.
 // Pages with sliders (e.g. /steering/) overwrite these via their own input handlers;
 // pages without sliders (e.g. the landing page) rely on these defaults.
-var max_desired = 20;
-var max_steer = 10;
-var flee_force = 50;
-var flee_dist = 250;
+let max_desired = 20;
+let max_steer = 10;
+let flee_force = 50;
+let flee_dist = 250;
 
 const MIN_FONT_SIZE = 40;
 const MAX_FONT_SIZE = 164;

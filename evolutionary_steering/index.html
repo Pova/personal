@@ -198,8 +198,8 @@
   <script>
     // Toggle "Hide Options" / "Show Options" label on the options button
     (function () {
-      var button = document.getElementById('toggleOptionsBtn');
-      var collapseElement = document.getElementById('visualizationOptions');
+      const button = document.getElementById('toggleOptionsBtn');
+      const collapseElement = document.getElementById('visualizationOptions');
 
       collapseElement.addEventListener('hidden.bs.collapse', function () {
         button.textContent = 'Show Options';

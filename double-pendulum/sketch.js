@@ -102,8 +102,8 @@ function resetAnimation(){
 }
 
 function euclideanDistance(point1, point2) {
-  var dx = point1.x - point2.x;
-  var dy = point1.y - point2.y;
+  const dx = point1.x - point2.x;
+  const dy = point1.y - point2.y;
 
   return Math.sqrt(dx*dx + dy*dy);
 }

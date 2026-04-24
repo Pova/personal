@@ -19,8 +19,8 @@ class Vehicle {
 
     boundaries(){
         
-        var d = 25; // Distance from boundary 
-        var desired = createVector(0,0);
+        const d = 25; // Distance from boundary 
+        let desired = createVector(0,0);
         
         if (this.position.x<d){
             desired = createVector(this.maxSpeed, this.velocity.y);
@@ -131,7 +131,7 @@ class Vehicle {
 
         const gr = color(0,255,0);
         const rd = color(255,0,0);
-        var col = lerpColor(rd,gr, this.health);
+        const col = lerpColor(rd,gr, this.health);
 
         fill(col);
         beginShape();

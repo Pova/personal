@@ -9,7 +9,7 @@ const environment = {
       this.font = loadFont('assets/font2.otf');
     },
     setup() {
-        var canvas = createCanvas(canvasWidth, canvasHeight);
+        const canvas = createCanvas(canvasWidth, canvasHeight);
         canvas.parent("canvas_div");
 
         bbox_1 = font.textBounds('Welcome', 0, 0, 164);
