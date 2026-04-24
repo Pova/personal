@@ -1,0 +1,13 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    text-align: center;
+}
+
+#roadCanvas {
+    background: rgb(250,250,250);
+}
+
+#networkCanvas {
+    background: rgb(0,0,0);
+}
