@@ -4,13 +4,23 @@ const vehicle_width = 6; //width in pixels
 const perception = 50;
 
 const vehicles = [];
+let vehicle_amount = 50;
 
-const food_amount = 10;
+const food_amount = 100;
 const poison_amount = 10;
+
+let food_create_rate = 0.15;
+const poison_create_rate = 0.01;
+
+// Per-vehicle tunables (read from Vehicle methods)
+let hunger_rate = 0.0025;
+let food_health_gain = 0.1;
+let poison_health_loss = 0.5;
+
 const food = [];
 const poison = [];
 
-let debug = true;
+var debug = false;
 
 
 function setup() {
@@ -18,14 +28,20 @@ function setup() {
     const canvas = createCanvas(canvasWidth, canvasHeight);
     canvas.parent('canvasContainer');
 
-    vehicles.push(new Vehicle())
 
+    // Create vehicles
+    for (let i=0;i<vehicle_amount;i++){
+      vehicles.push(new Vehicle())
+    }
+    
+    // Create food
     for (let i=0;i<food_amount;i++){
       const x = random(width);
       const y = random(height);
       food.push(createVector(x,y));
     }
 
+    // Create poison
     for (let i=0;i<poison_amount;i++){
       const x = random(width);
       const y = random(height);
@@ -34,6 +50,13 @@ function setup() {
   }
 
   function draw(){
+    if (random(1) < food_create_rate){
+      food.push(createVector(random(width),random(height)));
+    }
+    if (random(1) < poison_create_rate){
+      poison.push(createVector(random(width),random(height)));
+    }
+
     background(0);
 
     const target = createVector(mouseX,mouseY);
@@ -54,12 +77,18 @@ function setup() {
       pop();
     }
 
-    for (let vehicle of vehicles){
-        vehicle.behaviours(food,poison);
+    for (var i = vehicles.length-1; i>=0; i--){
+        vehicles[i].behaviours(food, poison);
 
-        vehicle.update();
+        vehicles[i].update();
         // vehicle.edges();
-        vehicle.show();
+        vehicles[i].show();
+
+        vehicles[i].applyHunger();
+
+        if (vehicles[i].dead()){
+            vehicles.splice(i,1);
+        }
     }
   }
 
@@ -77,4 +106,32 @@ function adjustCanvasSize() {
 
 function debug_toggle(){
   debug = !debug;
+}
+
+function reset(){
+  vehicles.length = 0;
+  food.length = 0;
+  poison.length = 0;
+
+  for (let i = 0; i < vehicle_amount; i++){
+    vehicles.push(new Vehicle());
+  }
+
+  for (let i = 0; i < food_amount; i++){
+    food.push(createVector(random(width), random(height)));
+  }
+
+  for (let i = 0; i < poison_amount; i++){
+    poison.push(createVector(random(width), random(height)));
+  }
+}
+
+// Resize the live population to match vehicle_amount without a full reset
+function syncPopulation(){
+  while (vehicles.length < vehicle_amount){
+    vehicles.push(new Vehicle());
+  }
+  while (vehicles.length > vehicle_amount){
+    vehicles.pop();
+  }
 }

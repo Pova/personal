@@ -105,34 +105,40 @@
       <div class="d-inline-flex align-text-center">
         <button type="button" class="btn btn-dark mx-1" onclick="debug_toggle()" ;>Debug</button>
         <button type="button" class="btn btn-dark mx-1" onclick="reset()" ;>Reset</button>
-        <button class="btn btn-dark mx-1" type="button" data-bs-toggle="collapse" data-bs-target="#visualizationOptions" aria-expanded="false" aria-controls="collapseExample" style="background-color:#65C6FF;color: #000;">Options</button>
+        <button id="toggleOptionsBtn" class="btn btn-dark mx-1" type="button" data-bs-toggle="collapse" data-bs-target="#visualizationOptions" aria-expanded="true" aria-controls="visualizationOptions" style="background-color:#65C6FF;color: #000;">Hide Options</button>
         <a class="navbar-brand mx-1 mx-lg-3" href="#how" style="color: #65C6FF;">What am I looking at?</a>
       </div>
     </div>
   </nav>
 
-  <!-- Dont need this yet -->
-
-  <!-- <section class="bg-secondary p-2 collapse" id="visualizationOptions" style="background-color:#65C6FF">
+  <section class="bg-secondary p-2 collapse show" id="visualizationOptions">
     <div class="container-fluid">
-      <div class=" align-items-center justify-content-around">
+      <div class="align-items-center justify-content-around">
         <div class="d-lg-flex align-items-center">
           <div class="container text-center">
-            <label for="customRange2" class="sliderText">Separation</label>
-            <input type="range" class="form-range" min="0" max="100" step="1" value="50" id="separation">
+            <label for="hungerRate" class="sliderText">Hunger rate: <span id="hungerRateValue">0.0025</span></label>
+            <input type="range" class="form-range" min="0" max="0.01" step="0.0001" value="0.0025" id="hungerRate">
           </div>
-            <div class="container text-center">
-              <label for="customRange2" class="sliderText">Alignment</label>
-              <input type="range" class="form-range" min="0" max="100" step="1" value="50" id="alignment">
-            </div>
           <div class="container text-center">
-            <label for="customRange1" class="sliderText align-items-center">Cohesion</label>
-            <input type="range" class="form-range" min="0" max="100" step="1" value="50" id="cohesion">
+            <label for="foodHealthGain" class="sliderText">Food health gain: <span id="foodHealthGainValue">0.10</span></label>
+            <input type="range" class="form-range" min="0" max="0.5" step="0.01" value="0.1" id="foodHealthGain">
+          </div>
+          <div class="container text-center">
+            <label for="poisonHealthLoss" class="sliderText">Poison health loss: <span id="poisonHealthLossValue">0.50</span></label>
+            <input type="range" class="form-range" min="0" max="1" step="0.01" value="0.5" id="poisonHealthLoss">
+          </div>
+          <div class="container text-center">
+            <label for="foodSpawnRate" class="sliderText">Food spawn rate: <span id="foodSpawnRateValue">0.15</span></label>
+            <input type="range" class="form-range" min="0" max="1" step="0.01" value="0.15" id="foodSpawnRate">
+          </div>
+          <div class="container text-center">
+            <label for="populationSize" class="sliderText">Population size: <span id="populationSizeValue">50</span></label>
+            <input type="range" class="form-range" min="0" max="200" step="1" value="50" id="populationSize">
           </div>
         </div>
       </div>
     </div>
-  </section> -->
+  </section>
 
 
   <section>
@@ -150,38 +156,60 @@
 
       <div class="container py-1">
         <h5 class="text_exp">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae veritatis laborum repellendus commodi, consequatur nostrum reiciendis cumque, esse fugit fuga iusto obcaecati quasi laudantium nam quaerat eaque numquam nulla sed.
+          A population of little triangular creatures foraging for food while trying to avoid poison &mdash; each one born with its own randomly generated &ldquo;DNA&rdquo; that dictates how strongly it is attracted to, or repelled by, what it sees.
         </h5>
         <p class="text_exp">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam sapiente odit, aspernatur a inventore fuga! Modi totam recusandae, repudiandae sapiente veritatis repellat voluptatibus, at temporibus perspiciatis maxime laborum esse sed?
+          The <span style="color: #00ff00;">green dots</span> are food and the <span style="color: #ff4444;">red dots</span> are poison. Every frame a vehicle looks for the nearest food and the nearest poison, then combines those two impulses into a single steering force. Eating food tops up its health, eating poison drains it, and a constant background hunger means that doing nothing is not an option.
         </p>
-        <p class="text_exp"><span style="color: #65C6FF">Click options above to experiment with the parameters for the simulation</span></p>
+        <p class="text_exp">
+          A vehicle's colour reflects its current health, fading from <span style="color: #00ff00;">green</span> when thriving to <span style="color: #ff4444;">red</span> as it starves. Once health hits zero the vehicle dies and is removed from the swarm.
+        </p>
+        <p class="text_exp">
+          With <strong>Debug</strong> enabled each creature shows two antennae: the <span style="color: #00ff00;">green line</span> is its appetite for food and the <span style="color: #ff4444;">red line</span> is its appetite for poison. Longer lines mean stronger attraction, and a line flipped to the opposite side means the weight is negative &mdash; the vehicle is actively <em>repelled</em> by that item. Poorly tuned DNA (loves poison, ignores food) dies out quickly; well-tuned DNA lingers.
+        </p>
+        <p class="text_exp"><span style="color: #65C6FF">Hit Reset to reseed the world with a fresh randomised population.</span></p>
       </div>
     </div>
   </section>
 
-  <!-- Dont need this yet -->
+  <script type="text/javascript">
+    function bindSlider(id, valueId, decimals, onChange) {
+      const slider = document.getElementById(id);
+      const readout = document.getElementById(valueId);
+      const render = () => {
+        const v = parseFloat(slider.value);
+        readout.textContent = decimals === 0 ? v.toFixed(0) : v.toFixed(decimals);
+        onChange(v);
+      };
+      slider.addEventListener('input', render);
+      render();
+    }
 
-  <!-- <script type="text/javascript">
-  // Separation Slider
-  separation_elt = document.getElementById('separation');
-  boid_separation = parseFloat(separation_elt.value);
-  separation_elt.addEventListener("input", function() {
-    boid_separation = parseFloat(separation_elt.value);
-  });
-  // Alignment Slider
-  alignment_elt = document.getElementById('alignment');
-  boid_alignment = parseFloat(alignment_elt.value);
-  alignment_elt.addEventListener("input", function() {
-    boid_alignment = parseFloat(alignment_elt.value);
-  });
-  // Cohesion Slider
-  cohesion_elt = document.getElementById('cohesion');
-  boid_cohesion = parseFloat(cohesion_elt.value);
-  cohesion_elt.addEventListener("input", function() {
-    boid_cohesion = parseFloat(cohesion_elt.value);
-  });
-  </script> -->
+    bindSlider('hungerRate',       'hungerRateValue',       4, v => { hunger_rate = v; });
+    bindSlider('foodHealthGain',   'foodHealthGainValue',   2, v => { food_health_gain = v; });
+    bindSlider('poisonHealthLoss', 'poisonHealthLossValue', 2, v => { poison_health_loss = v; });
+    bindSlider('foodSpawnRate',    'foodSpawnRateValue',    2, v => { food_create_rate = v; });
+    bindSlider('populationSize',   'populationSizeValue',   0, v => {
+      vehicle_amount = Math.round(v);
+      if (typeof syncPopulation === 'function') syncPopulation();
+    });
+  </script>
+
+  <script>
+    // Toggle "Hide Options" / "Show Options" label on the options button
+    (function () {
+      var button = document.getElementById('toggleOptionsBtn');
+      var collapseElement = document.getElementById('visualizationOptions');
+
+      collapseElement.addEventListener('hidden.bs.collapse', function () {
+        button.textContent = 'Show Options';
+      });
+
+      collapseElement.addEventListener('shown.bs.collapse', function () {
+        button.textContent = 'Hide Options';
+      });
+    })();
+  </script>
 
 
   <!-- Contact footer -->
