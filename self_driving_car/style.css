@@ -1,13 +1,28 @@
-body {
-    margin: 0;
-    overflow: hidden;
-    text-align: center;
+/* Simulation stage: the dark bar that hosts the two canvases. */
+.sdc-stage {
+    padding: 1rem 0;
+}
+
+.sdc-stage__inner {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 #roadCanvas {
-    background: rgb(250,250,250);
+    background: rgb(250, 250, 250);
+    display: block;
 }
 
 #networkCanvas {
-    background: rgb(0,0,0);
+    background: rgb(0, 0, 0);
+    display: block;
+}
+
+/* Shared styling for the "What am I looking at?" prose block so it matches
+   the typographic feel of the other project pages (e.g. steering). */
+.text_exp {
+    line-height: 1.6;
 }

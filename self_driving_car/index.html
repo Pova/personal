@@ -1,32 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Self driving car</title>
+  <meta charset="UTF-8">
+  <meta name="author" content="Roman Kitsela" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Self-driving car &mdash; Roman Kitsela</title>
+  <meta name="description" content="Neural-network-driven cars learning to navigate traffic, built from scratch without ML libraries. Click the road to reset.">
+
+  <!-- Bootstrap import -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Default styling -->
+  <link rel="stylesheet" href="../global_css/main.css">
+  <!-- Project-specific styling -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-85SP4HW3TX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-85SP4HW3TX');
+  </script>
 </head>
+
 <body>
-    <div style="display: inline-flex">
-        <canvas id="roadCanvas"></canvas>
-        <canvas id="networkCanvas"></canvas>
-    </div>
+  <!-- Primary nav -->
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark" id="navBar">
+    <div class="container-fluid px-lg-5">
+      <a href="../" class="navbar-brand">
+        <h1 class="display-4">Roman Kitsela</h1>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="inputs">
-        <p>Click on canvas to reset</p>
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../bio/index.html">About</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mathematics</a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="../fields/index.html">Vector Fields</a></li>
+              <li><a class="dropdown-item" href="../curves/index.html">Curves in Space</a></li>
+              <li><a class="dropdown-item" href="../mandelbrot/index.html">Mandelbrot Set</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Simulations</a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="../double-pendulum/index.html">Double Pendulum</a></li>
+              <li><a class="dropdown-item" href="../lorenz/index.html">Lorenz Attractor</a></li>
+              <li><a class="dropdown-item" href="../flocking/index.html">Flocking</a></li>
+              <li><a class="dropdown-item" href="../perlin/index.html">Perlin Noise</a></li>
+              <li><a class="dropdown-item" href="../l-systems/index.html">L-systems</a></li>
+              <li><a class="dropdown-item" href="../steering/index.html">Steering</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Algorithms</a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="../sorting/index.html">Sorting</a></li>
+              <li><a class="dropdown-item" href="../search/index.html">Search</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false">AI/ML</a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item active">Self-driving car</a></li>
+              <li><a class="dropdown-item" href="../evolutionary_steering/index.html">Evolutionary Steering</a></li>
+              <li><a class="dropdown-item" href="../evolutionary_rockets/index.html">Evolutionary Rockets</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Games</a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="../snake/index.html">Snake</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
+  </nav>
 
-    <script src="utils.js"></script>
-    <script src="network.js"></script>
-    <script src="sensors.js"></script>
-    <script src="controls.js"></script>
-    <script src="path.js"></script>
-    <script src="road.js"></script>
-    <script src="vehicles.js"></script>
-    <script src="playerCar.js"></script>
-    <script src="traffic.js"></script>
-    <script src="visualizer.js"></script>
-    <script src="main.js"></script>
+  <!-- Page title bar -->
+  <nav class="navbar navbar-dark bg-secondary border-bottom border-dark border-2 justify-content-between" id="detailBar">
+    <div class="container-fluid align-text-center px-lg-5">
+      <div class="d-inline-flex">
+        <a class="navbar-brand">
+          <h2>Self-driving car</h2>
+        </a>
+      </div>
+      <div class="d-inline-flex">
+        <button id="resetBtn" class="btn btn-dark mx-1" type="button" style="background-color:#65C6FF;color:#000;">Reset</button>
+        <a class="navbar-brand" href="#how" style="color:#65C6FF;">What am I looking at?</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Simulation stage: two canvases side-by-side. -->
+  <section class="bg-dark sdc-stage" id="sdc-stage" aria-label="Self-driving car simulation">
+    <div class="sdc-stage__inner">
+      <canvas id="roadCanvas" aria-label="Road simulation"></canvas>
+      <canvas id="networkCanvas" aria-label="Neural network visualization"></canvas>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="bg-secondary text-light p-md-5 text-center text-lg-start" id="how">
+    <div class="d-xl-flex align-items-center justify-content-around">
+      <div class="container py-5 text-center">
+        <h1 class="display-1">What am I looking at?</h1>
+      </div>
+
+      <div class="container py-4">
+        <h5 class="text_exp">
+          A population of cars, each driven by its own tiny neural network, trying to navigate traffic &mdash; no ML libraries, just linear algebra from scratch.
+        </h5>
+        <p class="text_exp">
+          On the <strong>left canvas</strong>, a fleet of semi-transparent cars starts from the same position. Each one is equipped with a fan of <em>sensor rays</em> that detect the road edges and other vehicles ahead; those sensor readings are fed into a small feed-forward network whose outputs decide <em>forward</em>, <em>reverse</em>, <em>left</em> and <em>right</em>.
+        </p>
+        <p class="text_exp">
+          At each frame the simulation highlights the <strong>best car</strong> &mdash; the one that has made it furthest up the road &mdash; and the view follows it. Faded cars behind are the rest of the population still sharing the road.
+        </p>
+        <p class="text_exp">
+          The <strong>right canvas</strong> visualises the best car's brain: each column is a layer, each node is a neuron, and the lines between them are weighted connections. The dashed &ldquo;marching ants&rdquo; along the connections make positive and negative weights easy to spot.
+        </p>
+        <p class="text_exp">
+          Every car is born with a slightly randomised brain, so each run plays out differently. <strong>Click the road canvas</strong> (or hit Reset) to spin up a fresh batch.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact footer -->
+  <footer class="bio-footer text-center" id="contact_links" aria-labelledby="contact-heading">
+    <div class="container">
+      <h2 id="contact-heading" class="h4 mb-3">Contact</h2>
+      <nav aria-label="Contact links">
+        <a class="btn btn-outline-light btn-sm m-1" href="mailto:romankitsela@gmail.com">
+          <i class="fab fa-google" aria-hidden="true"></i>
+          <span class="contact-label">Email</span>
+        </a>
+        <a class="btn btn-outline-light btn-sm m-1" href="https://www.linkedin.com/in/roman-kitsela-29615b133/" rel="noopener" target="_blank">
+          <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+          <span class="contact-label">LinkedIn</span>
+        </a>
+        <a class="btn btn-outline-light btn-sm m-1" href="https://github.com/Pova" rel="noopener" target="_blank">
+          <i class="fab fa-github" aria-hidden="true"></i>
+          <span class="contact-label">GitHub</span>
+        </a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Simulation scripts -->
+  <script src="utils.js"></script>
+  <script src="network.js"></script>
+  <script src="sensors.js"></script>
+  <script src="controls.js"></script>
+  <script src="path.js"></script>
+  <script src="road.js"></script>
+  <script src="vehicles.js"></script>
+  <script src="playerCar.js"></script>
+  <script src="traffic.js"></script>
+  <script src="visualizer.js"></script>
+  <script src="main.js"></script>
 </body>
+
 </html>
