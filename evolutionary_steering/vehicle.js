@@ -1,6 +1,6 @@
 class Vehicle {
-    constructor() {
-        this.position = createVector(random(width), random(height));
+    constructor(x = random(width), y = random(height), generation = 0, dna = null) {
+        this.position = createVector(x, y);
         this.velocity = p5.Vector.random2D();
         this.velocity.setMag(random(2,4));
         this.acceleration = createVector();
@@ -8,42 +8,86 @@ class Vehicle {
         this.maxForce = 0.5;
 
         this.health = 1;
-
-        this.dna = [];
-        
-        // Food desire
-        this.dna[0] = random(-5,5);
-        // Poison desire
-        this.dna[1] = random(-5,5);
+        this.generation = generation;
+        this.age = 0;
+    
+        if (dna === null) {
+            this.dna = [];
+            
+            this.dna[0] = random(-5,5); // Food desire
+            this.dna[1] = random(-5,5); // Poison desire
+            this.dna[2] = random(3,100); // Food perception
+            this.dna[3] = random(3,100); // Poison perception
+        } else {
+            this.dna = dna.slice();
+        }
+    
     }
 
-    boundaries(){
+    applyForce(force){
+        this.acceleration.add(force);
+    }
+
+    applyHunger(){
+        this.health -= hunger_rate;
+    }
+
+    dead(){
+        return (this.health <= 0);
+    }
+
+    clone(){
+        if (random(1) < 0.00125){
+            return new Vehicle(this.position.x, this.position.y, this.generation + 1, this.dna);
+        } else { 
+            return null;
+        }
+    }
+
+    apply_boundary_forces(){
         
         const d = 25; // Distance from boundary 
         let desired = createVector(0,0);
         
         if (this.position.x<d){
-            desired = createVector(this.maxSpeed, this.velocity.y);
+            desired = desired.add(createVector(this.maxSpeed, this.velocity.y));
         } else if (this.position.x > width-d){
-            desired = createVector(-this.maxSpeed, this.velocity.y);
+            desired = desired.add(createVector(-this.maxSpeed, this.velocity.y));
         }
 
         if (this.position.y<d){
-            desired = createVector(this.velocity.x, this.maxSpeed);
-        } else if (this.position.y<0){
-            desired = createVector(this.velocity.x, -this.maxSpeed);
+            desired = desired.add(createVector(this.velocity.x, this.maxSpeed));
+        } else if (this.position.y > height-d){
+            desired = desired.add(createVector(this.velocity.x, -this.maxSpeed));
         }
 
-        return desired;
-    }
+        // Apply force to vehicle
 
+        if (desired.mag() > 0){
+            if (debug){
+                console.log("Hit boundary!");
+                console.log("old velocity: ", this.velocity.x, this.velocity.y);
+            }
+            desired.normalize();
+            desired.mult(this.maxSpeed);
+            let steer = p5.Vector.sub(desired, this.velocity);
+            // steer.limit(this.maxForce);
+            this.applyForce(steer);
+            if (debug){
+                console.log("desired: ", steer.x, steer.y);
+            }
+        }
+    }
 
     // Behaviours triggers eat twice
     // eat triggers seek twice
     
-    behaviours(good,bad){
-        let steerG = this.eat(good, food_health_gain);
-        let steerB = this.eat(bad, -poison_health_loss);
+    search_and_eat_behaviours(good,bad){
+        // good is food (array)
+        // bad is poison (array)
+
+        let steerG = this.searching_behaviour(good, food_health_gain, this.dna[2]);
+        let steerB = this.searching_behaviour(bad, -poison_health_loss, this.dna[3]);
 
         steerG.mult(this.dna[0]);
         steerB.mult(this.dna[1]);
@@ -53,17 +97,6 @@ class Vehicle {
         combinedSteer.limit(this.maxForce);
         this.applyForce(combinedSteer);
         
-        
-        // this.applyForce(steerG);
-        // this.applyForce(steerB);
-    }
-
-    applyForce(force){
-        this.acceleration.add(force);
-    }
-
-    applyHunger(){
-        this.health -= hunger_rate;
     }
 
     seek(target){
@@ -76,37 +109,49 @@ class Vehicle {
         return steer;
     }
 
-    eat(list, health_gain){
-        let closestIdx = -1;
+    searching_behaviour(list, health_effect, perception_radius){
+        
         let min_dist = Infinity;
-        for (let i=0;i<list.length;i++){
-            const d = this.position.dist(list[i]);
-            if (d<min_dist){
-                min_dist = d;
-                closestIdx = i;
+        let closest = null;
+        
+        // scan across all food/poison
+        for (let i = list.length - 1; i >= 0; i--){
+            const d = this.position.dist(list[i]); // distance to food/poison
+            
+            // if close enough, eat and remove from list
+            if (d < this.maxSpeed){
+                list.splice(i,1);
+                this.health += health_effect;
+            } else {
+                if (d < perception_radius && d<min_dist){
+                    min_dist = d;
+                    closest = list[i];
+                }
             }
         }
-
-        // Eats food if close enough
-        if (min_dist < 5){
-            list.splice(closestIdx,1);
-            this.health += health_gain;
-        } else if (closestIdx > -1) {
-            return this.seek(list[closestIdx]);
+            
+        if (closest != null) {
+            return this.seek(closest);
         }
 
         return createVector(0,0);
     }
 
-    dead(){
-        return (this.health <= 0);
-    }
+
 
     update(){
         this.velocity.add(this.acceleration);
         this.velocity.limit(this.maxSpeed);
         this.position.add(this.velocity);
-        this.acceleration.mult(0);   
+
+        if (this.position.x < 0 || this.position.x > width || this.position.y < 0 || this.position.y > height){
+            console.log("Vehicle out of bounds!");
+            console.log("position: ", this.position.x, this.position.y);
+            console.log("velocity: ", this.velocity.x, this.velocity.y);
+        }
+
+        this.acceleration.mult(0);
+        this.age += 1;
     }
 
     show(){
@@ -118,12 +163,21 @@ class Vehicle {
         rotate(angle);
 
         if (debug){
+            noFill();
+
+            strokeWeight(2);
             stroke(0,255,0);
-            strokeWeight(1);
+            // Visualize food desire
             line(1,0,1,-this.dna[0]*20);
+            // Visualize food perception
+            ellipse(0,0,this.dna[2]*2);
+
             stroke(255,0,0);
             strokeWeight(1);
+            // Visualize poison desire
             line(-1,0,-1,-this.dna[1]*20);
+            // Visualize poison perception
+            ellipse(0,0,this.dna[3]*2);
         }
 
         strokeWeight(1);
