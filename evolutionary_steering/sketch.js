@@ -1,35 +1,46 @@
+// Global variables
+
+// Canvas Settings
+const boundary_pad = 25;
+const MAX_POPULATION_SIZE_ALLOWED = 5000;
+let debug = false;
+
+// Vehicle Settings
 const vehicle_length = 10; //length in pixels
 const vehicle_width = 6; //width in pixels
 
-const boundary_pad = 25;
+// for initial population generation
+const MIN_PERCEPTION_RADIUS = 3;
+const MAX_PERCEPTION_RADIUS = 100;
+const MAX_SPEED = 10;
 
-const perception = 50;
+// Simulation Settings
+let food_create_rate = 0.15; // slider overrides this
+const poison_create_rate = 0.01;
+let hunger_rate = 0.0025; // slider overrides this
+let food_health_gain = 0.1; // slider overrides this
+let poison_health_loss = 0.5; // slider overrides this
 
-const vehicles = [];
-let vehicle_amount = 50;
+const CLONE_ATTEMPT_RATE = 0.00125;
 
+// Starting amounts
+let vehicle_amount = 50; // slider overrides this
 const food_amount = 100;
 const poison_amount = 10;
 
-let food_create_rate = 0.15;
-const poison_create_rate = 0.01;
 
-// Per-vehicle tunables (read from Vehicle methods)
-let hunger_rate = 0.0025;
-let food_health_gain = 0.1;
-let poison_health_loss = 0.5;
-
+const vehicles = [];
 const food = [];
 const poison = [];
 
-let debug = false;
-
+// Metrics
+// --------------------------------------------
 // for average age at death
 let totalDeathAge = 0;
 let deathCount = 0;
-
 let maxGeneration = 0;
 let maxAge = 0;
+// --------------------------------------------
 
 
 function setup() {
@@ -59,12 +70,21 @@ function setup() {
 
   function draw(){
 
-    if (random(1) < food_create_rate){
-      food.push(createVector(random(boundary_pad, width-boundary_pad),random(boundary_pad, height-boundary_pad)));
+    // safety check to prevent population from growing too large
+    if (vehicles.length > MAX_POPULATION_SIZE_ALLOWED){
+      vehicles.length = MAX_POPULATION_SIZE_ALLOWED;
     }
-    if (random(1) < poison_create_rate){
-      poison.push(createVector(random(boundary_pad, width-boundary_pad),random(boundary_pad, height-boundary_pad)));
+
+    // Create food and poison
+    if (vehicles.length > 0){
+      if (random(1) < food_create_rate){
+        food.push(createVector(random(boundary_pad, width-boundary_pad),random(boundary_pad, height-boundary_pad)));
+      }
+      if (random(1) < poison_create_rate){
+        poison.push(createVector(random(boundary_pad, width-boundary_pad),random(boundary_pad, height-boundary_pad)));
+      }
     }
+
 
     background(0);
 
@@ -97,6 +117,7 @@ function setup() {
       vehicles[i].show();
       
       vehicles[i].applyHunger();
+
       if (vehicles[i].dead()){
           recordDeath(vehicles[i]);
           vehicles.splice(i,1);
@@ -104,7 +125,7 @@ function setup() {
         // Evolutionary step
         // Didn't die, has a chance to mutate
         recordGeneration(vehicles[i]);
-        const newVehicle = vehicles[i].clone();
+        const newVehicle = vehicles[i].clone_and_mutate();
         if (newVehicle != null){
           vehicles.push(newVehicle);
         }
@@ -131,9 +152,11 @@ function debug_toggle(){
 }
 
 function reset(){
+  // Reset vehicles, food, and poison
   vehicles.length = 0;
   food.length = 0;
   poison.length = 0;
+  // Reset metrics
   totalDeathAge = 0;
   deathCount = 0;
   maxAge = 0;
@@ -177,12 +200,50 @@ function drawMetrics(){
   const currentOldestAge = vehicles.reduce((maxAge, vehicle) => max(maxAge, vehicle.age), 0);
   const displayedOldestAge = max(maxAge, currentOldestAge);
   const metrics = [
-    `Population: ${vehicles.length}`,
+    `Current Population: ${vehicles.length}`,
     `Avg. Age at Death: ${averageAgeAtDeath.toFixed(1)}`,
     `Max Generation: ${maxGeneration}`,
     `Max Age Reached: ${displayedOldestAge}`,
     `Current Max Age: ${currentOldestAge}`
   ];
+  const averageMetrics = [
+    'Population Averages',
+    `health: ${getAverageVehicleValue('health').toFixed(3)}`,
+    `age: ${getAverageVehicleValue('age').toFixed(3)}`,
+    `foodDesire: ${getAverageVehicleValue('foodDesire').toFixed(3)}`,
+    `poisonDesire: ${getAverageVehicleValue('poisonDesire').toFixed(3)}`,
+    `foodPerceptionRadius: ${getAverageVehicleValue('foodPerceptionRadius').toFixed(1)}`,
+    `poisonPerceptionRadius: ${getAverageVehicleValue('poisonPerceptionRadius').toFixed(1)}`,
+    `maxSpeed: ${getAverageVehicleValue('maxSpeed').toFixed(2)}`,
+    `reproductionCost: ${getAverageVehicleValue('reproductionCost').toFixed(3)}`,
+    `poisonTolerance: ${getAverageVehicleValue('poisonTolerance').toFixed(3)}`,
+  ];
+  const oldestVehicle = getDistinguishedOldestVehicle();
+
+  if (oldestVehicle !== null){
+    averageMetrics.push(
+      '',
+      '',
+      'Best Vehicle DNA',
+      `age: ${oldestVehicle.age}`,
+      `foodDesire: ${oldestVehicle.dna[0].toFixed(3)}`,
+      `poisonDesire: ${oldestVehicle.dna[1].toFixed(3)}`,
+      `foodPerceptionRadius: ${oldestVehicle.dna[2].toFixed(1)}`,
+      `poisonPerceptionRadius: ${oldestVehicle.dna[3].toFixed(1)}`,
+      `mutationRate: ${oldestVehicle.dna[4].toFixed(3)}`,
+      `maxSpeed: ${oldestVehicle.dna[5].toFixed(2)}`,
+      `reproductionCost: ${oldestVehicle.dna[6].toFixed(3)}`,
+      `poisonTolerance: ${oldestVehicle.dna[7].toFixed(3)}`,
+      `startingHealth: ${oldestVehicle.dna[8].toFixed(3)}`
+    );
+  } else {
+    averageMetrics.push(
+      '',
+      '',
+      'Best Vehicle DNA',
+      'Waiting for a distinguished vehicle...'
+    );
+  }
 
   push();
   textFont('monospace');
@@ -190,7 +251,7 @@ function drawMetrics(){
   textAlign(LEFT, TOP);
   const padding = 12;
   const lineHeight = 22;
-  const boxWidth = 235;
+  const boxWidth = 285;
   const boxHeight = padding * 2 + lineHeight * metrics.length;
 
   noStroke();
@@ -201,5 +262,48 @@ function drawMetrics(){
   for (let i = 0; i < metrics.length; i++){
     text(metrics[i], 24, 24 + i * lineHeight);
   }
+
+  if (debug || true){
+    const debugBoxY = 12 + boxHeight + 12;
+    const debugBoxHeight = padding * 2 + lineHeight * averageMetrics.length;
+
+    noStroke();
+    fill(0, 170);
+    rect(12, debugBoxY, boxWidth, debugBoxHeight, 6);
+
+    fill(255);
+    for (let i = 0; i < averageMetrics.length; i++){
+      text(averageMetrics[i], 24, debugBoxY + padding + i * lineHeight);
+    }
+  }
   pop();
+}
+
+function getAverageVehicleValue(propertyName){
+  if (vehicles.length === 0){
+    return 0;
+  }
+
+  const total = vehicles.reduce((sum, vehicle) => sum + vehicle[propertyName], 0);
+  return total / vehicles.length;
+}
+
+function getDistinguishedOldestVehicle(){
+  if (vehicles.length === 0){
+    return null;
+  }
+
+  let oldestVehicle = vehicles[0];
+  let oldestCount = 1;
+
+  for (let i = 1; i < vehicles.length; i++){
+    if (vehicles[i].age > oldestVehicle.age){
+      oldestVehicle = vehicles[i];
+      oldestCount = 1;
+    } else if (vehicles[i].age === oldestVehicle.age){
+      oldestCount += 1;
+    }
+  }
+
+  return oldestCount === 1 ? oldestVehicle : null;
 }

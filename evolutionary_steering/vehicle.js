@@ -12,8 +12,6 @@ class Vehicle {
         this.maxSpeed = 5; 
         this.maxForce = 0.5; // caps steering in seek() and search_and_eat_behaviours(); shapes turn rate and paths (triangle motion), not drawn explicitly in show()
 
-        this.health = 1;
-
         // improvement idea: split health into:
         // --------------------------------------------
         // energy
@@ -32,27 +30,46 @@ class Vehicle {
             this.dna[0] = random(-5,5); // Food desire
             this.dna[1] = random(-5,5); // Poison desire
             
-            this.dna[2] = random(3,100); // Food perception (downside: costs more energy to sustain)
-            this.dna[3] = random(3,100); // Poison perception (downside: costs more energy to sustain)
+            this.dna[2] = random(MIN_PERCEPTION_RADIUS,MAX_PERCEPTION_RADIUS); // Food perception (downside: costs more energy to sustain)
+            this.dna[3] = random(MIN_PERCEPTION_RADIUS,MAX_PERCEPTION_RADIUS); // Poison perception (downside: costs more energy to sustain)
             
             this.dna[4] = random(0,1); // Mutation rate
             
-            this.dna[5] = random(1, 10); // maxSpeed (can move faster but will make hunger rate faster)
+            this.dna[5] = random(1, MAX_SPEED); // maxSpeed (can move faster but will make hunger rate faster)
             this.dna[6] = random(0, 1); // reproductionCost (higher cost means less likely to reproduce but children more likely to survive)
             this.dna[7] = random(0, 1); // poisonTolerance (downside?)
+            this.dna[8] = random(0, 2); // startingHealth
         } else {
             this.dna = dna.slice();
         }
+
+        this.setStartingValues();
     }
 
-
+    setStartingValues(){
+        this.foodDesire = this.dna[0];
+        this.poisonDesire = this.dna[1];
+        this.foodPerceptionRadius = this.dna[2];
+        this.poisonPerceptionRadius = this.dna[3];
+        this.mutationRate = this.dna[4];
+        this.maxSpeed = this.dna[5];
+        this.reproductionCost = this.dna[6];
+        this.poisonTolerance = this.dna[7];
+        this.health = this.dna[8];
+    }
 
     applyForce(force){
         this.acceleration.add(force);
     }
 
     applyHunger(){
-        this.health -= hunger_rate;
+
+        const perceptionCost = (this.foodPerceptionRadius/MAX_PERCEPTION_RADIUS)
+        const speedCost = (this.maxSpeed/MAX_SPEED)
+        const totalCost = perceptionCost + speedCost + 1
+        const adjustedHungerRate = hunger_rate * totalCost
+        
+        this.health -= adjustedHungerRate;
     }
 
     dead(){
@@ -67,13 +84,70 @@ class Vehicle {
         }
     }
 
-    // currently just clones the vehicle
-    mutate(){
-        if (random(1) < 0.00125){
-            return new Vehicle(this.position.x, this.position.y, this.generation + 1, this.dna);
-        } else { 
+    clone_and_mutate(){
+        if (random(1) < CLONE_ATTEMPT_RATE){
+            // check the health
+            if (this.health > this.reproductionCost){
+                // has enough health to reproduce
+                if (random(1) < this.mutationRate){
+                    // mutate the dna
+                    return new Vehicle(this.position.x, this.position.y, this.generation + 1, this.dna);
+                } else {
+                    // regular clone
+                    return new Vehicle(this.position.x, this.position.y, this.generation + 1, this.mutate(this.dna));
+                }
+            } else {
+                // dies in the attempt
+                this.health = 0;
+                return null;
+            }
+        } else {
             return null;
         }
+    }
+
+    
+    mutate(dna){
+
+        const newDna = dna.slice();
+
+        const indexToMutate = floor(random(dna.length));
+
+        // want different mutation rules for different indices
+
+        switch (indexToMutate){
+            case 0: // Food desire
+                newDna[indexToMutate] = constrain(dna[indexToMutate] + random(-0.5,0.5),-5, 5);
+                break;
+            case 1: // Poison desire
+                newDna[indexToMutate] = constrain(dna[indexToMutate] + random(-0.5,0.5), -5, 5);
+                break;
+            case 2: // Food perception
+                // remove limit on max perception - see if this evolves to grow
+                newDna[indexToMutate] = constrain(dna[indexToMutate] + random(-10,10), MIN_PERCEPTION_RADIUS);
+                break;
+            case 3: // Poison perception
+                // remove limit on max perception - see if this evolves to grow
+                newDna[indexToMutate] = constrain(dna[indexToMutate] + random(-10,10), MIN_PERCEPTION_RADIUS);
+                break;
+            case 4: // Mutation rate
+                newDna[indexToMutate] = constrain(dna[indexToMutate] + random(-0.1,0.1), 0.0, 1.0);
+                break;
+            case 5: // maxSpeed
+                newDna[indexToMutate] = constrain(dna[indexToMutate] + random(-1,1), 0);
+                break;
+            case 6: // reproductionCost
+                newDna[indexToMutate] = constrain(dna[indexToMutate] + random(-0.1,0.1), 0.0);
+                break;
+            case 7: // poisonTolerance
+                newDna[indexToMutate] = constrain(dna[indexToMutate] + random(-0.1,0.1), 0.0);
+                break;
+            case 8: // startingHealth
+                newDna[indexToMutate] = constrain(dna[indexToMutate] + random(-0.1,0.1), 0.0);
+                break;
+        }
+
+        return dna;
     }
 
     apply_boundary_forces(){
@@ -103,7 +177,10 @@ class Vehicle {
             desired.normalize();
             desired.mult(this.maxSpeed);
             let steer = p5.Vector.sub(desired, this.velocity);
+            
+            // No max force limit here - want to allow for immediate correction of direction
             // steer.limit(this.maxForce);
+            
             this.applyForce(steer);
             if (debug){
                 console.log("desired: ", steer.x, steer.y);
