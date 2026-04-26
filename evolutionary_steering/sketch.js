@@ -78,10 +78,10 @@ function setup() {
     // Create food and poison
     if (vehicles.length > 0){
       if (random(1) < food_create_rate){
-        food.push(createVector(random(boundary_pad, width-boundary_pad),random(boundary_pad, height-boundary_pad)));
+        food.push(createVector(random(boundary_pad*2, width-boundary_pad*2),random(boundary_pad*2, height-boundary_pad*2)));
       }
       if (random(1) < poison_create_rate){
-        poison.push(createVector(random(boundary_pad, width-boundary_pad),random(boundary_pad, height-boundary_pad)));
+        poison.push(createVector(random(boundary_pad*2, width-boundary_pad*2),random(boundary_pad*2, height-boundary_pad*2)));
       }
     }
 
@@ -167,11 +167,11 @@ function reset(){
   }
 
   for (let i = 0; i < food_amount; i++){
-    food.push(createVector(random(width), random(height)));
+    food.push(createVector(random(boundary_pad*2, width-boundary_pad*2),random(boundary_pad*2, height-boundary_pad*2)));
   }
 
   for (let i = 0; i < poison_amount; i++){
-    poison.push(createVector(random(width), random(height)));
+    poison.push(createVector(random(boundary_pad*2, width-boundary_pad*2),random(boundary_pad*2, height-boundary_pad*2)));
   }
 }
 
