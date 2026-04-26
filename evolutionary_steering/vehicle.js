@@ -8,6 +8,15 @@ class Vehicle {
         this.maxForce = 0.5;
 
         this.health = 1;
+        // idea: split health into:
+        // --------------------------------------------
+        // energy
+        // age
+        // metabolism (perception radius)
+        // speedCost
+        // turningCost
+        // reproductionCost (requires stored energy)
+        // --------------------------------------------
         this.generation = generation;
         this.age = 0;
     
@@ -16,13 +25,27 @@ class Vehicle {
             
             this.dna[0] = random(-5,5); // Food desire
             this.dna[1] = random(-5,5); // Poison desire
+            
             this.dna[2] = random(3,100); // Food perception
             this.dna[3] = random(3,100); // Poison perception
+            
+            this.dna[4] = random(0,1); // Mutation rate
+
+            // Features to vary with DNA:
+            // speed vehicles can move 
+            // reproduction cost?
+            // poison tolerance
+            
+            this.dna[5] = random(0,1); // maxSpeed (will make vehicles hungry faster)
+            this.dna[6] = random(0,1); // maxHealth (downside?)
+            this.dna[7] = random(0,1); // reproductionCost (downside?)
+            this.dna[8] = random(0,1); // poisonTolerance (downside?)
         } else {
             this.dna = dna.slice();
         }
-    
     }
+
+
 
     applyForce(force){
         this.acceleration.add(force);
@@ -37,6 +60,15 @@ class Vehicle {
     }
 
     clone(){
+        if (random(1) < 0.00125){
+            return new Vehicle(this.position.x, this.position.y, this.generation + 1, this.dna);
+        } else { 
+            return null;
+        }
+    }
+
+    // currently just clones the vehicle
+    mutate(){
         if (random(1) < 0.00125){
             return new Vehicle(this.position.x, this.position.y, this.generation + 1, this.dna);
         } else { 
