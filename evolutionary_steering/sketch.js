@@ -22,6 +22,7 @@ let poison_health_loss = 0.5;
 const food = [];
 const poison = [];
 
+let environment;
 let debug = false;
 
 // for average age at death
@@ -36,6 +37,7 @@ function setup() {
     adjustCanvasSize();
     const canvas = createCanvas(canvasWidth, canvasHeight);
     canvas.parent('canvasContainer');
+    environment = new Environment(width, height, boundary_pad);
 
     // Create vehicles
     for (let i=0;i<vehicle_amount;i++){
@@ -44,29 +46,25 @@ function setup() {
     
     // Create food
     for (let i=0;i<food_amount;i++){
-      const x = random(boundary_pad, width-boundary_pad);
-      const y = random(boundary_pad, height-boundary_pad);
-      food.push(createVector(x,y));
+      food.push(environment.randomPointForResource('food'));
     }
 
     // Create poison
     for (let i=0;i<poison_amount;i++){
-      const x = random(boundary_pad, width-boundary_pad);
-      const y = random(boundary_pad, height-boundary_pad);
-      poison.push(createVector(x,y));
+      poison.push(environment.randomPointForResource('poison'));
     }
   }
 
   function draw(){
 
     if (random(1) < food_create_rate){
-      food.push(createVector(random(boundary_pad, width-boundary_pad),random(boundary_pad, height-boundary_pad)));
+      food.push(environment.randomPointForResource('food'));
     }
     if (random(1) < poison_create_rate){
-      poison.push(createVector(random(boundary_pad, width-boundary_pad),random(boundary_pad, height-boundary_pad)));
+      poison.push(environment.randomPointForResource('poison'));
     }
 
-    background(0);
+    environment.draw();
 
     // Visualize food
     for (let i = 0; i<food.length; i++){
@@ -104,6 +102,8 @@ function setup() {
         // Evolutionary step
         // Didn't die, has a chance to mutate
         recordGeneration(vehicles[i]);
+
+        // mutate the vehicle
         const newVehicle = vehicles[i].clone();
         if (newVehicle != null){
           vehicles.push(newVehicle);
@@ -138,17 +138,18 @@ function reset(){
   deathCount = 0;
   maxAge = 0;
   maxGeneration = 0;
+  environment = new Environment(width, height, boundary_pad);
 
   for (let i = 0; i < vehicle_amount; i++){
     vehicles.push(new Vehicle());
   }
 
   for (let i = 0; i < food_amount; i++){
-    food.push(createVector(random(width), random(height)));
+    food.push(environment.randomPointForResource('food'));
   }
 
   for (let i = 0; i < poison_amount; i++){
-    poison.push(createVector(random(width), random(height)));
+    poison.push(environment.randomPointForResource('poison'));
   }
 }
 
