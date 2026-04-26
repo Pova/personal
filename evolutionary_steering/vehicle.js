@@ -1,22 +1,28 @@
 class Vehicle {
-    constructor(x = random(width), y = random(height), generation = 0, dna = null) {
+    constructor(
+        x = random(width), 
+        y = random(height), 
+        generation = 0, 
+        dna = null
+    ) {
         this.position = createVector(x, y);
         this.velocity = p5.Vector.random2D();
         this.velocity.setMag(random(2,4));
         this.acceleration = createVector();
-        this.maxSpeed = 5;
-        this.maxForce = 0.5;
+        this.maxSpeed = 5; 
+        this.maxForce = 0.5; // caps steering in seek() and search_and_eat_behaviours(); shapes turn rate and paths (triangle motion), not drawn explicitly in show()
 
         this.health = 1;
-        // idea: split health into:
+
+        // improvement idea: split health into:
         // --------------------------------------------
         // energy
         // age
         // metabolism (perception radius)
         // speedCost
-        // turningCost
         // reproductionCost (requires stored energy)
         // --------------------------------------------
+        
         this.generation = generation;
         this.age = 0;
     
@@ -26,20 +32,14 @@ class Vehicle {
             this.dna[0] = random(-5,5); // Food desire
             this.dna[1] = random(-5,5); // Poison desire
             
-            this.dna[2] = random(3,100); // Food perception
-            this.dna[3] = random(3,100); // Poison perception
+            this.dna[2] = random(3,100); // Food perception (downside: costs more energy to sustain)
+            this.dna[3] = random(3,100); // Poison perception (downside: costs more energy to sustain)
             
             this.dna[4] = random(0,1); // Mutation rate
-
-            // Features to vary with DNA:
-            // speed vehicles can move 
-            // reproduction cost?
-            // poison tolerance
             
-            this.dna[5] = random(0,1); // maxSpeed (will make vehicles hungry faster)
-            this.dna[6] = random(0,1); // maxHealth (downside?)
-            this.dna[7] = random(0,1); // reproductionCost (downside?)
-            this.dna[8] = random(0,1); // poisonTolerance (downside?)
+            this.dna[5] = random(1, 10); // maxSpeed (can move faster but will make hunger rate faster)
+            this.dna[6] = random(0, 1); // reproductionCost (higher cost means less likely to reproduce but children more likely to survive)
+            this.dna[7] = random(0, 1); // poisonTolerance (downside?)
         } else {
             this.dna = dna.slice();
         }
