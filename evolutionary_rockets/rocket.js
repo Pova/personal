@@ -4,12 +4,16 @@ const ROCKET_BOTTOM_DELTA = 2;
 const ROCKET_LIFESPAN = 200;
 
 class Rocket {
-    constructor(x, y) {
-        this.position = createVector(x, y);
+    constructor(dna) {
+        this.position = createVector(width/2, height);
         this.velocity = createVector();
         this.acceleration = createVector();
-
-        this.dna = new DNA();
+        this.fitness = 0;
+        if (dna){
+            this.dna = dna;
+        } else {
+            this.dna = new DNA();
+        }
     }
 
 
@@ -23,6 +27,11 @@ class Rocket {
         this.velocity.add(this.acceleration);
         this.position.add(this.velocity);
         this.acceleration.mult(0);   
+    }
+
+    calculateFitness(){
+        const d = dist(this.position.x, this.position.y, target.x, target.y);
+        this.fitness = 1/d;
     }
 
     show(){
