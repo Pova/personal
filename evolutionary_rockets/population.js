@@ -4,6 +4,8 @@ class Population {
     constructor(size) {
         this.rockets = [];
         this.matingPool = [];
+        this.generation = 1;
+        this.averageFitness = 0;
 
         for (let i = 0; i < size; i++) {
             this.rockets.push(new Rocket());
@@ -16,14 +18,18 @@ class Population {
 
     evaluate() {
         let maxFitness = 0;
+        let totalFitness = 0;
         
         this.rockets.forEach(rocket => {
             rocket.calculateFitness();
+            totalFitness += rocket.fitness;
         
             if (rocket.fitness > maxFitness){
                 maxFitness = rocket.fitness;
             }
         });
+
+        this.averageFitness = totalFitness / this.rockets.length;
     
         this.rockets.forEach(rocket => {
             rocket.normalizedFitness = rocket.fitness / maxFitness;
@@ -54,6 +60,7 @@ class Population {
         })
 
         this.rockets = newRockets;
+        this.generation++;
     }
 
     show() {

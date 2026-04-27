@@ -25,8 +25,8 @@ function setup() {
     background(0);
 
     drawTarget();
-    obstacles = setupObstacles(target);
-    drawObstacles(obstacles);
+    // obstacles = setupObstacles(target); // Hide these for now
+    // drawObstacles(obstacles); // Hide these for now
 
     population.update();
     population.show();
@@ -89,6 +89,8 @@ function setup() {
   function drawMetrics(){
     const metrics = [
       `Frame Count: ${counter}`,
+      `Generation: ${population.generation}`,
+      `Average Fitness: ${population.averageFitness.toFixed(4)}`,
     ];
 
     push();
