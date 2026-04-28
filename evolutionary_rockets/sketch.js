@@ -25,8 +25,8 @@ function setup() {
     background(0);
 
     drawTarget();
-    // obstacles = setupObstacles(target); // Hide these for now
-    // drawObstacles(obstacles); // Hide these for now
+    obstacles = setupObstacles(target); // Hide these for now
+    drawObstacles(obstacles); // Hide these for now
 
     population.update();
     population.show();
@@ -68,6 +68,15 @@ function setup() {
     return obstacles;
   }
 
+  function returnObstacleBounds(obstacle){
+    return [
+        [obstacle[0][0] - OBSTACLE_RADIUS, obstacle[0][1] - OBSTACLE_RADIUS], // (left, up) top left
+        [obstacle[1][0] + OBSTACLE_RADIUS, obstacle[1][1] - OBSTACLE_RADIUS], // (right, up) top right
+        [obstacle[1][0] + OBSTACLE_RADIUS, obstacle[1][1] + OBSTACLE_RADIUS], // (right, down) bottom right
+        [obstacle[0][0] - OBSTACLE_RADIUS, obstacle[0][1] + OBSTACLE_RADIUS]  // (left, down) bottom left
+    ]
+  }
+
   function drawObstacles(){
     // draw obstacles
     push();
@@ -91,6 +100,7 @@ function setup() {
       `Frame Count: ${counter}`,
       `Generation: ${population.generation}`,
       `Average Fitness: ${population.averageFitness.toFixed(4)}`,
+      `Max Fitness: ${population.maxFitness.toFixed(4)}`,
     ];
 
     push();
