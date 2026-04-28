@@ -1,5 +1,9 @@
-function Particle() {
-  this.pos = createVector(random(-windowWidth / 2, windowWidth / 2), random(-windowHeight / 2, windowHeight / 2));
+function Particle(x,y) {
+  if (x && y) {
+    this.pos = createVector(x, y);
+  } else {
+    this.pos = createVector(random(-windowWidth / 2, windowWidth / 2), random(-windowHeight / 2, windowHeight / 2));
+  }
   this.vel = createVector(0, 0);
   this.acc = createVector(0, 0);
   this.h = 0;
@@ -48,7 +52,23 @@ function Particle() {
     this.prevPos.y = this.pos.y;
   }
 
-  this.edges = function() {
+  this.check_off_canvas = function() {
+    if (this.pos.x > width / 2) {
+      return true;
+    }
+    if (this.pos.x < -width / 2) {
+      return true;
+    }
+    if (this.pos.y > height / 2) {
+      return true;
+    }
+    if (this.pos.y < -height / 2) {
+      return true;
+    }
+    return false;
+  }
+
+  this.edges_w_respawn = function() {
     if (this.pos.x > width / 2) {
       this.age = 0;
       this.pos = createVector(random(-windowWidth / 2 - 25, windowWidth / 2 + 25), random(-windowHeight / 2 - 25, windowHeight / 2 + 25));
@@ -75,11 +95,13 @@ function Particle() {
     }
   }
 
+
   this.aging = function() {
     this.age += 1;
   }
 
   this.checkdeath = function() {
+    // if the particle is older than max age, respawn it (90% of the time)
     if (this.age > this.max_age) {
       ran = Math.random(1);
       if (ran > 0.1) {
@@ -89,4 +111,6 @@ function Particle() {
       }
     }
   }
+
+
 }

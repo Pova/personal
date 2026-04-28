@@ -12,6 +12,8 @@ let path_thickness;
 let toggle_flow = false;
 let boxes = false; //this will control debug mode
 
+let animation_started = false;
+
 function windowResized() {
   setup();
 }
@@ -37,7 +39,8 @@ function setup() {
 
   flowfield = new Array(cols * rows);
 
-  const particle_count = Math.floor((canvasHeight*canvasWidth)/1000);
+  // const particle_count = Math.floor((canvasHeight*canvasWidth)/1000);
+  const particle_count = 0;
 
   for (let i = 0; i < particle_count; i++) {
     particles[i] = new Particle();
@@ -50,6 +53,17 @@ function draw() {
   smooth();
 
   translate(canvasWidth/2, canvasHeight/2);
+
+  if (!animation_started) {
+    push();
+    textFont('Verdana');
+    textAlign(CENTER);
+    textSize(constrain(min(width, height) * 0.08, 24, 128));
+    noStroke();
+    fill(100);
+    text("Click or drag to start the animation", 0, 0);
+    pop();
+  }
 
   // Perlin Noise
 
@@ -70,20 +84,66 @@ function draw() {
     zoff += z_inc; //time increment
   }
 
-  for (let i = 0; i < particles.length; i++) {
-    particles[i].edges();
+  for (let i = particles.length-1; i >= 0; i--) {
+    // particles[i].edges_w_respawn();
+    if (particles[i].check_off_canvas()) {
+      particles.splice(i, 1);
+      continue;
+    }
     particles[i].follow();
     particles[i].update();
     particles[i].show();
     particles[i].aging();
-    particles[i].checkdeath();
+    // particles[i].checkdeath();
   }
 
 }
 
+function mouseDragged() {
+  // Code to run that uses the event.
+
+  if (!animation_started) {
+    animation_started = true;
+    background(0);
+  }
+
+  let x = mouseX - canvasWidth/2;
+  let y = mouseY - canvasHeight/2;
+  for (let i = 0; i < 10; i++) {
+    particles.push(new Particle(x+random(-10, 10), y+random(-10, 10)));
+  }
+}
+
+function clickIsOnCanvas() {
+  return mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height;
+}
+
+function mouseClicked() {
+  // Code to run that uses the event.
+
+  if (!animation_started && clickIsOnCanvas()) {
+    animation_started = true;
+    background(0);
+  }
+
+  let x = mouseX - canvasWidth/2;
+  let y = mouseY - canvasHeight/2;
+  for (let i = 0; i < 100; i++) {
+    particles.push(new Particle(x+random(-10, 10), y+random(-10, 10)));
+  }
+}
 
 function clearBG() {
   background(0);
+}
+
+function resetAnimation() {
+  if (animation_started) {
+    animation_started = false;
+  }
+  clearBG();
+  zoff = 0;
+  particles = [];
 }
 
 function resetParticles() {
