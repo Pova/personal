@@ -21,31 +21,7 @@ body {
   display: block;
 }
 
-.snake-mobile-controls {
-  display: none;
-}
-
-@media (max-width: 767.98px) {
-  .snake-mobile-controls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem;
-    background: #6c757d;
-  }
-
-  .snake-mobile-controls__row {
-    display: flex;
-    gap: 0.5rem;
-  }
-
-  .snake-control-btn {
-    min-width: 4.5rem;
-    padding: 0.5rem 0.75rem;
-    border: 1px solid #212529;
-    border-radius: 0.375rem;
-    background: #212529;
-    color: #fff;
-  }
+#canvasContainer,
+#defaultCanvas0 {
+  touch-action: none;
 }

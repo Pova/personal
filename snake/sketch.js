@@ -8,6 +8,11 @@ let speed;
 let snakeFontSize = 128;
 let animationHorizontalOffset = 100;
 let animationVerticalOffset = 0;
+let touchStartX = 0;
+let touchStartY = 0;
+const minSwipeDistance = 30;
+let introductionText = 'Use WASD or arrow keys to control the snake';
+let followupText = 'Press a direction to start';
 
 const blipSound = new Audio('sounds/blip.mp3');
 const loseMusic = new Audio('sounds/negative.mp3');
@@ -21,6 +26,7 @@ function setup() {
 
     const canvas = createCanvas(canvasWidth, canvasHeight);
     canvas.parent('canvasContainer');
+    setupSwipeControls(document.getElementById('canvasContainer'));
 
     rows = Math.floor(canvasHeight/scl) - 2;
     cols = Math.floor(canvasWidth/scl) - 2;
@@ -29,9 +35,11 @@ function setup() {
     height_size = scl * rows; //height of grid
 
     if (canvasWidth<625){
-        snakeFontSize = 64;
+        snakeFontSize = 36;
         animationHorizontalOffset = 50;
         animationVerticalOffset = 50;
+        introductionText = 'Swipe gestures control the snake';
+        followupText = 'Swipe to start';
     }
 
     // Scoring
@@ -130,7 +138,7 @@ async function draw() {
             stroke(0);
             textSize(20);
             textAlign(CENTER);
-            text('Use WASD or arrow keys to control the snake', width_size / 2, height / 2 + 60);
+            text(introductionText, width_size / 2, height / 2 + 60);
             pop();
         }
 
@@ -140,7 +148,7 @@ async function draw() {
             stroke(0);
             textSize(20);
             textAlign(CENTER);
-            text('Press a direction to get started', width_size / 2, height / 2 + 90);
+            text(followupText, width_size / 2, height / 2 + 90);
             pop();
         }
     }
@@ -218,6 +226,48 @@ function setSnakeDirection(direction) {
     }
 }
 
+function setupSwipeControls(target) {
+    if (!target || target.dataset.swipeControls === 'true') {
+        return;
+    }
+
+    target.dataset.swipeControls = 'true';
+
+    target.addEventListener('touchstart', function(e) {
+        if (e.touches.length !== 1) {
+            return;
+        }
+
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        e.preventDefault();
+    }, { passive: false });
+
+    target.addEventListener('touchend', function(e) {
+        if (e.changedTouches.length !== 1) {
+            return;
+        }
+
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+
+        const dx = touchEndX - touchStartX;
+        const dy = touchEndY - touchStartY;
+
+        if (Math.max(Math.abs(dx), Math.abs(dy)) < minSwipeDistance) {
+            return;
+        }
+
+        if (Math.abs(dx) > Math.abs(dy)) {
+            setSnakeDirection(dx > 0 ? 'right' : 'left');
+        } else {
+            setSnakeDirection(dy > 0 ? 'down' : 'up');
+        }
+
+        e.preventDefault();
+    }, { passive: false });
+}
+
 // Sets the canvas size based on the window size
 function adjustCanvasSize() {
     const totalHeight = document.documentElement.clientHeight;
@@ -226,10 +276,7 @@ function adjustCanvasSize() {
     const navBarHeight = document.getElementById('navBar').clientHeight;
     const detailBarHeight = document.getElementById('detailBar').clientHeight;
   
-    const mobileControls = document.getElementById('snakeMobileControls');
-    const mobileControlsHeight = window.innerWidth < 768 && mobileControls ? mobileControls.clientHeight : 0;
-  
-    canvasHeight = totalHeight - navBarHeight - detailBarHeight - mobileControlsHeight;
+    canvasHeight = totalHeight - navBarHeight - detailBarHeight;
     canvasWidth = totalWidth;
   }
 
