@@ -30,6 +30,7 @@ class Rocket {
             this.applyForce(this.dna.genes[counter]);
     
             this.velocity.add(this.acceleration);
+            this.velocity.limit(10);
             this.position.add(this.velocity);
             this.acceleration.mult(0);
 
@@ -115,9 +116,11 @@ class Rocket {
         this.fitness = 1/d * (this.age/ROCKET_LIFESPAN);
 
         if (this.crashed){
-            this.fitness *= 1; // penalize crashed rockets
-        } else {
-            this.fitness *= 2; // reward reached target rockets
+            this.fitness *= 0.1; // penalize crashed rockets
+        } 
+        
+        if (this.reachedTarget) {
+            this.fitness *= 10; // reward reached target rockets
         }
     }
 

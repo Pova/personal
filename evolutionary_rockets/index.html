@@ -104,10 +104,14 @@
         <h2>Smart Rockets</h2>
       </a>
       </div>
-      <div class="d-inline-flex align-text-center">
-        <button type="button" class="btn btn-dark mx-1" onclick="debug_toggle()" ;>Debug</button>
-        <button type="button" class="btn btn-dark mx-1" onclick="reset()" ;>Reset</button>
-        <button class="btn btn-dark mx-1" type="button" data-bs-toggle="collapse" data-bs-target="#visualizationOptions" aria-expanded="false" aria-controls="collapseExample" style="background-color:#65C6FF;color: #000;">Options</button>
+      <div class="d-flex flex-wrap gap-2 justify-content-end align-items-center">
+        <button type="button" class="btn btn-dark btn-sm" onclick="mode = 'placeTarget'">Place Target</button>
+        <button type="button" class="btn btn-dark btn-sm" onclick="mode = 'drawObstacle'">Draw Obstacle</button>
+        <button type="button" class="btn btn-dark btn-sm" onclick="mode = 'simulate'">Simulate</button>
+        <button type="button" class="btn btn-dark btn-sm" onclick="clearObstacles()">Clear Obstacles</button>
+        <!-- <button type="button" class="btn btn-dark btn-sm" onclick="debug_toggle()" ;>Debug</button> -->
+        <button type="button" class="btn btn-dark btn-sm" onclick="resetSimulation()" ;>Reset</button>
+        <button class="btn btn-dark btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#visualizationOptions" aria-expanded="false" aria-controls="collapseExample" style="background-color:#65C6FF;color: #000;">Options</button>
         <a class="navbar-brand mx-1 mx-lg-3" href="#how" style="color: #65C6FF;">What am I looking at?</a>
       </div>
     </div>

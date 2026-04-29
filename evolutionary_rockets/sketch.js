@@ -1,8 +1,12 @@
 let debug = true;
 let rocket;
+const ROCKET_POPULATION_SIZE = 100;
+const mutationRate = 0.01;
 let counter = 0;
 let target; 
-let obstacles;
+let obstacles = [];
+let draftObstacle = null;
+let mode = "simulate" // "placeTarget" / "drawObstacle" / "simulate"
 const OBSTACLE_COLOR = [255, 0, 0];
 const OBSTACLE_RADIUS = 5;
 
@@ -12,34 +16,34 @@ function setup() {
     canvas.parent('canvasContainer');
 
     target = createVector(width/2, height/4);
+    obstacles = createDefaultObstacles(target);
 
-    population = new Population(100);
+    population = new Population(ROCKET_POPULATION_SIZE);
   }
 
   function draw(){
-    if (counter >= ROCKET_LIFESPAN){
-      noLoop();
-      population.evaluate();
-    }
-
     background(0);
-
     drawTarget();
-    obstacles = setupObstacles(target); // Hide these for now
-    drawObstacles(obstacles); // Hide these for now
-
-    population.update();
-    population.show();
-
-    drawMetrics();
+    drawObstacles(obstacles);
+    if (draftObstacle) {
+        drawObstacles([draftObstacle]);
+      }
     
-    counter++;
-
-    if (counter == ROCKET_LIFESPAN){
-      population.evaluate();
-      population.selection();
-
-      counter = 0;
+    if (mode == "simulate"){
+  
+      population.update();
+      population.show();
+  
+      drawMetrics();
+      
+      counter++;
+  
+      if (counter == ROCKET_LIFESPAN){
+        population.evaluate();
+        population.selection();
+  
+        counter = 0;
+      }
     }
   }
 
@@ -50,7 +54,7 @@ function setup() {
     pop();
   }
 
-  function setupObstacles(target){
+  function createDefaultObstacles(target){
     obstacles = [
         // Each obstacle is represented by two points: [ [x1, y1], [x2, y2] ]
         // These are defined relative to the target's position
@@ -77,18 +81,19 @@ function setup() {
     ]
   }
 
-  function drawObstacles(){
+  function drawObstacles(obstaclesToDraw){
     // draw obstacles
     push();
-    for (let i = 0; i < obstacles.length; i++){
+    for (let i = 0; i < obstaclesToDraw.length; i++){
+      const obstacle = obstaclesToDraw[i];
       
       fill(OBSTACLE_COLOR);
       noStroke();
       quad(
-        obstacles[i][0][0] - OBSTACLE_RADIUS, obstacles[i][0][1] - OBSTACLE_RADIUS,
-        obstacles[i][1][0] + OBSTACLE_RADIUS, obstacles[i][1][1] - OBSTACLE_RADIUS,
-        obstacles[i][1][0] + OBSTACLE_RADIUS, obstacles[i][1][1] + OBSTACLE_RADIUS,
-        obstacles[i][0][0] - OBSTACLE_RADIUS, obstacles[i][0][1] + OBSTACLE_RADIUS
+        obstacle[0][0] - OBSTACLE_RADIUS, obstacle[0][1] - OBSTACLE_RADIUS,
+        obstacle[1][0] + OBSTACLE_RADIUS, obstacle[1][1] - OBSTACLE_RADIUS,
+        obstacle[1][0] + OBSTACLE_RADIUS, obstacle[1][1] + OBSTACLE_RADIUS,
+        obstacle[0][0] - OBSTACLE_RADIUS, obstacle[0][1] + OBSTACLE_RADIUS
       );
       
     }
@@ -137,4 +142,49 @@ function adjustCanvasSize() {
 
 function debug_toggle(){
   debug = !debug;
+}
+
+function mouseIsOnCanvas() {
+  return mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height;
+}
+
+function mousePressed(){
+
+  if (!mouseIsOnCanvas()) {
+    return;
+  }
+
+  if (mode == "placeTarget"){
+    target = createVector(mouseX, mouseY);
+    resetSimulation();
+  }
+
+  if (mode === "drawObstacle") {
+    draftObstacle = [[mouseX, mouseY], [mouseX, mouseY]];
+  }
+
+}
+
+function mouseDragged() {
+  if (mode === "drawObstacle" && draftObstacle) {
+    draftObstacle[1] = [mouseX, mouseY];
+  }
+}
+function mouseReleased() {
+  if (mode === "drawObstacle" && draftObstacle) {
+    obstacles.push(draftObstacle);
+    draftObstacle = null;
+    resetSimulation();
+  }
+}
+
+function resetSimulation() {
+  counter = 0;
+  population = new Population(ROCKET_POPULATION_SIZE);
+}
+
+function clearObstacles() {
+  obstacles = [];
+  draftObstacle = null;
+  resetSimulation();
 }

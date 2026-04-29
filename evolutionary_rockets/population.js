@@ -42,7 +42,7 @@ class Population {
         this.matingPool = []; // reset mating pool
 
         this.rockets.forEach(rocket => {
-            let n = rocket.fitness * 100;
+            let n = rocket.normalizedFitness * 100;
             for (let j = 0; j < n; j++) {
                 this.matingPool.push(rocket);
             }
@@ -53,11 +53,12 @@ class Population {
     mutate(dna) { 
         // mutate the dna
         const newGenes = dna.genes.slice();
-        const indicesToMutate = floor(random(dna.length/2))
-        for (let i = 0; i < indicesToMutate; i++) {
-            const indexToMutate = floor(random(dna.length));
-            newGenes[indexToMutate] = p5.Vector.random2D();
-            newGenes[indexToMutate].setMag(random(0,1));
+
+        for (let i = 0; i < newGenes.length; i++) {
+            if (random(1) < mutationRate) {
+                newGenes[i] = p5.Vector.random2D();
+                newGenes[i].setMag(random(0,1));
+            }
         }
         return new DNA(newGenes);
     }
@@ -67,12 +68,16 @@ class Population {
         let newRockets = [];
 
         this.rockets.forEach(rocket => {
-            let parentA = random(this.matingPool).dna;
-            let parentB = random(this.matingPool).dna;
+            if (random(1) < 0.05){
+                newRockets.push(new Rocket())
+            } else { 
+                let parentA = random(this.matingPool).dna;
+                let parentB = random(this.matingPool).dna;
     
-            let child = this.mutate(parentA.crossover(parentB));
+                let child = this.mutate(parentA.crossover(parentB));
 
-            newRockets.push(new Rocket(child))
+                newRockets.push(new Rocket(child))
+            }
         })
 
         this.rockets = newRockets;
