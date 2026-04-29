@@ -105,13 +105,13 @@
           <h2>Curves in Space</h2>
         </a>
 
-      <div class="d-xl-inline-flex align-text-center">
+      <div class="d-flex flex-wrap gap-2 justify-content-end align-items-center">
         <a class="navbar-brand">Current curve:</a>
         <a class="navbar-brand" id="curve_name">
           None
         </a>
           <div class="btn-group mx-1 py-1 py-md-0">
-          <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button class="btn btn-dark btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Choose a curve!
           </button>
           <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
@@ -127,7 +127,7 @@
             <a class="dropdown-item" onclick="pathChoice(7);">Spherical Epitrochoid</a>
           </div>
           </div>
-          <button id="toggleOptionsBtn" class="btn btn-dark mx-1" type="button" data-bs-toggle="collapse" data-bs-target="#visualizationOptions" aria-expanded="false" aria-controls="collapseExample" id="options_button" style="background-color:#65C6FF;color: #000;">Show Options</button>
+          <button id="toggleOptionsBtn" class="btn btn-dark btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#visualizationOptions" aria-expanded="false" aria-controls="collapseExample" id="options_button" style="background-color:#65C6FF;color: #000;">Show Options</button>
 
 
         <a class="navbar-brand mx-xl-3" href="#how" style="color:#65C6FF">What am I looking at?</a>
@@ -190,7 +190,7 @@
             <label for="customRange2" class="sliderText">Animation Speed</label>
             <input type="range" class="form-range" min="0" max="0.25" step="0.01" value="0.05" id="speed">
           </div>
-            <button class="btn btn-dark mx-1" type="button" onclick="reset();">Reset Animation</button>
+            <button class="btn btn-dark btn-sm" type="button" onclick="reset();">Reset Animation</button>
           </div>
 
 

@@ -107,14 +107,14 @@
         <h2>Backgammon game</h2>
       </a>
       </div>
-      <div class="d-inline-flex align-text-center">
-        <button id="startButton" type="button" class="btn btn-dark mx-1" onclick="game.start_game()" ;>Start Game</button>
-        <button id="musicToggle" type="button" class="btn btn-dark mx-1 btn-unmuted" onclick="toggleMusic()">
+      <div class="d-flex flex-wrap gap-2 justify-content-end align-items-center">
+        <button id="startButton" type="button" class="btn btn-dark btn-sm" onclick="game.start_game()" ;>Start Game</button>
+        <button id="musicToggle" type="button" class="btn btn-dark btn-sm btn-unmuted" onclick="toggleMusic()">
           <span>Music </span><i id="musicIcon" class="fas fa-volume-up"></i>
         </button>
-        <button type="button" class="btn btn-dark mx-1" onclick="Button_3()" ;>Roll Dice</button>
-        <button id="endTurnButton" type="button" class="btn btn-dark mx-1 hidden disabled" onclick="game.finalizeTurn()">End turn</button>
-        <button id="undoMovesButton" type="button" class="btn btn-dark mx-1 hidden disabled" onclick="game.undoMoves()">Undo moves</button>
+        <button type="button" class="btn btn-dark btn-sm" onclick="Button_3()" ;>Roll Dice</button>
+        <button id="endTurnButton" type="button" class="btn btn-dark btn-sm hidden disabled" onclick="game.finalizeTurn()">End turn</button>
+        <button id="undoMovesButton" type="button" class="btn btn-dark btn-sm hidden disabled" onclick="game.undoMoves()">Undo moves</button>
       </div>
     </div>
   </nav>
