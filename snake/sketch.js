@@ -6,8 +6,8 @@ let gameStarted = false;
 let gameOver = false;
 let speed;
 let snakeFontSize = 128;
-const animationHorizontalOffset = 100;
-const animationVerticalOffset = 0;
+let animationHorizontalOffset = 100;
+let animationVerticalOffset = 0;
 
 const blipSound = new Audio('sounds/blip.mp3');
 const loseMusic = new Audio('sounds/negative.mp3');
@@ -171,33 +171,45 @@ async function draw() {
 
 
 function keyPressed() {
+    if (keyCode === UP_ARROW || keyCode==87) {
+        setSnakeDirection('up');
+    } else if (keyCode === DOWN_ARROW || keyCode==83) {
+        setSnakeDirection('down');
+    } else if (keyCode === RIGHT_ARROW || keyCode==68) {
+        setSnakeDirection('right');
+    } else if (keyCode === LEFT_ARROW || keyCode==65) {
+        setSnakeDirection('left');
+    }
+}
+
+function setSnakeDirection(direction) {
     if (gameStarted) {
-        if ((keyCode === UP_ARROW || keyCode==87) && s.yspeed != 1) {
+        if (direction === 'up' && s.yspeed != 1) {
             s.dir(0, -1);
-        } else if ((keyCode === DOWN_ARROW || keyCode==83) && s.yspeed != -1) {
+        } else if (direction === 'down' && s.yspeed != -1) {
             s.dir(0, 1);
-        } else if ((keyCode === RIGHT_ARROW || keyCode==68) && s.xspeed != -1) {
+        } else if (direction === 'right' && s.xspeed != -1) {
             s.dir(1, 0);
-        } else if ((keyCode === LEFT_ARROW || keyCode==65) && s.xspeed != 1) {
+        } else if (direction === 'left' && s.xspeed != 1) {
             s.dir(-1, 0);
         }
-    } else { //If game is not started
-        if (keyCode === UP_ARROW || keyCode==87) {
+    } else {
+        if (direction === 'up') {
             gameStarted = true;
             s = new Snake(floor(random(0, cols)) * scl, (rows-1) * scl);
             s.dir(0, -1);
             food = new Food(s.x, floor(random(0, rows-1)) * scl);
-        } else if (keyCode === DOWN_ARROW || keyCode==83) {
+        } else if (direction === 'down') {
             gameStarted = true;
             s = new Snake(floor(random(0, cols)) * scl, 0);
             s.dir(0, 1);
             food = new Food(s.x, floor(random(1, rows)) * scl);
-        } else if (keyCode === RIGHT_ARROW || keyCode==68) {
+        } else if (direction === 'right') {
             gameStarted = true;
             s = new Snake(0, floor(random(0, rows)) * scl);
             s.dir(1, 0);
             food = new Food(floor(random(1, cols)) * scl, s.y);
-        } else if (keyCode === LEFT_ARROW || keyCode==65) {
+        } else if (direction === 'left') {
             gameStarted = true;
             s = new Snake((cols-1)*scl, floor(random(0,rows)) * scl);
             s.dir(-1, 0);
@@ -214,7 +226,10 @@ function adjustCanvasSize() {
     const navBarHeight = document.getElementById('navBar').clientHeight;
     const detailBarHeight = document.getElementById('detailBar').clientHeight;
   
-    canvasHeight = totalHeight - navBarHeight - detailBarHeight;
+    const mobileControls = document.getElementById('snakeMobileControls');
+    const mobileControlsHeight = window.innerWidth < 768 && mobileControls ? mobileControls.clientHeight : 0;
+  
+    canvasHeight = totalHeight - navBarHeight - detailBarHeight - mobileControlsHeight;
     canvasWidth = totalWidth;
   }
 
