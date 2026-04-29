@@ -72,13 +72,24 @@ function setup() {
     return obstacles;
   }
 
-  function returnObstacleBounds(obstacle){
+  function returnObstacleBounds(obstacle) {
+    const start = createVector(obstacle[0][0], obstacle[0][1]);
+    const end = createVector(obstacle[1][0], obstacle[1][1]);
+  
+    const along = p5.Vector.sub(end, start).setMag(OBSTACLE_RADIUS);
+    const normal = createVector(-along.y, along.x).setMag(OBSTACLE_RADIUS);
+  
+    const top_left = p5.Vector.add(start, normal).sub(along);
+    const top_right = p5.Vector.add(end, normal).add(along);
+    const bottom_right = p5.Vector.sub(end, normal).add(along);
+    const bottom_left = p5.Vector.sub(start, normal).sub(along);
+  
     return [
-        [obstacle[0][0] - OBSTACLE_RADIUS, obstacle[0][1] - OBSTACLE_RADIUS], // (left, up) top left
-        [obstacle[1][0] + OBSTACLE_RADIUS, obstacle[1][1] - OBSTACLE_RADIUS], // (right, up) top right
-        [obstacle[1][0] + OBSTACLE_RADIUS, obstacle[1][1] + OBSTACLE_RADIUS], // (right, down) bottom right
-        [obstacle[0][0] - OBSTACLE_RADIUS, obstacle[0][1] + OBSTACLE_RADIUS]  // (left, down) bottom left
-    ]
+      [top_left.x, top_left.y],
+      [top_right.x, top_right.y],
+      [bottom_right.x, bottom_right.y],
+      [bottom_left.x, bottom_left.y],
+    ];
   }
 
   function drawObstacles(obstaclesToDraw){
@@ -86,14 +97,15 @@ function setup() {
     push();
     for (let i = 0; i < obstaclesToDraw.length; i++){
       const obstacle = obstaclesToDraw[i];
+      const obstacleBounds = returnObstacleBounds(obstacle);
       
       fill(OBSTACLE_COLOR);
       noStroke();
       quad(
-        obstacle[0][0] - OBSTACLE_RADIUS, obstacle[0][1] - OBSTACLE_RADIUS,
-        obstacle[1][0] + OBSTACLE_RADIUS, obstacle[1][1] - OBSTACLE_RADIUS,
-        obstacle[1][0] + OBSTACLE_RADIUS, obstacle[1][1] + OBSTACLE_RADIUS,
-        obstacle[0][0] - OBSTACLE_RADIUS, obstacle[0][1] + OBSTACLE_RADIUS
+        obstacleBounds[0][0], obstacleBounds[0][1],
+        obstacleBounds[1][0], obstacleBounds[1][1],
+        obstacleBounds[2][0], obstacleBounds[2][1],
+        obstacleBounds[3][0], obstacleBounds[3][1]
       );
       
     }
