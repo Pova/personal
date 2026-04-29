@@ -56,12 +56,21 @@ function draw() {
 
   if (!animation_started) {
     push();
+    const promptTextSize = constrain(min(width, height) * 0.08, 24, 128);
+    const promptWidth = width * 0.8;
+    const promptHeight = promptTextSize * 4;
     textFont('Verdana');
-    textAlign(CENTER);
-    textSize(constrain(min(width, height) * 0.08, 24, 128));
+    textAlign(CENTER, CENTER);
+    textSize(promptTextSize);
     noStroke();
     fill(100);
-    text("Click or drag to start the animation", 0, 0);
+    text(
+      "Click or drag to start the animation",
+      -promptWidth / 2,
+      -promptHeight / 2,
+      promptWidth,
+      promptHeight
+    );
     pop();
   }
 
