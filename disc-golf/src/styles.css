@@ -1,0 +1,252 @@
+:root {
+  color: #10201a;
+  background: #f3f0e7;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 48px 0 72px;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  max-width: 820px;
+  font-size: clamp(3rem, 8vw, 6.8rem);
+  line-height: 0.92;
+  letter-spacing: -0.08em;
+}
+
+h2 {
+  max-width: 680px;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+
+p,
+li {
+  color: #4b5d55;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+rect {
+  fill: #729b79;
+}
+
+rect.focus,
+circle.focus {
+  fill: #143d2c;
+}
+
+circle {
+  fill: #729b79;
+  stroke: #f3f0e7;
+  stroke-width: 2;
+}
+
+circle.major {
+  fill: #d88c4a;
+}
+
+line {
+  stroke: #c9c1ad;
+}
+
+.axis-tick line {
+  stroke: #ded7c5;
+}
+
+.axis-tick text,
+.x-label,
+.bar-value,
+.point-label,
+.axis-title {
+  fill: #4b5d55;
+  font-size: 0.78rem;
+}
+
+.axis-tick text {
+  text-anchor: end;
+  dominant-baseline: middle;
+}
+
+.x-label,
+.bar-value {
+  text-anchor: middle;
+}
+
+.x-label {
+  dominant-baseline: hanging;
+}
+
+.x-label.compact {
+  font-size: 0.68rem;
+}
+
+.bar-value {
+  fill: #10201a;
+  font-weight: 700;
+}
+
+.point-label {
+  fill: #10201a;
+  font-weight: 700;
+}
+
+.axis-title {
+  text-anchor: middle;
+  font-weight: 700;
+}
+
+.axis-title.vertical {
+  transform: rotate(-90deg);
+}
+
+.stem {
+  stroke: #bdb39d;
+  stroke-dasharray: 4 6;
+}
+
+.hero {
+  min-height: 72vh;
+  display: grid;
+  align-content: center;
+  gap: 28px;
+}
+
+.eyebrow {
+  color: #d26f35;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.lede {
+  max-width: 720px;
+  color: #33433d;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.stat-card,
+.chart-card,
+.notice,
+.methodology {
+  border: 1px solid #ded7c5;
+  border-radius: 28px;
+  background: rgba(255, 252, 243, 0.78);
+  box-shadow: 0 24px 70px rgba(32, 41, 34, 0.08);
+}
+
+.stat-card {
+  padding: 20px;
+}
+
+.stat-card p {
+  color: #66746d;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stat-card strong {
+  display: block;
+  margin-top: 10px;
+  color: #10201a;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1;
+}
+
+.stat-card span {
+  display: block;
+  margin-top: 10px;
+  color: #66746d;
+}
+
+.notice {
+  padding: 18px 22px;
+  color: #33433d;
+}
+
+.story-section {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.4fr);
+  gap: 28px;
+  align-items: center;
+  margin-top: 80px;
+}
+
+.story-section > div:first-child {
+  display: grid;
+  gap: 16px;
+}
+
+.chart-card {
+  padding: clamp(16px, 3vw, 28px);
+}
+
+.methodology {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 80px;
+  padding: clamp(24px, 4vw, 40px);
+}
+
+.methodology > div {
+  display: grid;
+  gap: 16px;
+}
+
+.methodology ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+@media (max-width: 860px) {
+  main {
+    width: min(100% - 24px, 720px);
+    padding-top: 32px;
+  }
+
+  .hero-grid,
+  .story-section,
+  .methodology {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 56px 0;
+  }
+}
+

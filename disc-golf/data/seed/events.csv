@@ -1,0 +1,10 @@
+source_event_id,name,start_date,end_date,tier,tour_category,is_major,location,source_url
+seed-2021-worlds,2021 PDGA Professional Disc Golf World Championships,2021-06-22,2021-06-26,Major,Major,true,Ogden UT,https://www.pdga.com/
+seed-2022-champions-cup,2022 PDGA Champions Cup,2022-04-13,2022-04-17,Major,Major,true,Appling GA,https://www.pdga.com/
+seed-2022-portland,2022 Portland Open,2022-06-03,2022-06-05,DGPT Elite,DGPT,false,Portland OR,https://www.dgpt.com/
+seed-2023-worlds,2023 PDGA Professional Disc Golf World Championships,2023-08-30,2023-09-03,Major,Major,true,Jeffersonville VT,https://www.pdga.com/
+seed-2023-mvp,2023 MVP Open,2023-09-14,2023-09-17,DGPT Playoff,DGPT,false,Leicester MA,https://www.dgpt.com/
+seed-2024-champions-cup,2024 PDGA Champions Cup,2024-04-25,2024-04-28,Major,Major,true,North Augusta SC,https://www.pdga.com/
+seed-2024-european-open,2024 European Open,2024-07-18,2024-07-21,Major,Major,true,Nokia Finland,https://www.pdga.com/
+seed-2024-mvp,2024 MVP Open,2024-09-12,2024-09-15,DGPT Playoff,DGPT,false,Leicester MA,https://www.dgpt.com/
+

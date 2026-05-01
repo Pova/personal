@@ -2,3 +2,15 @@
 
 .vscode/
 dev_notes/
+
+node_modules/
+.svelte-kit/
+build/
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+disc-golf/data/raw/
+disc-golf/data/interim/
+disc-golf/data/processed/

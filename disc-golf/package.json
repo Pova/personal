@@ -1,0 +1,30 @@
+{
+  "name": "disc-golf-data-story",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "data:export": "cd pipeline && python -m dgdata.cli export"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-static": "3.0.10",
+    "@sveltejs/kit": "2.58.0",
+    "@sveltejs/vite-plugin-svelte": "7.0.0",
+    "@types/d3": "7.4.3",
+    "svelte": "5.55.5",
+    "svelte-check": "4.4.6",
+    "typescript": "6.0.3",
+    "vite": "8.0.10"
+  },
+  "dependencies": {
+    "d3": "7.9.0"
+  }
+}
+

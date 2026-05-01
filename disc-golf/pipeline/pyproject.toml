@@ -1,0 +1,26 @@
+[project]
+name = "disc-golf-data"
+version = "0.1.0"
+description = "Disc golf scraping, ETL, and analysis pipeline for the Gannon Buhr data story."
+requires-python = ">=3.11"
+dependencies = [
+  "beautifulsoup4",
+  "pandas",
+  "psycopg[binary]",
+  "python-dotenv",
+  "requests",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest",
+  "ruff",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
